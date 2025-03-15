@@ -1,0 +1,148 @@
+\doxysection{ir.\+IR Class Reference}
+\hypertarget{classir_1_1_i_r}{}\label{classir_1_1_i_r}\index{ir.IR@{ir.IR}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classir_1_1_i_r_a8cfba8d7bd7843dd61b332e58fb7e442}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, ODD, PINS)
+\item 
+\mbox{\hyperlink{classir_1_1_i_r_a0c015bc589faf4cadec015df36529e33}{update}} (self)
+\item 
+\mbox{\hyperlink{classir_1_1_i_r_a87acf8c1a0d592fe6662d45a45d28aef}{calc\+\_\+centroid}} (self)
+\item 
+\mbox{\hyperlink{classir_1_1_i_r_ad45f0f3f682d60b29e50c00983ea2945}{calibrate\+\_\+black}} (self)
+\item 
+\mbox{\hyperlink{classir_1_1_i_r_a4376352409f774cb049c1f47b62032ee}{calibrate\+\_\+white}} (self)
+\item 
+\mbox{\hyperlink{classir_1_1_i_r_ab986d04a269db005fd77e73a303252b2}{default\+\_\+calibration}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classir_1_1_i_r_a6b12698e895b3199947738c4fa39409e}\label{classir_1_1_i_r_a6b12698e895b3199947738c4fa39409e} 
+{\bfseries ODD\+\_\+pin} = Pin(ODD, mode=Pin.\+OUT\+\_\+\+PP)
+\item 
+\Hypertarget{classir_1_1_i_r_a722bf3aaaf4a81cd2acae311a5a88e54}\label{classir_1_1_i_r_a722bf3aaaf4a81cd2acae311a5a88e54} 
+{\bfseries IR1} = pyb.\+ADC(PIN1\+\_\+pin)
+\item 
+\Hypertarget{classir_1_1_i_r_af4fbb94f5e8e61b8e94b07e095c2de34}\label{classir_1_1_i_r_af4fbb94f5e8e61b8e94b07e095c2de34} 
+{\bfseries IR3} = pyb.\+ADC(PIN3\+\_\+pin)
+\item 
+\Hypertarget{classir_1_1_i_r_a1f29f0f6ede812e75be3e468aedaa733}\label{classir_1_1_i_r_a1f29f0f6ede812e75be3e468aedaa733} 
+{\bfseries IR5} = pyb.\+ADC(PIN5\+\_\+pin)
+\item 
+\Hypertarget{classir_1_1_i_r_aa9125f87e2ce2d21716c95deb4602a62}\label{classir_1_1_i_r_aa9125f87e2ce2d21716c95deb4602a62} 
+{\bfseries IR7} = pyb.\+ADC(PIN7\+\_\+pin)
+\item 
+\Hypertarget{classir_1_1_i_r_a55c4a027d594c734b04b6dcbb7781a2b}\label{classir_1_1_i_r_a55c4a027d594c734b04b6dcbb7781a2b} 
+{\bfseries values} = array(\textquotesingle{}f\textquotesingle{}, len(PINS) \texorpdfstring{$\ast$}{*} \mbox{[}0\mbox{]})
+\item 
+\Hypertarget{classir_1_1_i_r_adcd30e5c37154dd94c4da2998c58a05d}\label{classir_1_1_i_r_adcd30e5c37154dd94c4da2998c58a05d} 
+int {\bfseries min1} = 0
+\item 
+\Hypertarget{classir_1_1_i_r_a5aa51a405ccda0e26d2d5683e259df8b}\label{classir_1_1_i_r_a5aa51a405ccda0e26d2d5683e259df8b} 
+int {\bfseries min3} = 0
+\item 
+\Hypertarget{classir_1_1_i_r_a80da6007195ce39d5c87140533a7fbb9}\label{classir_1_1_i_r_a80da6007195ce39d5c87140533a7fbb9} 
+int {\bfseries min5} = 0
+\item 
+\Hypertarget{classir_1_1_i_r_a1f3c3f2903f95f59322bd07015bbc24f}\label{classir_1_1_i_r_a1f3c3f2903f95f59322bd07015bbc24f} 
+int {\bfseries min7} = 0
+\item 
+\Hypertarget{classir_1_1_i_r_a5c337bd6835ce3f63c66a2ea5e622e76}\label{classir_1_1_i_r_a5c337bd6835ce3f63c66a2ea5e622e76} 
+float {\bfseries max1} = 5.\+5
+\item 
+\Hypertarget{classir_1_1_i_r_a757bbce131beb1f1faaa4d6ced861ec8}\label{classir_1_1_i_r_a757bbce131beb1f1faaa4d6ced861ec8} 
+float {\bfseries max3} = 5.\+5
+\item 
+\Hypertarget{classir_1_1_i_r_a0903806957bfd5b3db95be1fa157cf7c}\label{classir_1_1_i_r_a0903806957bfd5b3db95be1fa157cf7c} 
+float {\bfseries max5} = 5.\+5
+\item 
+\Hypertarget{classir_1_1_i_r_acc770e352e7df26f37938920ebe52940}\label{classir_1_1_i_r_acc770e352e7df26f37938920ebe52940} 
+float {\bfseries max7} = 5.\+5
+\item 
+\Hypertarget{classir_1_1_i_r_aaa9212438d13d73dd81af9802e3e953d}\label{classir_1_1_i_r_aaa9212438d13d73dd81af9802e3e953d} 
+{\bfseries pins} = len(PINS)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class IR
+@brief IR sensor interface class for line following on the ROMI chassis.
+@details
+  Uses four analog inputs to measure reflectance. The data is scaled 
+  between min and max values determined by calibration.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classir_1_1_i_r_a8cfba8d7bd7843dd61b332e58fb7e442}\index{ir.IR@{ir.IR}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ir.IR@{ir.IR}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classir_1_1_i_r_a8cfba8d7bd7843dd61b332e58fb7e442} 
+ir.\+IR.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{ODD}{, }\item[{}]{PINS}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes the IR sensor array.
+@param ODD Pin controlling the IR LED power (ODD_pin).
+@param PINS List of 4 pin identifiers used for IR sensor ADC reads.
+@exception ValueError If PINS does not have exactly 4 elements.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classir_1_1_i_r_a87acf8c1a0d592fe6662d45a45d28aef}\index{ir.IR@{ir.IR}!calc\_centroid@{calc\_centroid}}
+\index{calc\_centroid@{calc\_centroid}!ir.IR@{ir.IR}}
+\doxysubsubsection{\texorpdfstring{calc\_centroid()}{calc\_centroid()}}
+{\footnotesize\ttfamily \label{classir_1_1_i_r_a87acf8c1a0d592fe6662d45a45d28aef} 
+ir.\+IR.\+calc\+\_\+centroid (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Computes a centroid-based position indicator from -1 to +1.
+@details
+  The IR sensors are conceptually at positions [0..3]. Weighted by readings,
+  the centroid is computed. Then scaled to [-1..1].
+
+@return A float from -1 to +1 representing the line's position under the sensors.
+\end{DoxyVerb}
+ \Hypertarget{classir_1_1_i_r_ad45f0f3f682d60b29e50c00983ea2945}\index{ir.IR@{ir.IR}!calibrate\_black@{calibrate\_black}}
+\index{calibrate\_black@{calibrate\_black}!ir.IR@{ir.IR}}
+\doxysubsubsection{\texorpdfstring{calibrate\_black()}{calibrate\_black()}}
+{\footnotesize\ttfamily \label{classir_1_1_i_r_ad45f0f3f682d60b29e50c00983ea2945} 
+ir.\+IR.\+calibrate\+\_\+black (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Calibrates sensor readings for the 'black' (high reflection) case.
+@details
+  Updates the max calibration values based on the current ADC readings.
+\end{DoxyVerb}
+ \Hypertarget{classir_1_1_i_r_a4376352409f774cb049c1f47b62032ee}\index{ir.IR@{ir.IR}!calibrate\_white@{calibrate\_white}}
+\index{calibrate\_white@{calibrate\_white}!ir.IR@{ir.IR}}
+\doxysubsubsection{\texorpdfstring{calibrate\_white()}{calibrate\_white()}}
+{\footnotesize\ttfamily \label{classir_1_1_i_r_a4376352409f774cb049c1f47b62032ee} 
+ir.\+IR.\+calibrate\+\_\+white (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Calibrates sensor readings for the 'white' (low reflection) case.
+@details
+  Updates the min calibration values based on the current ADC readings.
+\end{DoxyVerb}
+ \Hypertarget{classir_1_1_i_r_ab986d04a269db005fd77e73a303252b2}\index{ir.IR@{ir.IR}!default\_calibration@{default\_calibration}}
+\index{default\_calibration@{default\_calibration}!ir.IR@{ir.IR}}
+\doxysubsubsection{\texorpdfstring{default\_calibration()}{default\_calibration()}}
+{\footnotesize\ttfamily \label{classir_1_1_i_r_ab986d04a269db005fd77e73a303252b2} 
+ir.\+IR.\+default\+\_\+calibration (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Loads default calibration values known to be typical for the ROMI's IR sensors.
+\end{DoxyVerb}
+ \Hypertarget{classir_1_1_i_r_a0c015bc589faf4cadec015df36529e33}\index{ir.IR@{ir.IR}!update@{update}}
+\index{update@{update}!ir.IR@{ir.IR}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classir_1_1_i_r_a0c015bc589faf4cadec015df36529e33} 
+ir.\+IR.\+update (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Updates the IR sensor readings, scaling them between 0 and 1.
+@details
+  Reads each ADC, subtracts the min calibration, and divides by 
+  the (max - min) range.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/ir.\+py\end{DoxyCompactItemize}

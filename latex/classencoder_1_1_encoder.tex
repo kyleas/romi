@@ -1,0 +1,117 @@
+\doxysection{encoder.\+Encoder Class Reference}
+\hypertarget{classencoder_1_1_encoder}{}\label{classencoder_1_1_encoder}\index{encoder.Encoder@{encoder.Encoder}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classencoder_1_1_encoder_a0411c44a9f8937d3e389cc01a67230ce}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, timer, pin\+\_\+a, pin\+\_\+b)
+\item 
+\mbox{\hyperlink{classencoder_1_1_encoder_aa49b0c5f3a84989bbd9500f1d25f81aa}{update}} (self)
+\item 
+\mbox{\hyperlink{classencoder_1_1_encoder_a5e1f45bde021fbdb806bfda8a17ded47}{get\+\_\+position}} (self)
+\item 
+\mbox{\hyperlink{classencoder_1_1_encoder_a5f5175f8d031309051acea0f25710e3d}{get\+\_\+velocity}} (self)
+\item 
+\mbox{\hyperlink{classencoder_1_1_encoder_ab79017405d71f96cb2363307a1f04c88}{zero}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classencoder_1_1_encoder_a9c15eb087b5869c188cf94e53ea3b4f5}\label{classencoder_1_1_encoder_a9c15eb087b5869c188cf94e53ea3b4f5} 
+int {\bfseries position} = 0
+\item 
+\Hypertarget{classencoder_1_1_encoder_ae97b9cbf3c0b6b6ba1a6b2db4a5eaf68}\label{classencoder_1_1_encoder_ae97b9cbf3c0b6b6ba1a6b2db4a5eaf68} 
+int {\bfseries prev\+\_\+count} = 0
+\item 
+\Hypertarget{classencoder_1_1_encoder_ad3c110d78ce1b5e97ce08efd20b41040}\label{classencoder_1_1_encoder_ad3c110d78ce1b5e97ce08efd20b41040} 
+int {\bfseries delta} = 0
+\item 
+\Hypertarget{classencoder_1_1_encoder_aa6c60def8af928ad3d55a959755a657d}\label{classencoder_1_1_encoder_aa6c60def8af928ad3d55a959755a657d} 
+int {\bfseries dt} = 0
+\item 
+\Hypertarget{classencoder_1_1_encoder_af9ca104df590d6508b1131c0853aec5a}\label{classencoder_1_1_encoder_af9ca104df590d6508b1131c0853aec5a} 
+int {\bfseries prev\+\_\+time} = 0
+\item 
+\Hypertarget{classencoder_1_1_encoder_a6d34277d78f0f528aeb8b4d8901356b7}\label{classencoder_1_1_encoder_a6d34277d78f0f528aeb8b4d8901356b7} 
+{\bfseries tim} = Timer(timer, period=0x\+FFFF, prescaler=0)
+\item 
+\Hypertarget{classencoder_1_1_encoder_a9fa4f1ce58d42bc5727c75a1e2f79fa3}\label{classencoder_1_1_encoder_a9fa4f1ce58d42bc5727c75a1e2f79fa3} 
+{\bfseries position\+\_\+history} = \mbox{\hyperlink{classcqueue_1_1_int_queue}{cqueue.\+Int\+Queue}}(5)
+\item 
+\Hypertarget{classencoder_1_1_encoder_a9c71b38c85c343c06e7d415029ea148b}\label{classencoder_1_1_encoder_a9c71b38c85c343c06e7d415029ea148b} 
+{\bfseries time\+\_\+history} = \mbox{\hyperlink{classcqueue_1_1_int_queue}{cqueue.\+Int\+Queue}}(5)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class Encoder
+@brief A quadrature encoder decoding interface.
+@details
+  Uses a hardware timer in ENC_AB mode to count position. Keeps a small queue
+  of past positions/timestamps to estimate velocity.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classencoder_1_1_encoder_a0411c44a9f8937d3e389cc01a67230ce}\index{encoder.Encoder@{encoder.Encoder}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!encoder.Encoder@{encoder.Encoder}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classencoder_1_1_encoder_a0411c44a9f8937d3e389cc01a67230ce} 
+encoder.\+Encoder.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{timer}{, }\item[{}]{pin\+\_\+a}{, }\item[{}]{pin\+\_\+b}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes the encoder with the given timer and pins.
+@param timer The timer number configured for quadrature decoding.
+@param pin_a The pin for channel A of the quadrature signal.
+@param pin_b The pin for channel B of the quadrature signal.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classencoder_1_1_encoder_a5e1f45bde021fbdb806bfda8a17ded47}\index{encoder.Encoder@{encoder.Encoder}!get\_position@{get\_position}}
+\index{get\_position@{get\_position}!encoder.Encoder@{encoder.Encoder}}
+\doxysubsubsection{\texorpdfstring{get\_position()}{get\_position()}}
+{\footnotesize\ttfamily \label{classencoder_1_1_encoder_a5e1f45bde021fbdb806bfda8a17ded47} 
+encoder.\+Encoder.\+get\+\_\+position (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Returns the most recently computed position.
+@return The encoder's current position in counts (relative to zero()).
+\end{DoxyVerb}
+ \Hypertarget{classencoder_1_1_encoder_a5f5175f8d031309051acea0f25710e3d}\index{encoder.Encoder@{encoder.Encoder}!get\_velocity@{get\_velocity}}
+\index{get\_velocity@{get\_velocity}!encoder.Encoder@{encoder.Encoder}}
+\doxysubsubsection{\texorpdfstring{get\_velocity()}{get\_velocity()}}
+{\footnotesize\ttfamily \label{classencoder_1_1_encoder_a5f5175f8d031309051acea0f25710e3d} 
+encoder.\+Encoder.\+get\+\_\+velocity (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Computes velocity in RPM based on historical data.
+@details
+  Uses the difference in position between now and 5 updates ago 
+  (if the queue is full) and the time difference. 
+  Formula: 
+    velocity (RPM) = (delta_counts * 60_000_000) / (time_delta_us * 1440).
+
+@return The velocity in RPM or 0.0 if there's insufficient data.
+\end{DoxyVerb}
+ \Hypertarget{classencoder_1_1_encoder_aa49b0c5f3a84989bbd9500f1d25f81aa}\index{encoder.Encoder@{encoder.Encoder}!update@{update}}
+\index{update@{update}!encoder.Encoder@{encoder.Encoder}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classencoder_1_1_encoder_aa49b0c5f3a84989bbd9500f1d25f81aa} 
+encoder.\+Encoder.\+update (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Updates internal position/velocity calculations with latest timer counts.
+@details
+  Reads the hardware timer, calculates delta from last reading, and 
+  adjusts for rollovers. Stores position and timestamp in FIFO queues.
+\end{DoxyVerb}
+ \Hypertarget{classencoder_1_1_encoder_ab79017405d71f96cb2363307a1f04c88}\index{encoder.Encoder@{encoder.Encoder}!zero@{zero}}
+\index{zero@{zero}!encoder.Encoder@{encoder.Encoder}}
+\doxysubsubsection{\texorpdfstring{zero()}{zero()}}
+{\footnotesize\ttfamily \label{classencoder_1_1_encoder_ab79017405d71f96cb2363307a1f04c88} 
+encoder.\+Encoder.\+zero (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Resets the encoder's position to zero.
+@details Clears the position history so velocity computations restart from zero.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/encoder.\+py\end{DoxyCompactItemize}

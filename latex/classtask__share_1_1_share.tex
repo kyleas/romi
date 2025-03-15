@@ -1,0 +1,240 @@
+\doxysection{task\+\_\+share.\+Share Class Reference}
+\hypertarget{classtask__share_1_1_share}{}\label{classtask__share_1_1_share}\index{task\_share.Share@{task\_share.Share}}
+
+
+A single shared data item (thread-\/safe if needed).  
+
+
+Inheritance diagram for task\+\_\+share.\+Share\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtask__share_1_1_share}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtask__share_1_1_share_ad8263aa134dc9fa17abb7f751240f092}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, type\+\_\+code, thread\+\_\+protect=True, name=None)
+\begin{DoxyCompactList}\small\item\em Creates a shared data item of a specific type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtask__share_1_1_share_a6bca473510fc2d28f5b7a32f242e4e18}{put}} (self, data, in\+\_\+\+ISR=False)
+\begin{DoxyCompactList}\small\item\em Writes data into the share (overwrites old data). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtask__share_1_1_share_ae5e4a0e21b274c9a76b80b8bb5eb62d3}{get}} (self, in\+\_\+\+ISR=False)
+\begin{DoxyCompactList}\small\item\em Reads the data from the share. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtask__share_1_1_share_ae764d854ffc31037a37f89211128eb98}{\+\_\+\+\_\+repr\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Returns a string with diagnostic information about this share. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classtask__share_1_1_base_share}{task\+\_\+share.\+Base\+Share}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtask__share_1_1_base_share_ad8079b40800179be6c58aaac9abb0e26}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, type\+\_\+code, thread\+\_\+protect=True, name=None)
+\begin{DoxyCompactList}\small\item\em Initializes common features of share/queue objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classtask__share_1_1_share_a2e8df029af46fbfd44ef0c2e7e8c7af6}{ser\+\_\+num}} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtask__share_1_1_share_a2f7e0b72d08d27b7ccf92da6ddc127a8}{\+\_\+buffer}} = array.\+array(type\+\_\+code, \mbox{[}0\mbox{]})
+\item 
+\mbox{\hyperlink{classtask__share_1_1_share_acff3918997966ba1e31292398f3ca196}{\+\_\+name}} = str(name) if name else (\textquotesingle{}\mbox{\hyperlink{classtask__share_1_1_share}{Share}}\textquotesingle{} + str(Share.\+ser\+\_\+num))
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classtask__share_1_1_base_share}{task\+\_\+share.\+Base\+Share}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtask__share_1_1_base_share_a0e45276424d1600740942b82f216c649}{\+\_\+type\+\_\+code}} = type\+\_\+code
+\item 
+\mbox{\hyperlink{classtask__share_1_1_base_share_acf1741d88ede8f82b9c5f321a92aaa5e}{\+\_\+thread\+\_\+protect}} = thread\+\_\+protect
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A single shared data item (thread-\/safe if needed). 
+
+Holds exactly one data item of a fixed type. Overwrites old data with each \doxylink{classtask__share_1_1_share_a6bca473510fc2d28f5b7a32f242e4e18}{put()}. 
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00211}{211}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classtask__share_1_1_share_ad8263aa134dc9fa17abb7f751240f092}\index{task\_share.Share@{task\_share.Share}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_ad8263aa134dc9fa17abb7f751240f092} 
+task\+\_\+share.\+Share.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{type\+\_\+code}{, }\item[{}]{thread\+\_\+protect}{ = {\ttfamily True}, }\item[{}]{name}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Creates a shared data item of a specific type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+\_\+code} & Data type code (e.\+g. \textquotesingle{}f\textquotesingle{}, \textquotesingle{}h\textquotesingle{}, etc.). \\
+\hline
+{\em thread\+\_\+protect} & Protect data by disabling interrupts if True. \\
+\hline
+{\em name} & Optional name for diagnostic identification. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00220}{220}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ type\_code,\ thread\_protect=True,\ name=None):}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00222\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Creates\ a\ shared\ data\ item\ of\ a\ specific\ type.}}
+\DoxyCodeLine{00223\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ type\_code\ Data\ type\ code\ (e.g.\ 'f',\ 'h',\ etc.).}}
+\DoxyCodeLine{00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ thread\_protect\ Protect\ data\ by\ disabling\ interrupts\ if\ True.}}
+\DoxyCodeLine{00225\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ name\ Optional\ name\ for\ diagnostic\ identification.}}
+\DoxyCodeLine{00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ super().\_\_init\_\_(type\_code,\ thread\_protect,\ name)}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ self.\_buffer\ =\ array.array(type\_code,\ [0])}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ self.\_name\ =\ str(name)\ \textcolor{keywordflow}{if}\ name\ \textcolor{keywordflow}{else}\ (\textcolor{stringliteral}{'Share'}\ +\ str(Share.ser\_num))}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ Share.ser\_num\ +=\ 1}
+\DoxyCodeLine{00231\ }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classtask__share_1_1_share_ae764d854ffc31037a37f89211128eb98}\index{task\_share.Share@{task\_share.Share}!\_\_repr\_\_@{\_\_repr\_\_}}
+\index{\_\_repr\_\_@{\_\_repr\_\_}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{\_\_repr\_\_()}{\_\_repr\_\_()}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_ae764d854ffc31037a37f89211128eb98} 
+task\+\_\+share.\+Share.\+\_\+\+\_\+repr\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Returns a string with diagnostic information about this share. 
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00259}{259}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{def\ }\_\_repr\_\_(self):}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00261\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ a\ string\ with\ diagnostic\ information\ about\ this\ share.}}
+\DoxyCodeLine{00262\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{stringliteral}{"{}\{:<12s\}\ Share<\{:s\}>"{}}.format(self.\_name,}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type\_code\_strings[self.\_type\_code]))}
+
+\end{DoxyCode}
+\Hypertarget{classtask__share_1_1_share_ae5e4a0e21b274c9a76b80b8bb5eb62d3}\index{task\_share.Share@{task\_share.Share}!get@{get}}
+\index{get@{get}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_ae5e4a0e21b274c9a76b80b8bb5eb62d3} 
+task\+\_\+share.\+Share.\+get (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{in\+\_\+\+ISR}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+Reads the data from the share. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+\+ISR} & True if called from an ISR, so we do not block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The data in the share. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00246}{246}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{def\ }get(self,\ in\_ISR=False):}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00248\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Reads\ the\ data\ from\ the\ share.}}
+\DoxyCodeLine{00249\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ so\ we\ do\ not\ block.}}
+\DoxyCodeLine{00250\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ data\ in\ the\ share.}}
+\DoxyCodeLine{00251\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq()}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ to\_return\ =\ self.\_buffer[0]}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state)}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ to\_return}
+\DoxyCodeLine{00258\ }
+
+\end{DoxyCode}
+\Hypertarget{classtask__share_1_1_share_a6bca473510fc2d28f5b7a32f242e4e18}\index{task\_share.Share@{task\_share.Share}!put@{put}}
+\index{put@{put}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{put()}{put()}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_a6bca473510fc2d28f5b7a32f242e4e18} 
+task\+\_\+share.\+Share.\+put (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{data}{, }\item[{}]{in\+\_\+\+ISR}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+Writes data into the share (overwrites old data). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The new data value to store. \\
+\hline
+{\em in\+\_\+\+ISR} & True if called from an ISR, so we do not block. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00233}{233}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{def\ }put(self,\ data,\ in\_ISR=False):}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00235\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Writes\ data\ into\ the\ share\ (overwrites\ old\ data).}}
+\DoxyCodeLine{00236\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ data\ The\ new\ data\ value\ to\ store.}}
+\DoxyCodeLine{00237\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ so\ we\ do\ not\ block.}}
+\DoxyCodeLine{00238\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq()}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ self.\_buffer[0]\ =\ data}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state)}
+\DoxyCodeLine{00244\ }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classtask__share_1_1_share_a2f7e0b72d08d27b7ccf92da6ddc127a8}\index{task\_share.Share@{task\_share.Share}!\_buffer@{\_buffer}}
+\index{\_buffer@{\_buffer}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{\_buffer}{\_buffer}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_a2f7e0b72d08d27b7ccf92da6ddc127a8} 
+task\+\_\+share.\+Share.\+\_\+buffer = array.\+array(type\+\_\+code, \mbox{[}0\mbox{]})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00228}{228}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+\Hypertarget{classtask__share_1_1_share_acff3918997966ba1e31292398f3ca196}\index{task\_share.Share@{task\_share.Share}!\_name@{\_name}}
+\index{\_name@{\_name}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{\_name}{\_name}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_acff3918997966ba1e31292398f3ca196} 
+task\+\_\+share.\+Share.\+\_\+name = str(name) if name else (\textquotesingle{}\mbox{\hyperlink{classtask__share_1_1_share}{Share}}\textquotesingle{} + str(Share.\+ser\+\_\+num))\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00229}{229}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+\Hypertarget{classtask__share_1_1_share_a2e8df029af46fbfd44ef0c2e7e8c7af6}\index{task\_share.Share@{task\_share.Share}!ser\_num@{ser\_num}}
+\index{ser\_num@{ser\_num}!task\_share.Share@{task\_share.Share}}
+\doxysubsubsection{\texorpdfstring{ser\_num}{ser\_num}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_share_a2e8df029af46fbfd44ef0c2e7e8c7af6} 
+int task\+\_\+share.\+Share.\+ser\+\_\+num = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00218}{218}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/\mbox{\hyperlink{task__share_8py}{task\+\_\+share.\+py}}\end{DoxyCompactItemize}

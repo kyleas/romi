@@ -1,0 +1,72 @@
+\chapter{Romi Time-\/\+Trials\+: ME405 Term Project}
+\hypertarget{index}{}\label{index}\index{Romi Time-\/Trials: ME405 Term Project@{Romi Time-\/Trials: ME405 Term Project}}
+\label{index_md_index}%
+\Hypertarget{index_md_index}%
+\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{index_autotoc_md1}
+Welcome to the {\bfseries{\doxylink{class_romi}{Romi} Time-\/\+Trials Project\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}—a self-\/navigating robot designed for autonomous competition in \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+ME 405\+: Mechatronics}}. ~\newline
+ The goal of this project is to build a {\bfseries{highly precise, efficient, and autonomous \doxylink{class_romi}{Romi} robot}} that can\+:
+\begin{DoxyItemize}
+\item {\bfseries{Follow a predefined track}} using calibrated infrared (\doxylink{class_i_r}{IR}) sensors.
+\item {\bfseries{Adjust its heading}} using an Inertial Measurement Unit (\doxylink{class_i_m_u}{IMU}).
+\item {\bfseries{Utilize \doxylink{class_p_i_d}{PID} control}} for precise motor velocity regulation.
+\item {\bfseries{Respond to obstacles}} with bumper sensors.
+\end{DoxyItemize}
+
+This project integrates real-\/time task scheduling, control theory, and embedded systems to create a functional and adaptable robotic platform.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_autotoc_md3}
+
+\begin{DoxyItemize}
+\item {\bfseries{\doxylink{class_motor}{Motor} Control}}\+: PID-\/based velocity control for both left and right motors.
+\item {\bfseries{\doxylink{class_i_r}{IR} Sensor Navigation}}\+: Line-\/following algorithm to track the course.
+\item {\bfseries{IMU-\/\+Assisted Navigation}}\+: Accurate heading control for smooth turns.
+\item {\bfseries{Finite-\/\+State Machine (FSM)}}\+: Organized execution of robot behaviors.
+\item {\bfseries{Multitasking Framework}}\+: Cooperative scheduling using {\ttfamily \doxylink{cotask_8py}{cotask.\+py}} and shared data via {\ttfamily \doxylink{task__share_8py}{task\+\_\+share.\+py}}.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{System Architecture}{System Architecture}}\label{index_autotoc_md5}
+The system is built on a task-\/based multitasking model, where each component operates as a separate task\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Task 1}}\+: Handles user inputs and data logging.
+\item {\bfseries{Task 2 \& Task 3}}\+: Control left and right motors using \doxylink{class_p_i_d}{PID} velocity control.
+\item {\bfseries{Task 4}}\+: Implements path following using \doxylink{class_i_r}{IR} sensor and \doxylink{class_i_m_u}{IMU} data.
+\item {\bfseries{Task 5}} (Optional)\+: Provides an emergency stop using bumper sensors.
+\end{DoxyEnumerate}
+
+{\itshape Diagram Placeholder}\+: ~\newline
+ {\itshape You can insert a system architecture diagram here to visually represent the tasks and their interactions.}
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md7}{}\doxysection{\texorpdfstring{Code Structure}{Code Structure}}\label{index_autotoc_md7}
+The project is organized into several modules\+:
+
+{\bfseries{Main and Kinematics\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{main_8py}{main.\+py}}}} – Main entry point; initializes tasks and the scheduler.
+\item {\bfseries{{\ttfamily \doxylink{romi_8py}{romi.\+py}}}} – Handles robot kinematics, tracking position, heading, and distance.
+\item {\bfseries{{\ttfamily \doxylink{motor_8py}{motor.\+py}}}} – \doxylink{class_motor}{Motor} driver interface.
+\item {\bfseries{{\ttfamily \doxylink{pid_8py}{pid.\+py}}}} – \doxylink{class_p_i_d}{PID} controller for motor speed regulation.
+\item {\bfseries{{\ttfamily \doxylink{imu_8py}{imu.\+py}}}} – Interface to the \doxylink{class_i_m_u}{IMU} sensor.
+\item {\bfseries{{\ttfamily \doxylink{ir_8py}{ir.\+py}}}} – \doxylink{class_i_r}{IR} sensor interface for line following.
+\end{DoxyItemize}
+
+{\bfseries{Task Scheduling and Data Sharing\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{cotask_8py}{cotask.\+py}}}} – Cooperative task scheduler.
+\item {\bfseries{{\ttfamily \doxylink{task__share_8py}{task\+\_\+share.\+py}}}} – Shared data and communication utilities.
+\item {\bfseries{{\ttfamily \doxylink{cqueue_8py}{cqueue.\+py}}}} – Custom C-\/based queue implementations for efficiency.
+\end{DoxyItemize}
+
+{\bfseries{Sensors and Peripherals\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{bump_8py}{bump.\+py}}}} – Bumper switch interface.
+\item {\bfseries{{\ttfamily \doxylink{encoder_8py}{encoder.\+py}}}} – Quadrature encoder for velocity sensing.
+\item {\bfseries{{\ttfamily \doxylink{pin__definitions_8py}{pin\+\_\+definitions.\+py}}}} – Hardware pin mappings.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ 

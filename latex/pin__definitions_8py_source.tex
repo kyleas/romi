@@ -1,0 +1,57 @@
+\doxysection{pin\+\_\+definitions.\+py}
+\hypertarget{pin__definitions_8py_source}{}\label{pin__definitions_8py_source}\index{lib2/pin\_definitions.py@{lib2/pin\_definitions.py}}
+\mbox{\hyperlink{pin__definitions_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00001}00001\ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00002}00002\ \textcolor{stringliteral}{@file\ pin\_definitions.py}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00003}00003\ \textcolor{stringliteral}{@brief\ Defines\ pin\ mappings\ and\ timer\ assignments\ for\ the\ ROMI\ hardware.}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00004}00004\ \textcolor{stringliteral}{@details}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ Centralizes\ all\ pin\ definitions\ for\ motors,\ encoders,\ IR\ sensors,\ bumpers,}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ and\ the\ blue\ button.\ This\ makes\ it\ easier\ to\ maintain\ and\ modify\ hardware\ mappings.}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00007}00007\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00009}00009\ \textcolor{keyword}{from}\ pyb\ \textcolor{keyword}{import}\ Pin}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00011}00011\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ ENCODER\ TIMERS\ \&\ PINS\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00012}00012\ encoder\_left\_timer\ =\ 1}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00013}00013\ encoder\_left\_A\ =\ Pin.cpu.A8}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00014}00014\ encoder\_left\_B\ =\ Pin.cpu.A9}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00016}00016\ encoder\_right\_timer\ =\ 2}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00017}00017\ encoder\_right\_A\ =\ Pin.cpu.A0}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00018}00018\ encoder\_right\_B\ =\ Pin.cpu.A1}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00020}00020\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ MOTOR\ PINS\ \&\ TIMERS\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00021}00021\ \textcolor{comment}{\#\ Left\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00022}00022\ motor\_left\_enable\ =\ Pin.cpu.A7\ \ \ \ \ \textcolor{comment}{\#\ PA7:\ motor\ enable\ for\ left\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00023}00023\ motor\_left\_dir\ =\ Pin.cpu.B6\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ PB6:\ direction\ pin\ for\ left\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00024}00024\ motor\_left\_timer\ =\ 3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Timer\ 3\ used\ for\ left\ motor\ PWM}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00025}00025\ motor\_left\_channel\ =\ 2\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Timer\ channel}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00026}00026\ motor\_left\_pwm\ =\ Pin.cpu.C7\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ PC7:\ PWM\ output\ pin\ for\ left\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00028}00028\ \textcolor{comment}{\#\ Right\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00029}00029\ motor\_right\_enable\ =\ Pin.cpu.A6\ \ \ \ \textcolor{comment}{\#\ PA6:\ motor\ enable\ for\ right\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00030}00030\ motor\_right\_dir\ =\ Pin.cpu.B5\ \ \ \ \ \ \ \textcolor{comment}{\#\ PB5:\ direction\ pin\ for\ right\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00031}00031\ motor\_right\_timer\ =\ 8\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Timer\ 8\ used\ for\ right\ motor\ PWM}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00032}00032\ motor\_right\_channel\ =\ 3\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Timer\ channel}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00033}00033\ motor\_right\_pwm\ =\ Pin.cpu.C8\ \ \ \ \ \ \ \textcolor{comment}{\#\ PC8:\ PWM\ output\ pin\ for\ right\ motor}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00035}00035\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ IR\ SENSOR\ CONTROL\ \&\ INPUTS\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00036}00036\ ir\_ctrl\ =\ Pin.cpu.B2}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00037}00037\ ir\_1\ =\ Pin.cpu.A4}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00038}00038\ ir\_3\ =\ Pin.cpu.B0}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00039}00039\ ir\_5\ =\ Pin.cpu.C1}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00040}00040\ ir\_7\ =\ Pin.cpu.C0}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00042}00042\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ BLUE\ BUTTON\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00043}00043\ blue\_button\ =\ Pin.cpu.C13}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00045}00045\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ BUMPER\ SWITCHES\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00046}00046\ bump0\ =\ Pin.cpu.B15}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00047}00047\ bump1\ =\ Pin.cpu.B13}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00048}00048\ bump2\ =\ Pin.cpu.B14}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00049}00049\ bump3\ =\ Pin.cpu.B1}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00050}00050\ bump4\ =\ Pin.cpu.B3}
+\DoxyCodeLine{\Hypertarget{pin__definitions_8py_source_l00051}00051\ bump5\ =\ Pin.cpu.B4}
+
+\end{DoxyCode}

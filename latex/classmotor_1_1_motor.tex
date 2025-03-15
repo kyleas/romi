@@ -1,0 +1,98 @@
+\doxysection{motor.\+Motor Class Reference}
+\hypertarget{classmotor_1_1_motor}{}\label{classmotor_1_1_motor}\index{motor.Motor@{motor.Motor}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmotor_1_1_motor_a4a518a52637a7174d7578f1e60ef4603}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, n\+SLP, DIR, TIM, CH, PWM)
+\item 
+\mbox{\hyperlink{classmotor_1_1_motor_aacaeae41be4d94273ff9318b5a616b93}{set\+\_\+effort}} (self, effort)
+\item 
+\mbox{\hyperlink{classmotor_1_1_motor_a9f58c627d1e1d0437921b0eac5b81222}{enable}} (self)
+\item 
+\mbox{\hyperlink{classmotor_1_1_motor_af791b20dd99b0a34d48b0178dc11fcb0}{disable}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmotor_1_1_motor_a1869baa1d1be0f088f732cc71dc0a562}\label{classmotor_1_1_motor_a1869baa1d1be0f088f732cc71dc0a562} 
+{\bfseries n\+SLP\+\_\+pin} = Pin(n\+SLP, mode=Pin.\+OUT\+\_\+\+PP, value=0)
+\item 
+\Hypertarget{classmotor_1_1_motor_aab7b2b168a8b560c21db05a960a51cba}\label{classmotor_1_1_motor_aab7b2b168a8b560c21db05a960a51cba} 
+{\bfseries DIR\+\_\+pin} = Pin(DIR, mode=Pin.\+OUT\+\_\+\+PP)
+\item 
+\Hypertarget{classmotor_1_1_motor_a9fafd83119fe771b0d6500f8623a1c69}\label{classmotor_1_1_motor_a9fafd83119fe771b0d6500f8623a1c69} 
+{\bfseries TIM} = Timer(TIM, freq=20000)
+\item 
+\Hypertarget{classmotor_1_1_motor_a130b7bd4e1fc62bac9d6b7b7faaec64d}\label{classmotor_1_1_motor_a130b7bd4e1fc62bac9d6b7b7faaec64d} 
+{\bfseries PWM\+\_\+pin} = self.\+TIM.\+channel(CH, Timer.\+PWM, pin=PWM)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class Motor
+@brief A motor driver interface encapsulated in a Python class.
+@details 
+  This class creates a motor driver object controlling PWM and direction pins 
+  for a single motor. The driver uses separate PWM and direction lines, e.g., 
+  DRV8838 modules on a ROMI chassis.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmotor_1_1_motor_a4a518a52637a7174d7578f1e60ef4603}\index{motor.Motor@{motor.Motor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!motor.Motor@{motor.Motor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmotor_1_1_motor_a4a518a52637a7174d7578f1e60ef4603} 
+motor.\+Motor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{n\+SLP}{, }\item[{}]{DIR}{, }\item[{}]{TIM}{, }\item[{}]{CH}{, }\item[{}]{PWM}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes a Motor object.
+@param nSLP Pin identifier for the motor's sleep (enable) pin.
+@param DIR Pin identifier for the motor's direction pin.
+@param TIM Timer number used for generating PWM signals.
+@param CH The timer channel for PWM output.
+@param PWM The pin to which PWM output is assigned.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmotor_1_1_motor_af791b20dd99b0a34d48b0178dc11fcb0}\index{motor.Motor@{motor.Motor}!disable@{disable}}
+\index{disable@{disable}!motor.Motor@{motor.Motor}}
+\doxysubsubsection{\texorpdfstring{disable()}{disable()}}
+{\footnotesize\ttfamily \label{classmotor_1_1_motor_af791b20dd99b0a34d48b0178dc11fcb0} 
+motor.\+Motor.\+disable (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Disables the motor driver by putting it into sleep mode.
+@details 
+  Sets the nSLP pin low, halting motor activity.
+\end{DoxyVerb}
+ \Hypertarget{classmotor_1_1_motor_a9f58c627d1e1d0437921b0eac5b81222}\index{motor.Motor@{motor.Motor}!enable@{enable}}
+\index{enable@{enable}!motor.Motor@{motor.Motor}}
+\doxysubsubsection{\texorpdfstring{enable()}{enable()}}
+{\footnotesize\ttfamily \label{classmotor_1_1_motor_a9f58c627d1e1d0437921b0eac5b81222} 
+motor.\+Motor.\+enable (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Enables the motor driver by taking it out of sleep mode.
+@details 
+  Sets the nSLP (not sleep) pin high, activating the motor driver 
+  to brake mode with 0% duty cycle initially.
+\end{DoxyVerb}
+ \Hypertarget{classmotor_1_1_motor_aacaeae41be4d94273ff9318b5a616b93}\index{motor.Motor@{motor.Motor}!set\_effort@{set\_effort}}
+\index{set\_effort@{set\_effort}!motor.Motor@{motor.Motor}}
+\doxysubsubsection{\texorpdfstring{set\_effort()}{set\_effort()}}
+{\footnotesize\ttfamily \label{classmotor_1_1_motor_aacaeae41be4d94273ff9318b5a616b93} 
+motor.\+Motor.\+set\+\_\+effort (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{effort}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Sets the motor effort (speed and direction).
+@details 
+  The effort value must be between -100 and 100. Negative values 
+  cause the motor to spin in reverse, while positive values spin forward.
+
+@exception ValueError If effort is outside the range -100 to 100.
+@param effort Motor speed setting, from -100 (full reverse) 
+              to +100 (full forward).
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/motor.\+py\end{DoxyCompactItemize}

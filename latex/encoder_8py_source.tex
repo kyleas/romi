@@ -1,0 +1,117 @@
+\doxysection{encoder.\+py}
+\hypertarget{encoder_8py_source}{}\label{encoder_8py_source}\index{lib2/encoder.py@{lib2/encoder.py}}
+\mbox{\hyperlink{encoder_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00001}00001\ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00002}00002\ \textcolor{stringliteral}{@file\ encoder.py}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00003}00003\ \textcolor{stringliteral}{@brief\ A\ quadrature\ encoder\ interface\ class\ for\ measuring\ position\ and\ velocity.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00004}00004\ \textcolor{stringliteral}{@details}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ Provides\ an\ update\ method\ to\ track\ position\ changes\ and\ compute\ velocity\ in\ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ RPM\ using\ a\ short\ history\ of\ positions\ and\ timestamps.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00007}00007\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00009}00009\ \textcolor{keyword}{from}\ time\ \textcolor{keyword}{import}\ ticks\_us,\ ticks\_diff}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00010}00010\ \textcolor{keyword}{from}\ pyb\ \textcolor{keyword}{import}\ Pin,\ Timer}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00011}00011\ \textcolor{keyword}{import}\ cqueue\ \textcolor{keyword}{as}\ cqueue}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00013}00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_encoder}{Encoder}}:}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00014}00014\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00015}\mbox{\hyperlink{class_encoder}{00015}}\ \textcolor{stringliteral}{\ \ \ \ @class\ Encoder}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ @brief\ A\ quadrature\ encoder\ decoding\ interface.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ \ \ Uses\ a\ hardware\ timer\ in\ ENC\_AB\ mode\ to\ count\ position.\ Keeps\ a\ small\ queue}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ of\ past\ positions/timestamps\ to\ estimate\ velocity.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ timer,\ pin\_a,\ pin\_b):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Initializes\ the\ encoder\ with\ the\ given\ timer\ and\ pins.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ timer\ The\ timer\ number\ configured\ for\ quadrature\ decoding.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ pin\_a\ The\ pin\ for\ channel\ A\ of\ the\ quadrature\ signal.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ pin\_b\ The\ pin\ for\ channel\ B\ of\ the\ quadrature\ signal.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ self.position\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ self.prev\_count\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ self.delta\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ self.dt\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ self.tim\ =\ Timer(timer,\ period=0xFFFF,\ prescaler=0)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ self.tim.channel(1,\ pin=pin\_a,\ mode=Timer.ENC\_AB)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ self.tim.channel(2,\ pin=pin\_b,\ mode=Timer.ENC\_AB)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Deques\ to\ store\ position/time\ history\ for\ velocity\ calculation}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ self.position\_history\ =\ \mbox{\hyperlink{classcqueue_1_1_int_queue}{cqueue.IntQueue}}(5)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ self.time\_history\ =\ \mbox{\hyperlink{classcqueue_1_1_int_queue}{cqueue.IntQueue}}(5)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ self.update()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{def\ }update(self):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00047}00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Updates\ internal\ position/velocity\ calculations\ with\ latest\ timer\ counts.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Reads\ the\ hardware\ timer,\ calculates\ delta\ from\ last\ reading,\ and\ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00050}00050\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ adjusts\ for\ rollovers.\ Stores\ position\ and\ timestamp\ in\ FIFO\ queues.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ self.delta\ =\ self.tim.counter()\ -\/\ self.prev\_count}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.delta\ >\ ((0xFFFF\ +\ 1)\ /\ 2):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ self.delta\ -\/=\ (0xFFFF\ +\ 1)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.delta\ <\ -\/((0xFFFF\ +\ 1)\ /\ 2):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ self.delta\ +=\ (0xFFFF\ +\ 1)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ self.position\ =\ self.prev\_count\ +\ self.delta}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ self.prev\_count\ =\ self.tim.counter()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ self.dt\ =\ ticks\_diff(ticks\_us(),\ self.prev\_time)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ ticks\_us()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ self.position\_history.put(self.position)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ self.time\_history.put(self.prev\_time)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{def\ }get\_position(self):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00069}00069\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ the\ most\ recently\ computed\ position.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00070}00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ encoder's\ current\ position\ in\ counts\ (relative\ to\ zero()).}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00071}00071\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.position}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{def\ }get\_velocity(self):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00076}00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Computes\ velocity\ in\ RPM\ based\ on\ historical\ data.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00077}00077\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Uses\ the\ difference\ in\ position\ between\ now\ and\ 5\ updates\ ago\ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00079}00079\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ (if\ the\ queue\ is\ full)\ and\ the\ time\ difference.\ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00080}00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Formula:\ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ velocity\ (RPM)\ =\ (delta\_counts\ *\ 60\_000\_000)\ /\ (time\_delta\_us\ *\ 1440).}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00082}00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00083}00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ velocity\ in\ RPM\ or\ 0.0\ if\ there's\ insufficient\ data.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.position\_history.full():}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ position\_5\_updates\_ago\ =\ self.position\_history.get()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ time\_5\_updates\_ago\ =\ self.time\_history.get()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ position\_delta\ =\ float(self.position\ -\/\ position\_5\_updates\_ago)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ current\_time\ =\ self.prev\_time}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ time\_delta\ =\ ticks\_diff(current\_time,\ time\_5\_updates\_ago)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ time\_delta\ >\ 0:}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Convert\ from\ counts/time\ to\ RPM:\ }}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ (counts)\ /\ (us)\ *\ (60\_000\_000\ us/min)\ *\ (1\ rev\ /\ 1440\ counts)}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ velocity\ =\ (position\_delta\ *\ 60\_000\_000.0)\ /\ (time\_delta\ *\ 1440.0)}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ velocity}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00101}00101\ \ \ \ \ \textcolor{keyword}{def\ }zero(self):}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00103}00103\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Resets\ the\ encoder's\ position\ to\ zero.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00104}00104\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details\ Clears\ the\ position\ history\ so\ velocity\ computations\ restart\ from\ zero.}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00105}00105\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ self.position\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ self.prev\_count\ =\ self.tim.counter()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ self.delta\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ self.dt\ =\ 0}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ self.position\_history.clear()}
+\DoxyCodeLine{\Hypertarget{encoder_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ self.time\_history.clear()}
+
+\end{DoxyCode}

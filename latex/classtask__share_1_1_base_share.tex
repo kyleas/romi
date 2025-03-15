@@ -1,0 +1,104 @@
+\doxysection{task\+\_\+share.\+Base\+Share Class Reference}
+\hypertarget{classtask__share_1_1_base_share}{}\label{classtask__share_1_1_base_share}\index{task\_share.BaseShare@{task\_share.BaseShare}}
+
+
+Base class for data-\/sharing structures (\doxylink{classtask__share_1_1_queue}{Queue} \& \doxylink{classtask__share_1_1_share}{Share}).  
+
+
+Inheritance diagram for task\+\_\+share.\+Base\+Share\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtask__share_1_1_base_share}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtask__share_1_1_base_share_ad8079b40800179be6c58aaac9abb0e26}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, type\+\_\+code, thread\+\_\+protect=True, name=None)
+\begin{DoxyCompactList}\small\item\em Initializes common features of share/queue objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtask__share_1_1_base_share_a0e45276424d1600740942b82f216c649}{\+\_\+type\+\_\+code}} = type\+\_\+code
+\item 
+\mbox{\hyperlink{classtask__share_1_1_base_share_acf1741d88ede8f82b9c5f321a92aaa5e}{\+\_\+thread\+\_\+protect}} = thread\+\_\+protect
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for data-\/sharing structures (\doxylink{classtask__share_1_1_queue}{Queue} \& \doxylink{classtask__share_1_1_share}{Share}). 
+
+Not to be instantiated directly. Provides common functionality for child classes. 
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00047}{47}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classtask__share_1_1_base_share_ad8079b40800179be6c58aaac9abb0e26}\index{task\_share.BaseShare@{task\_share.BaseShare}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!task\_share.BaseShare@{task\_share.BaseShare}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_base_share_ad8079b40800179be6c58aaac9abb0e26} 
+task\+\_\+share.\+Base\+Share.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{type\+\_\+code}{, }\item[{}]{thread\+\_\+protect}{ = {\ttfamily True}, }\item[{}]{name}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Initializes common features of share/queue objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+\_\+code} & One-\/letter type code as for array.\+array (e.\+g. \textquotesingle{}f\textquotesingle{} for float). \\
+\hline
+{\em thread\+\_\+protect} & If True, disables interrupts during data access. \\
+\hline
+{\em name} & Optional name string for diagnostic identification. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00055}{55}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ type\_code,\ thread\_protect=True,\ name=None):}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Initializes\ common\ features\ of\ share/queue\ objects.}}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ type\_code\ One-\/letter\ type\ code\ as\ for\ array.array\ (e.g.\ 'f'\ for\ float).}}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ thread\_protect\ If\ True,\ disables\ interrupts\ during\ data\ access.}}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ name\ Optional\ name\ string\ for\ diagnostic\ identification.}}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ self.\_type\_code\ =\ type\_code}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ self.\_thread\_protect\ =\ thread\_protect}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ share\_list.append(self)}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classtask__share_1_1_base_share_acf1741d88ede8f82b9c5f321a92aaa5e}\index{task\_share.BaseShare@{task\_share.BaseShare}!\_thread\_protect@{\_thread\_protect}}
+\index{\_thread\_protect@{\_thread\_protect}!task\_share.BaseShare@{task\_share.BaseShare}}
+\doxysubsubsection{\texorpdfstring{\_thread\_protect}{\_thread\_protect}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_base_share_acf1741d88ede8f82b9c5f321a92aaa5e} 
+task\+\_\+share.\+Base\+Share.\+\_\+thread\+\_\+protect = thread\+\_\+protect\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00063}{63}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+\Hypertarget{classtask__share_1_1_base_share_a0e45276424d1600740942b82f216c649}\index{task\_share.BaseShare@{task\_share.BaseShare}!\_type\_code@{\_type\_code}}
+\index{\_type\_code@{\_type\_code}!task\_share.BaseShare@{task\_share.BaseShare}}
+\doxysubsubsection{\texorpdfstring{\_type\_code}{\_type\_code}}
+{\footnotesize\ttfamily \label{classtask__share_1_1_base_share_a0e45276424d1600740942b82f216c649} 
+task\+\_\+share.\+Base\+Share.\+\_\+type\+\_\+code = type\+\_\+code\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00062}{62}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/\mbox{\hyperlink{task__share_8py}{task\+\_\+share.\+py}}\end{DoxyCompactItemize}

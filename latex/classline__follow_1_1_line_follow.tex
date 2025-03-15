@@ -1,0 +1,60 @@
+\doxysection{line\+\_\+follow.\+Line\+Follow Class Reference}
+\hypertarget{classline__follow_1_1_line_follow}{}\label{classline__follow_1_1_line_follow}\index{line\_follow.LineFollow@{line\_follow.LineFollow}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classline__follow_1_1_line_follow_aa785352681f9c81f573086aec1fa63f2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, IR\+\_\+\+SENSOR)
+\item 
+\mbox{\hyperlink{classline__follow_1_1_line_follow_ad87458616741c97278b7f24cde2db6da}{update}} (self, MAX\+\_\+\+VEL)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classline__follow_1_1_line_follow_a39cfe2024174a6efaaf0e9c7a19a4346}\label{classline__follow_1_1_line_follow_a39cfe2024174a6efaaf0e9c7a19a4346} 
+{\bfseries IR\+\_\+\+SENSOR} = IR\+\_\+\+SENSOR
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class LineFollow
+@brief Class that computes left/right motor velocities to keep a line sensor's centroid at center.
+@details
+  The centroid from the IR sensor is used to adjust wheel speeds in real-time,
+  steering the robot to follow a line on the floor.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classline__follow_1_1_line_follow_aa785352681f9c81f573086aec1fa63f2}\index{line\_follow.LineFollow@{line\_follow.LineFollow}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!line\_follow.LineFollow@{line\_follow.LineFollow}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classline__follow_1_1_line_follow_aa785352681f9c81f573086aec1fa63f2} 
+line\+\_\+follow.\+Line\+Follow.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{IR\+\_\+\+SENSOR}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructs the line follower object with a reference to an IR sensor module.
+@param IR_SENSOR An instance of the IR class for reading line position data.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classline__follow_1_1_line_follow_ad87458616741c97278b7f24cde2db6da}\index{line\_follow.LineFollow@{line\_follow.LineFollow}!update@{update}}
+\index{update@{update}!line\_follow.LineFollow@{line\_follow.LineFollow}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classline__follow_1_1_line_follow_ad87458616741c97278b7f24cde2db6da} 
+line\+\_\+follow.\+Line\+Follow.\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{MAX\+\_\+\+VEL}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Updates and returns new left/right velocities based on IR sensor centroid.
+@details
+  - Reads the centroid (-1 to +1).
+  - Scales each wheel's velocity from 0 up to max_vel, with opposing directions for large errors 
+    (in a more advanced scenario).
+  - Clamps outputs to [0..max_vel].
+
+@param MAX_VEL A shared variable containing the maximum allowed velocity.
+@return (left_vel, right_vel) as floats in the range [0..max_vel].
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/line\+\_\+follow.\+py\end{DoxyCompactItemize}

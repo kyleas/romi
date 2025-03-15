@@ -1,0 +1,91 @@
+\doxysection{bump.\+Bump Class Reference}
+\hypertarget{classbump_1_1_bump}{}\label{classbump_1_1_bump}\index{bump.Bump@{bump.Bump}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbump_1_1_bump_a6298480c5b10c19827a85bd34e4978b1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, BUMP0, BUMP1, BUMP2, BUMP3, BUMP4, BUMP5)
+\item 
+\mbox{\hyperlink{classbump_1_1_bump_a6071aea04410250f194a8d3de78fc115}{update}} (self)
+\item 
+\mbox{\hyperlink{classbump_1_1_bump_a47b354ce71e6897f79055ae348e1c27c}{get}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbump_1_1_bump_a8960ff864391790ac71050efe89861e5}\label{classbump_1_1_bump_a8960ff864391790ac71050efe89861e5} 
+{\bfseries BUMP0\+\_\+pin} = Pin(BUMP0, Pin.\+IN, Pin.\+PULL\+\_\+\+UP)
+\item 
+\Hypertarget{classbump_1_1_bump_a670efe162bab0f08937ba2107f372a8f}\label{classbump_1_1_bump_a670efe162bab0f08937ba2107f372a8f} 
+{\bfseries BUMP1\+\_\+pin} = Pin(BUMP1, Pin.\+IN, Pin.\+PULL\+\_\+\+UP)
+\item 
+\Hypertarget{classbump_1_1_bump_a6fef5805c38026dc5a5a7f646f0a8f49}\label{classbump_1_1_bump_a6fef5805c38026dc5a5a7f646f0a8f49} 
+{\bfseries BUMP2\+\_\+pin} = Pin(BUMP2, Pin.\+IN, Pin.\+PULL\+\_\+\+UP)
+\item 
+\Hypertarget{classbump_1_1_bump_aad7eb0615f5fdf614f16477f5cecce70}\label{classbump_1_1_bump_aad7eb0615f5fdf614f16477f5cecce70} 
+{\bfseries BUMP3\+\_\+pin} = Pin(BUMP3, Pin.\+IN, Pin.\+PULL\+\_\+\+UP)
+\item 
+\Hypertarget{classbump_1_1_bump_a1575c093a71e57c6f65b3a09a6014875}\label{classbump_1_1_bump_a1575c093a71e57c6f65b3a09a6014875} 
+{\bfseries BUMP4\+\_\+pin} = Pin(BUMP4, Pin.\+IN, Pin.\+PULL\+\_\+\+UP)
+\item 
+\Hypertarget{classbump_1_1_bump_a62f32936b9fa648afc2f7276552c89e5}\label{classbump_1_1_bump_a62f32936b9fa648afc2f7276552c89e5} 
+{\bfseries BUMP5\+\_\+pin} = Pin(BUMP5, Pin.\+IN, Pin.\+PULL\+\_\+\+UP)
+\item 
+\Hypertarget{classbump_1_1_bump_a539ebcfd165ace53426013970981b521}\label{classbump_1_1_bump_a539ebcfd165ace53426013970981b521} 
+{\bfseries BUMP\+\_\+\+Array} = array(\textquotesingle{}i\textquotesingle{}, \mbox{[}0, 0, 0, 0, 0, 0\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class Bump
+@brief Encapsulates ROMI bumper switch reading.
+@details
+  The ROMI can have up to six bump/tactile switches. Each is read as 
+  a digital input with pull-up, returning 0 if pressed, 1 if released.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbump_1_1_bump_a6298480c5b10c19827a85bd34e4978b1}\index{bump.Bump@{bump.Bump}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bump.Bump@{bump.Bump}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbump_1_1_bump_a6298480c5b10c19827a85bd34e4978b1} 
+bump.\+Bump.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{BUMP0}{, }\item[{}]{BUMP1}{, }\item[{}]{BUMP2}{, }\item[{}]{BUMP3}{, }\item[{}]{BUMP4}{, }\item[{}]{BUMP5}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructs a Bump object with pin references for six switches.
+@param BUMP0 Pin identifier for bumper 0.
+@param BUMP1 Pin identifier for bumper 1.
+@param BUMP2 Pin identifier for bumper 2.
+@param BUMP3 Pin identifier for bumper 3.
+@param BUMP4 Pin identifier for bumper 4.
+@param BUMP5 Pin identifier for bumper 5.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbump_1_1_bump_a47b354ce71e6897f79055ae348e1c27c}\index{bump.Bump@{bump.Bump}!get@{get}}
+\index{get@{get}!bump.Bump@{bump.Bump}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \label{classbump_1_1_bump_a47b354ce71e6897f79055ae348e1c27c} 
+bump.\+Bump.\+get (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Returns True if any bumper is pressed, False otherwise.
+@details
+  Iterates through BUMP_Array looking for a 0 (pressed).
+@return True if any switch is pressed, False if none are pressed.
+\end{DoxyVerb}
+ \Hypertarget{classbump_1_1_bump_a6071aea04410250f194a8d3de78fc115}\index{bump.Bump@{bump.Bump}!update@{update}}
+\index{update@{update}!bump.Bump@{bump.Bump}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classbump_1_1_bump_a6071aea04410250f194a8d3de78fc115} 
+bump.\+Bump.\+update (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Updates the bumper readings (populates BUMP_Array).
+@details
+  The array is stored in an order that correlates with the physical 
+  layout. A 0 value indicates pressed (pin driven low).
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/bump.\+py\end{DoxyCompactItemize}

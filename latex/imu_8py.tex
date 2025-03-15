@@ -1,0 +1,55 @@
+\doxysection{lib2/imu.py File Reference}
+\hypertarget{imu_8py}{}\label{imu_8py}\index{lib2/imu.py@{lib2/imu.py}}
+
+
+Provides an interface to the BNO055 \doxylink{class_i_m_u}{IMU} for orientation and calibration.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{imu_8py_a48acb7253db0569ea47928e25de0076a}{imu.\+oldmain}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides an interface to the BNO055 \doxylink{class_i_m_u}{IMU} for orientation and calibration. 
+
+Communicates with the BNO055 sensor over I2C to read euler angles, gyroscope, magnetometer data, and handle calibration. Can store/read calibration data from a binary file to speed up repeated usage. 
+
+Definition in file \mbox{\hyperlink{imu_8py_source}{imu.\+py}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{imu_8py_a48acb7253db0569ea47928e25de0076a}\index{imu.py@{imu.py}!oldmain@{oldmain}}
+\index{oldmain@{oldmain}!imu.py@{imu.py}}
+\doxysubsubsection{\texorpdfstring{oldmain()}{oldmain()}}
+{\footnotesize\ttfamily \label{imu_8py_a48acb7253db0569ea47928e25de0076a} 
+imu.\+oldmain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{imu_8py_source_l00299}{299}} of file \mbox{\hyperlink{imu_8py_source}{imu.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keyword}{def\ }oldmain(): }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ IMU\_obj\ =\ \mbox{\hyperlink{class_i_m_u}{IMU}}() }
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ IMU\_obj.set\_mode(IMU.NDOF) }
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ IMU.file\_exists(\textcolor{stringliteral}{'calibrations.bin'}): }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ IMU\_obj.write\_calibration\_coeff() }
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Calibration\ data\ obtained\ through\ file"{}}) }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Manually\ calibrate\ the\ IMU"{}}) }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}: }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ yes\ =\ IMU\_obj.calibration\_status() }
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(yes) }
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ yes\ ==\ 1: }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IMU\_obj.retrieve\_calibration\_coeff() }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Calibration\ complete\ and\ written\ to\ file"{}}) }
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break} }
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_ms(1000) }
+\DoxyCodeLine{00315\  }
+
+\end{DoxyCode}

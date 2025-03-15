@@ -1,0 +1,124 @@
+\doxysection{lib2/task\+\_\+share.py File Reference}
+\hypertarget{task__share_8py}{}\label{task__share_8py}\index{lib2/task\_share.py@{lib2/task\_share.py}}
+
+
+Provides classes for data sharing and communication between tasks.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtask__share_1_1_base_share}{task\+\_\+share.\+Base\+Share}}
+\begin{DoxyCompactList}\small\item\em Base class for data-\/sharing structures (\doxylink{classtask__share_1_1_queue}{Queue} \& \doxylink{classtask__share_1_1_share}{Share}). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtask__share_1_1_queue}{task\+\_\+share.\+Queue}}
+\begin{DoxyCompactList}\small\item\em A FIFO queue to transfer data between tasks. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}
+\begin{DoxyCompactList}\small\item\em A single shared data item (thread-\/safe if needed). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{task__share_8py_ad6aea1db68be1a10f72039a5ac9e9dd4}{task\+\_\+share.\+show\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Generates a diagnostic printout of all queues and shares. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{task__share_8py_a75818e5b662453e3723d0f234c85e519}{task\+\_\+share.\+share\+\_\+list}} = \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em A system-\/wide list of all queues and shared variables for diagnostics. \end{DoxyCompactList}\item 
+dict \mbox{\hyperlink{task__share_8py_af5ee68a35f9ce19aef4c4bd4ab7c2679}{task\+\_\+share.\+type\+\_\+code\+\_\+strings}}
+\begin{DoxyCompactList}\small\item\em Maps Python array type codes to human-\/readable strings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides classes for data sharing and communication between tasks. 
+
+Includes two main classes\+: Queue (for multiple data items) and Share (for single data). Also contains a global function show\+\_\+all() which prints diagnostics for all shares/queues.
+
+\begin{DoxyAuthor}{Author}
+JR Ridgely
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2017-\/Jan-\/01 (original creation), 2021-\/Dec-\/18 (docstring updates), 2023 (further modifications and reformatting)
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Released under the GNU Public License, version 3.\+0. Intended for educational use only; no warranties implied. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{task__share_8py_ad6aea1db68be1a10f72039a5ac9e9dd4}\index{task\_share.py@{task\_share.py}!show\_all@{show\_all}}
+\index{show\_all@{show\_all}!task\_share.py@{task\_share.py}}
+\doxysubsubsection{\texorpdfstring{show\_all()}{show\_all()}}
+{\footnotesize\ttfamily \label{task__share_8py_ad6aea1db68be1a10f72039a5ac9e9dd4} 
+task\+\_\+share.\+show\+\_\+all (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Generates a diagnostic printout of all queues and shares. 
+
+\begin{DoxyReturn}{Returns}
+A string containing formatted data about each queue/share. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00038}{38}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \textcolor{keyword}{def\ }show\_all():}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ @brief\ Generates\ a\ diagnostic\ printout\ of\ all\ queues\ and\ shares.}}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ @return\ A\ string\ containing\ formatted\ data\ about\ each\ queue/share.}}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00043\ \ \ \ \ gen\ =\ (str(item)\ \textcolor{keywordflow}{for}\ item\ \textcolor{keywordflow}{in}\ share\_list)}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{'\(\backslash\)n'}.join(gen)}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{task__share_8py_a75818e5b662453e3723d0f234c85e519}\index{task\_share.py@{task\_share.py}!share\_list@{share\_list}}
+\index{share\_list@{share\_list}!task\_share.py@{task\_share.py}}
+\doxysubsubsection{\texorpdfstring{share\_list}{share\_list}}
+{\footnotesize\ttfamily \label{task__share_8py_a75818e5b662453e3723d0f234c85e519} 
+list task\+\_\+share.\+share\+\_\+list = \mbox{[}$\,$\mbox{]}}
+
+
+
+A system-\/wide list of all queues and shared variables for diagnostics. 
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00026}{26}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+
+\Hypertarget{task__share_8py_af5ee68a35f9ce19aef4c4bd4ab7c2679}\index{task\_share.py@{task\_share.py}!type\_code\_strings@{type\_code\_strings}}
+\index{type\_code\_strings@{type\_code\_strings}!task\_share.py@{task\_share.py}}
+\doxysubsubsection{\texorpdfstring{type\_code\_strings}{type\_code\_strings}}
+{\footnotesize\ttfamily \label{task__share_8py_af5ee68a35f9ce19aef4c4bd4ab7c2679} 
+dict task\+\_\+share.\+type\+\_\+code\+\_\+strings}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{'b'}:\ \textcolor{stringliteral}{"{}int8"{}},\ \ \ \textcolor{stringliteral}{'B'}:\ \textcolor{stringliteral}{"{}uint8"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{'h'}:\ \textcolor{stringliteral}{"{}int16"{}},\ \ \textcolor{stringliteral}{'H'}:\ \textcolor{stringliteral}{"{}uint16"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{'i'}:\ \textcolor{stringliteral}{"{}int(?)"{}},\ \textcolor{stringliteral}{'I'}:\ \textcolor{stringliteral}{"{}uint(?)"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{'l'}:\ \textcolor{stringliteral}{"{}int32"{}},\ \ \textcolor{stringliteral}{'L'}:\ \textcolor{stringliteral}{"{}uint32"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{'q'}:\ \textcolor{stringliteral}{"{}int64"{}},\ \ \textcolor{stringliteral}{'Q'}:\ \textcolor{stringliteral}{"{}uint64"{}},}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{stringliteral}{'f'}:\ \textcolor{stringliteral}{"{}float"{}},\ \ \textcolor{stringliteral}{'d'}:\ \textcolor{stringliteral}{"{}double"{}}}
+\DoxyCodeLine{00008\ \}}
+
+\end{DoxyCode}
+
+
+Maps Python array type codes to human-\/readable strings. 
+
+
+
+Definition at line \mbox{\hyperlink{task__share_8py_source_l00029}{29}} of file \mbox{\hyperlink{task__share_8py_source}{task\+\_\+share.\+py}}.
+

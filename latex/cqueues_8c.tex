@@ -1,0 +1,1264 @@
+\doxysection{lib2/cqueues.c File Reference}
+\hypertarget{cqueues_8c}{}\label{cqueues_8c}\index{lib2/cqueues.c@{lib2/cqueues.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}py/runtime.\+h"{}}\newline
+{\ttfamily \#include "{}py/obj.\+h"{}}\newline
+{\ttfamily \#include "{}py/objstr.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct__cqueue___int_queue__obj__t}{\+\_\+cqueue\+\_\+\+Int\+Queue\+\_\+obj\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct__cqueue___float_queue__obj__t}{\+\_\+cqueue\+\_\+\+Float\+Queue\+\_\+obj\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct__cqueue___byte_queue__obj__t}{\+\_\+cqueue\+\_\+\+Byte\+Queue\+\_\+obj\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct__cqueue___int_queue__obj__t}{\+\_\+cqueue\+\_\+\+Int\+Queue\+\_\+obj\+\_\+t}} \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\+\_\+\+Int\+Queue\+\_\+obj\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{struct__cqueue___float_queue__obj__t}{\+\_\+cqueue\+\_\+\+Float\+Queue\+\_\+obj\+\_\+t}} \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\+\_\+\+Float\+Queue\+\_\+obj\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{struct__cqueue___byte_queue__obj__t}{\+\_\+cqueue\+\_\+\+Byte\+Queue\+\_\+obj\+\_\+t}} \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\+\_\+\+Byte\+Queue\+\_\+obj\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+STATIC void \mbox{\hyperlink{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e}{Int\+Queue\+\_\+print}} (const mp\+\_\+print\+\_\+t \texorpdfstring{$\ast$}{*}print, mp\+\_\+obj\+\_\+t self\+\_\+in, mp\+\_\+print\+\_\+kind\+\_\+t kind)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{Int\+Queue\+\_\+clear}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc}{Int\+Queue\+\_\+make\+\_\+new}} (const mp\+\_\+obj\+\_\+type\+\_\+t \texorpdfstring{$\ast$}{*}type, size\+\_\+t n\+\_\+args, size\+\_\+t n\+\_\+kw, const mp\+\_\+obj\+\_\+t \texorpdfstring{$\ast$}{*}args)
+\item 
+\Hypertarget{cqueues_8c_a341092c43c186f2e9ece7c9ebc0d3d0a}\label{cqueues_8c_a341092c43c186f2e9ece7c9ebc0d3d0a} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Int\+Queue\+\_\+clear\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{Int\+Queue\+\_\+clear}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a9e1186547af14130c2d0453854ddb827}{Int\+Queue\+\_\+any}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a39f56962b25fc4d1a192fbd41e95c5bf}\label{cqueues_8c_a39f56962b25fc4d1a192fbd41e95c5bf} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Int\+Queue\+\_\+any\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a9e1186547af14130c2d0453854ddb827}{Int\+Queue\+\_\+any}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11}{Int\+Queue\+\_\+full}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a54f4511ecd9c6ce804186f928f333fce}\label{cqueues_8c_a54f4511ecd9c6ce804186f928f333fce} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Int\+Queue\+\_\+full\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11}{Int\+Queue\+\_\+full}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a8705f418364cc6da74782909c112df93}{Int\+Queue\+\_\+put}} (mp\+\_\+obj\+\_\+t self\+\_\+in, mp\+\_\+obj\+\_\+t to\+\_\+put)
+\item 
+\Hypertarget{cqueues_8c_a77f09249547c8924fa05d4f55a89bcd3}\label{cqueues_8c_a77f09249547c8924fa05d4f55a89bcd3} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+2} (Int\+Queue\+\_\+put\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a8705f418364cc6da74782909c112df93}{Int\+Queue\+\_\+put}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6}{Int\+Queue\+\_\+get}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a8318dd24603396c459463610e1715fdd}\label{cqueues_8c_a8318dd24603396c459463610e1715fdd} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Int\+Queue\+\_\+get\+\_\+obj, \mbox{\hyperlink{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6}{Int\+Queue\+\_\+get}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a4381028f15e8d7da45d95671949069d3}{Int\+Queue\+\_\+available}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a3edebdd0c73c7a7df4c3ac0cec88ccd8}\label{cqueues_8c_a3edebdd0c73c7a7df4c3ac0cec88ccd8} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Int\+Queue\+\_\+available\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a4381028f15e8d7da45d95671949069d3}{Int\+Queue\+\_\+available}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a6fd0d95f0305c17160c4880d55172721}{Int\+Queue\+\_\+max\+\_\+full}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a04bd7e98773361ba2ac903634f5eaf3c}\label{cqueues_8c_a04bd7e98773361ba2ac903634f5eaf3c} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Int\+Queue\+\_\+max\+\_\+full\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a6fd0d95f0305c17160c4880d55172721}{Int\+Queue\+\_\+max\+\_\+full}})
+\item 
+\Hypertarget{cqueues_8c_aac46c4c1fd2e7d6cf5bd4ad5ea546e39}\label{cqueues_8c_aac46c4c1fd2e7d6cf5bd4ad5ea546e39} 
+STATIC {\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+DICT} (Int\+Queue\+\_\+locals\+\_\+dict, \mbox{\hyperlink{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718}{Int\+Queue\+\_\+locals\+\_\+dict\+\_\+table}})
+\item 
+STATIC void \mbox{\hyperlink{cqueues_8c_af6c14cca499d205058ac3659d432c46e}{Float\+Queue\+\_\+print}} (const mp\+\_\+print\+\_\+t \texorpdfstring{$\ast$}{*}print, mp\+\_\+obj\+\_\+t self\+\_\+in, mp\+\_\+print\+\_\+kind\+\_\+t kind)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{Float\+Queue\+\_\+clear}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a98af6f32f639676013f11fe2753d6a07}{Float\+Queue\+\_\+make\+\_\+new}} (const mp\+\_\+obj\+\_\+type\+\_\+t \texorpdfstring{$\ast$}{*}type, size\+\_\+t n\+\_\+args, size\+\_\+t n\+\_\+kw, const mp\+\_\+obj\+\_\+t \texorpdfstring{$\ast$}{*}args)
+\item 
+\Hypertarget{cqueues_8c_aea23be6cfac418a0699643c0315c5f3b}\label{cqueues_8c_aea23be6cfac418a0699643c0315c5f3b} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Float\+Queue\+\_\+clear\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{Float\+Queue\+\_\+clear}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a6945e27c0480fb32b31d7cb33f4d4cf2}{Float\+Queue\+\_\+any}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_ae31bf20723a410ff77c9e5a7cf4b3a08}\label{cqueues_8c_ae31bf20723a410ff77c9e5a7cf4b3a08} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Float\+Queue\+\_\+any\+\_\+obj, Float\+Queue\+\_\+any)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe}{Float\+Queue\+\_\+full}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a74a0ee505803bebeb989f0223f17b477}\label{cqueues_8c_a74a0ee505803bebeb989f0223f17b477} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Float\+Queue\+\_\+full\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe}{Float\+Queue\+\_\+full}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced}{Float\+Queue\+\_\+put}} (mp\+\_\+obj\+\_\+t self\+\_\+in, mp\+\_\+obj\+\_\+t to\+\_\+put)
+\item 
+\Hypertarget{cqueues_8c_a74e44d3ab682894023dd8503cbce193b}\label{cqueues_8c_a74e44d3ab682894023dd8503cbce193b} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+2} (Float\+Queue\+\_\+put\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced}{Float\+Queue\+\_\+put}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80}{Float\+Queue\+\_\+get}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_abf19a70bd50546dbae7ea570c68fc95f}\label{cqueues_8c_abf19a70bd50546dbae7ea570c68fc95f} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Float\+Queue\+\_\+get\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80}{Float\+Queue\+\_\+get}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50}{Float\+Queue\+\_\+available}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a49b2af0be64957d5cd78bb0eff162010}\label{cqueues_8c_a49b2af0be64957d5cd78bb0eff162010} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Float\+Queue\+\_\+available\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50}{Float\+Queue\+\_\+available}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c}{Float\+Queue\+\_\+max\+\_\+full}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a0376a120407bf5c02de12b5c0cf11997}\label{cqueues_8c_a0376a120407bf5c02de12b5c0cf11997} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Float\+Queue\+\_\+max\+\_\+full\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c}{Float\+Queue\+\_\+max\+\_\+full}})
+\item 
+\Hypertarget{cqueues_8c_a4bc3174da644014c0419b4d74bdbc834}\label{cqueues_8c_a4bc3174da644014c0419b4d74bdbc834} 
+STATIC {\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+DICT} (Float\+Queue\+\_\+locals\+\_\+dict, \mbox{\hyperlink{cqueues_8c_a8419789c1ef4840cde96c331e644c467}{Float\+Queue\+\_\+locals\+\_\+dict\+\_\+table}})
+\item 
+STATIC void \mbox{\hyperlink{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90}{Byte\+Queue\+\_\+print}} (const mp\+\_\+print\+\_\+t \texorpdfstring{$\ast$}{*}print, mp\+\_\+obj\+\_\+t self\+\_\+in, mp\+\_\+print\+\_\+kind\+\_\+t kind)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{Byte\+Queue\+\_\+clear}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53}{Byte\+Queue\+\_\+make\+\_\+new}} (const mp\+\_\+obj\+\_\+type\+\_\+t \texorpdfstring{$\ast$}{*}type, size\+\_\+t n\+\_\+args, size\+\_\+t n\+\_\+kw, const mp\+\_\+obj\+\_\+t \texorpdfstring{$\ast$}{*}args)
+\item 
+\Hypertarget{cqueues_8c_a765722b33c7ade793e955716eac46950}\label{cqueues_8c_a765722b33c7ade793e955716eac46950} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Byte\+Queue\+\_\+clear\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{Byte\+Queue\+\_\+clear}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5}{Byte\+Queue\+\_\+any}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_af2a5e18cb1ec3b555456734869a0379d}\label{cqueues_8c_af2a5e18cb1ec3b555456734869a0379d} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Byte\+Queue\+\_\+any\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5}{Byte\+Queue\+\_\+any}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71}{Byte\+Queue\+\_\+full}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a83d8ff15da12dd421a6471c353a8fe97}\label{cqueues_8c_a83d8ff15da12dd421a6471c353a8fe97} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Byte\+Queue\+\_\+full\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71}{Byte\+Queue\+\_\+full}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a31557e11065497fa793bc6dc02859017}{Byte\+Queue\+\_\+put}} (mp\+\_\+obj\+\_\+t self\+\_\+in, mp\+\_\+obj\+\_\+t str\+\_\+obj\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_ad61040abbc9eae812f5ff5dc08ab843b}\label{cqueues_8c_ad61040abbc9eae812f5ff5dc08ab843b} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+2} (Byte\+Queue\+\_\+put\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a31557e11065497fa793bc6dc02859017}{Byte\+Queue\+\_\+put}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_acc7db03de23d547479c6a75064e6f962}{Byte\+Queue\+\_\+get}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_aee57a1d759a6e273dbcbae18c540b551}\label{cqueues_8c_aee57a1d759a6e273dbcbae18c540b551} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Byte\+Queue\+\_\+get\+\_\+obj, \mbox{\hyperlink{cqueues_8c_acc7db03de23d547479c6a75064e6f962}{Byte\+Queue\+\_\+get}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_af52c2ce74e037392395894a1e12719fa}{Byte\+Queue\+\_\+available}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_ac38fe04759a4d2f9c5beb11dcf63c9d7}\label{cqueues_8c_ac38fe04759a4d2f9c5beb11dcf63c9d7} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Byte\+Queue\+\_\+available\+\_\+obj, \mbox{\hyperlink{cqueues_8c_af52c2ce74e037392395894a1e12719fa}{Byte\+Queue\+\_\+available}})
+\item 
+STATIC mp\+\_\+obj\+\_\+t \mbox{\hyperlink{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e}{Byte\+Queue\+\_\+max\+\_\+full}} (mp\+\_\+obj\+\_\+t self\+\_\+in)
+\item 
+\Hypertarget{cqueues_8c_a6212046135a9e2263436f5af8bba3656}\label{cqueues_8c_a6212046135a9e2263436f5af8bba3656} 
+{\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+FUN\+\_\+\+OBJ\+\_\+1} (Byte\+Queue\+\_\+max\+\_\+full\+\_\+obj, \mbox{\hyperlink{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e}{Byte\+Queue\+\_\+max\+\_\+full}})
+\item 
+\Hypertarget{cqueues_8c_ad025b433d6db3eb1575d50ad5259f4c9}\label{cqueues_8c_ad025b433d6db3eb1575d50ad5259f4c9} 
+STATIC {\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+DICT} (Byte\+Queue\+\_\+locals\+\_\+dict, \mbox{\hyperlink{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7}{Byte\+Queue\+\_\+locals\+\_\+dict\+\_\+table}})
+\item 
+\Hypertarget{cqueues_8c_a088b9b934676602ff32d775c2b0a51b6}\label{cqueues_8c_a088b9b934676602ff32d775c2b0a51b6} 
+STATIC {\bfseries MP\+\_\+\+DEFINE\+\_\+\+CONST\+\_\+\+DICT} (mp\+\_\+module\+\_\+cqueue\+\_\+globals, \mbox{\hyperlink{cqueues_8c_a7976151cf38e8efbfb143998f3e00619}{cqueue\+\_\+globals\+\_\+table}})
+\item 
+\Hypertarget{cqueues_8c_aed68967bc4fd441ae92e7c5871a333d0}\label{cqueues_8c_aed68967bc4fd441ae92e7c5871a333d0} 
+{\bfseries MP\+\_\+\+REGISTER\+\_\+\+MODULE} (MP\+\_\+\+QSTR\+\_\+cqueue, cqueue\+\_\+user\+\_\+cmodule, 1)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const mp\+\_\+obj\+\_\+type\+\_\+t \mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\+\_\+\+Int\+Queue\+\_\+type}}
+\item 
+STATIC const mp\+\_\+rom\+\_\+map\+\_\+elem\+\_\+t \mbox{\hyperlink{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718}{Int\+Queue\+\_\+locals\+\_\+dict\+\_\+table}} \mbox{[}$\,$\mbox{]}
+\item 
+const mp\+\_\+obj\+\_\+type\+\_\+t \mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\+\_\+\+Float\+Queue\+\_\+type}}
+\item 
+STATIC const mp\+\_\+rom\+\_\+map\+\_\+elem\+\_\+t \mbox{\hyperlink{cqueues_8c_a8419789c1ef4840cde96c331e644c467}{Float\+Queue\+\_\+locals\+\_\+dict\+\_\+table}} \mbox{[}$\,$\mbox{]}
+\item 
+const mp\+\_\+obj\+\_\+type\+\_\+t \mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\+\_\+\+Byte\+Queue\+\_\+type}}
+\item 
+STATIC const mp\+\_\+rom\+\_\+map\+\_\+elem\+\_\+t \mbox{\hyperlink{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7}{Byte\+Queue\+\_\+locals\+\_\+dict\+\_\+table}} \mbox{[}$\,$\mbox{]}
+\item 
+STATIC const mp\+\_\+map\+\_\+elem\+\_\+t \mbox{\hyperlink{cqueues_8c_a7976151cf38e8efbfb143998f3e00619}{cqueue\+\_\+globals\+\_\+table}} \mbox{[}$\,$\mbox{]}
+\item 
+const mp\+\_\+obj\+\_\+module\+\_\+t \mbox{\hyperlink{cqueues_8c_ad8346e914c19213f26bc60a8ed4c2cf4}{cqueue\+\_\+user\+\_\+cmodule}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains classes which implement queues in C that are linked to Micro\+Python. These queues allow data to be transferred between tasks, especially interrupt driven tasks, more quickly than it can be using queues which have been written in Python.
+
+\begin{DoxyAuthor}{Author}
+JR Ridgely 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2022-\/Feb-\/20 JRR Original file, based on some excellent examples from the micropython-\/usermod project, {\ttfamily \href{https://github.com/v923z/micropython-usermod}{\texttt{ https\+://github.\+com/v923z/micropython-\/usermod}}} as well as code in Micro\+Python\textquotesingle{}s objarray.\+c.
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+(c) 2019-\/2020 Zoltán Vörös 
+
+(c) 2022 by JR Ridgely, released under the MIT License (MIT) under terms matching those of the micropython-\/usermod project.
+\end{DoxyCopyright}
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+Definition in file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}\index{cqueues.c@{cqueues.c}!cqueue\_ByteQueue\_obj\_t@{cqueue\_ByteQueue\_obj\_t}}
+\index{cqueue\_ByteQueue\_obj\_t@{cqueue\_ByteQueue\_obj\_t}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_ByteQueue\_obj\_t}{cqueue\_ByteQueue\_obj\_t}}
+{\footnotesize\ttfamily \label{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d} 
+typedef struct \mbox{\hyperlink{struct__cqueue___byte_queue__obj__t}{\+\_\+cqueue\+\_\+\+Byte\+Queue\+\_\+obj\+\_\+t}} \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\+\_\+\+Byte\+Queue\+\_\+obj\+\_\+t}}}
+
+This structure holds the data of the Byte\+Queue class. \Hypertarget{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}\index{cqueues.c@{cqueues.c}!cqueue\_FloatQueue\_obj\_t@{cqueue\_FloatQueue\_obj\_t}}
+\index{cqueue\_FloatQueue\_obj\_t@{cqueue\_FloatQueue\_obj\_t}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_FloatQueue\_obj\_t}{cqueue\_FloatQueue\_obj\_t}}
+{\footnotesize\ttfamily \label{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836} 
+typedef struct \mbox{\hyperlink{struct__cqueue___float_queue__obj__t}{\+\_\+cqueue\+\_\+\+Float\+Queue\+\_\+obj\+\_\+t}} \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\+\_\+\+Float\+Queue\+\_\+obj\+\_\+t}}}
+
+This structure holds the data of the Float\+Queue class. \Hypertarget{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}\index{cqueues.c@{cqueues.c}!cqueue\_IntQueue\_obj\_t@{cqueue\_IntQueue\_obj\_t}}
+\index{cqueue\_IntQueue\_obj\_t@{cqueue\_IntQueue\_obj\_t}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_IntQueue\_obj\_t}{cqueue\_IntQueue\_obj\_t}}
+{\footnotesize\ttfamily \label{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45} 
+typedef struct \mbox{\hyperlink{struct__cqueue___int_queue__obj__t}{\+\_\+cqueue\+\_\+\+Int\+Queue\+\_\+obj\+\_\+t}} \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\+\_\+\+Int\+Queue\+\_\+obj\+\_\+t}}}
+
+This structure holds the data of the Int\+Queue class. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5}\index{cqueues.c@{cqueues.c}!ByteQueue\_any@{ByteQueue\_any}}
+\index{ByteQueue\_any@{ByteQueue\_any}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_any()}{ByteQueue\_any()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+any (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return True if there are any items in the queue, False if it\textquotesingle{}s empty 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00613}{613}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00614\ \{}
+\DoxyCodeLine{00615\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00616\ }
+\DoxyCodeLine{00617\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >\ 0);}
+\DoxyCodeLine{00618\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_af52c2ce74e037392395894a1e12719fa}\index{cqueues.c@{cqueues.c}!ByteQueue\_available@{ByteQueue\_available}}
+\index{ByteQueue\_available@{ByteQueue\_available}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_available()}{ByteQueue\_available()}}
+{\footnotesize\ttfamily \label{cqueues_8c_af52c2ce74e037392395894a1e12719fa} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+available (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return the number of items in the queue. \begin{DoxyReturn}{Returns}
+The number if items available to be read from the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00719}{719}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00720\ \{}
+\DoxyCodeLine{00721\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00722\ }
+\DoxyCodeLine{00723\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>num\_items);}
+\DoxyCodeLine{00724\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}\index{cqueues.c@{cqueues.c}!ByteQueue\_clear@{ByteQueue\_clear}}
+\index{ByteQueue\_clear@{ByteQueue\_clear}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_clear()}{ByteQueue\_clear()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+clear (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Set internal variables to indicate an empty queue. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00597}{597}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00598\ \{}
+\DoxyCodeLine{00599\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{00602\ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00603\ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{00604\ \ \ \ \ self-\/>max\_full\ =\ 0;}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00607\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71}\index{cqueues.c@{cqueues.c}!ByteQueue\_full@{ByteQueue\_full}}
+\index{ByteQueue\_full@{ByteQueue\_full}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_full()}{ByteQueue\_full()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+full (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return {\ttfamily True} if the queue is full or {\ttfamily False} if there\textquotesingle{}s still room for more items without overwriting old ones. \begin{DoxyReturn}{Returns}
+The Python constant {\ttfamily True} if the queue is full or {\ttfamily False} if not 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00626}{626}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00627\ \{}
+\DoxyCodeLine{00628\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >=\ self-\/>size);}
+\DoxyCodeLine{00631\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_acc7db03de23d547479c6a75064e6f962}\index{cqueues.c@{cqueues.c}!ByteQueue\_get@{ByteQueue\_get}}
+\index{ByteQueue\_get@{ByteQueue\_get}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_get()}{ByteQueue\_get()}}
+{\footnotesize\ttfamily \label{cqueues_8c_acc7db03de23d547479c6a75064e6f962} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+get (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Get an item from the queue; return {\ttfamily None} if the queue is empty. \begin{DoxyReturn}{Returns}
+The oldest data in the queue, or {\ttfamily None} if none is present 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00687}{687}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00688\ \{}
+\DoxyCodeLine{00689\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00690\ }
+\DoxyCodeLine{00691\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ something\ to\ get}}
+\DoxyCodeLine{00692\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ ==\ 0)}
+\DoxyCodeLine{00693\ \ \ \ \ \{}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00695\ \ \ \ \ \}}
+\DoxyCodeLine{00696\ }
+\DoxyCodeLine{00697\ \ \ \ \ \textcolor{keywordtype}{byte}\ to\_return\ =\ self-\/>p\_data[self-\/>read\_idx];}
+\DoxyCodeLine{00698\ }
+\DoxyCodeLine{00699\ \ \ \ \ \textcolor{comment}{//\ If\ we\ get\ here,\ the\ queue\ has\ some\ data\ in\ it}}
+\DoxyCodeLine{00700\ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{00701\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00702\ \ \ \ \ \{}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00704\ \ \ \ \ \}}
+\DoxyCodeLine{00705\ }
+\DoxyCodeLine{00706\ \ \ \ \ self-\/>num\_items-\/-\/;}
+\DoxyCodeLine{00707\ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)(self-\/>num\_items)\ <=\ 0)}
+\DoxyCodeLine{00708\ \ \ \ \ \{}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{00710\ \ \ \ \ \}}
+\DoxyCodeLine{00711\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bytes(\&to\_return,\ 1);}
+\DoxyCodeLine{00712\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53}\index{cqueues.c@{cqueues.c}!ByteQueue\_make\_new@{ByteQueue\_make\_new}}
+\index{ByteQueue\_make\_new@{ByteQueue\_make\_new}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_make\_new()}{ByteQueue\_make\_new()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+make\+\_\+new (\begin{DoxyParamCaption}\item[{const mp\+\_\+obj\+\_\+type\+\_\+t \texorpdfstring{$\ast$}{*}}]{type}{, }\item[{size\+\_\+t}]{n\+\_\+args}{, }\item[{size\+\_\+t}]{n\+\_\+kw}{, }\item[{const mp\+\_\+obj\+\_\+t \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+Create a new queue, allocating memory in which to store the data. Preallocating the memory is important when we need to pass information from an interrupt callback, as interrupt code isn\textquotesingle{}t allowed to allocate memory. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00576}{576}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00580\ \{}
+\DoxyCodeLine{00581\ \ \ \ \ mp\_arg\_check\_num(n\_args,\ n\_kw,\ 1,\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00582\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ m\_new\_obj(\mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}});}
+\DoxyCodeLine{00583\ \ \ \ \ self-\/>base.type\ =\ \&\mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}};}
+\DoxyCodeLine{00584\ }
+\DoxyCodeLine{00585\ \ \ \ \ self-\/>size\ =\ mp\_obj\_get\_int(args[0]);}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{ByteQueue\_clear}}\ (self);}
+\DoxyCodeLine{00588\ }
+\DoxyCodeLine{00589\ \ \ \ \ self-\/>p\_data\ =\ (\textcolor{keywordtype}{byte}*)(m\_new(\textcolor{keywordtype}{byte},\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{byte})\ *\ self-\/>size));}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00591\ \ \ \ \ \textcolor{keywordflow}{return}\ MP\_OBJ\_FROM\_PTR(self);}
+\DoxyCodeLine{00592\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e}\index{cqueues.c@{cqueues.c}!ByteQueue\_max\_full@{ByteQueue\_max\_full}}
+\index{ByteQueue\_max\_full@{ByteQueue\_max\_full}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_max\_full()}{ByteQueue\_max\_full()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+max\+\_\+full (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return the maximum number of items which have been in the queue since it was created or last cleared. \begin{DoxyReturn}{Returns}
+The largest number of items in the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00732}{732}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00733\ \{}
+\DoxyCodeLine{00734\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00735\ }
+\DoxyCodeLine{00736\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>max\_full);}
+\DoxyCodeLine{00737\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90}\index{cqueues.c@{cqueues.c}!ByteQueue\_print@{ByteQueue\_print}}
+\index{ByteQueue\_print@{ByteQueue\_print}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_print()}{ByteQueue\_print()}}
+{\footnotesize\ttfamily \label{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90} 
+STATIC void Byte\+Queue\+\_\+print (\begin{DoxyParamCaption}\item[{const mp\+\_\+print\+\_\+t \texorpdfstring{$\ast$}{*}}]{print}{, }\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{, }\item[{mp\+\_\+print\+\_\+kind\+\_\+t}]{kind}{}\end{DoxyParamCaption})}
+
+A way to print a Byte\+Queue object; it\textquotesingle{}s used for debugging. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00540}{540}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00543\ \{}
+\DoxyCodeLine{00544\ \ \ \ \ (void)kind;}
+\DoxyCodeLine{00545\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00546\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}ByteQueue["{}});}
+\DoxyCodeLine{00547\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>size),\ PRINT\_REPR);}
+\DoxyCodeLine{00548\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}]:b'"{}});}
+\DoxyCodeLine{00549\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ self-\/>size;\ index++)}
+\DoxyCodeLine{00550\ \ \ \ \ \{}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ characters\ in\ approximately\ Python\ string\ printing\ style}}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>p\_data[index]\ >\ 31\ \&\&\ self-\/>p\_data[index]\ <\ 127)}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ mp\_printf(print,\ \textcolor{stringliteral}{"{}\%c"{}},\ self-\/>p\_data[index]);}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ mp\_printf(print,\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)x\%02x"{}},\ self-\/>p\_data[index]);}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00560\ \ \ \ \ \}}
+\DoxyCodeLine{00561\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}'\ W:"{}});}
+\DoxyCodeLine{00562\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>write\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{00563\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},\ R:"{}});}
+\DoxyCodeLine{00564\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>read\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{00565\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a31557e11065497fa793bc6dc02859017}\index{cqueues.c@{cqueues.c}!ByteQueue\_put@{ByteQueue\_put}}
+\index{ByteQueue\_put@{ByteQueue\_put}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_put()}{ByteQueue\_put()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a31557e11065497fa793bc6dc02859017} 
+STATIC mp\+\_\+obj\+\_\+t Byte\+Queue\+\_\+put (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{, }\item[{mp\+\_\+obj\+\_\+t}]{str\+\_\+obj\+\_\+in}{}\end{DoxyParamCaption})}
+
+Put characters into the queue. Overwrite old data if queue is full. 
+\begin{DoxyParams}{Parameters}
+{\em str\+\_\+obj\+\_\+in} & The characters to be put into the queue \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00638}{638}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00639\ \{}
+\DoxyCodeLine{00640\ \ \ \ \ \textcolor{comment}{//\ Ensure\ that\ the\ input\ is\ a\ valid\ type\ (prevents\ crashes)}}
+\DoxyCodeLine{00641\ \ \ \ \ \textcolor{keywordflow}{if}\ (!mp\_obj\_is\_str\_or\_bytes(str\_obj\_in))}
+\DoxyCodeLine{00642\ \ \ \ \ \{}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ mp\_raise\_TypeError(\textcolor{stringliteral}{"{}Bytes\ or\ string\ required"{}});}
+\DoxyCodeLine{00644\ \ \ \ \ \}}
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00646\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00647\ }
+\DoxyCodeLine{00648\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ length\ of\ the\ bytearray\ or\ string\ and\ a\ data\ pointer}}
+\DoxyCodeLine{00649\ \ \ \ \ GET\_STR\_DATA\_LEN(str\_obj\_in,\ my\_str,\ str\_len);}
+\DoxyCodeLine{00650\ }
+\DoxyCodeLine{00651\ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ data\ into\ the\ queue,\ overwriting\ old\ data\ if\ it's\ there}}
+\DoxyCodeLine{00652\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ str\_len;\ index++)}
+\DoxyCodeLine{00653\ \ \ \ \ \{}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ self-\/>p\_data[self-\/>write\_idx]\ =\ my\_str[index];}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ self-\/>write\_idx++;}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>write\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)\ \ \ \ \ \textcolor{comment}{//\ If\ the\ queue\ is\ full\ before\ }}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ writing,\ move\ read\ pointer}}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ we'll\ read\ old\ data,}}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)\ \ \textcolor{comment}{//\ not\ new\ data}}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ self-\/>num\_items++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ increase\ the\ fillage\ and}}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)\ \ \ \ \ \textcolor{comment}{//\ check\ again\ if\ the\ queue\ is}}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ full}}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ self-\/>size;}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >\ self-\/>max\_full)}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>max\_full\ =\ self-\/>num\_items;}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00677\ \ \ \ \ \}}
+\DoxyCodeLine{00678\ }
+\DoxyCodeLine{00679\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00680\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a6945e27c0480fb32b31d7cb33f4d4cf2}\index{cqueues.c@{cqueues.c}!FloatQueue\_any@{FloatQueue\_any}}
+\index{FloatQueue\_any@{FloatQueue\_any}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_any()}{FloatQueue\_any()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a6945e27c0480fb32b31d7cb33f4d4cf2} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+any (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00368}{368}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00369\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >\ 0);}
+\DoxyCodeLine{00373\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50}\index{cqueues.c@{cqueues.c}!FloatQueue\_available@{FloatQueue\_available}}
+\index{FloatQueue\_available@{FloatQueue\_available}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_available()}{FloatQueue\_available()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+available (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return the number of items in the queue. \begin{DoxyReturn}{Returns}
+The number if items available to be read from the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00467}{467}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00468\ \{}
+\DoxyCodeLine{00469\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00471\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>num\_items);}
+\DoxyCodeLine{00472\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}\index{cqueues.c@{cqueues.c}!FloatQueue\_clear@{FloatQueue\_clear}}
+\index{FloatQueue\_clear@{FloatQueue\_clear}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_clear()}{FloatQueue\_clear()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+clear (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Set internal variables to indicate an empty queue. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00353}{353}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00354\ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{00358\ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00359\ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{00360\ \ \ \ \ self-\/>max\_full\ =\ 0;}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00363\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe}\index{cqueues.c@{cqueues.c}!FloatQueue\_full@{FloatQueue\_full}}
+\index{FloatQueue\_full@{FloatQueue\_full}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_full()}{FloatQueue\_full()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+full (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return {\ttfamily True} if the queue is full or {\ttfamily False} if there\textquotesingle{}s still room for more items without overwriting old ones. \begin{DoxyReturn}{Returns}
+The Python constant {\ttfamily True} if the queue is full or {\ttfamily False} if not 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00381}{381}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00382\ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >=\ self-\/>size);}
+\DoxyCodeLine{00386\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80}\index{cqueues.c@{cqueues.c}!FloatQueue\_get@{FloatQueue\_get}}
+\index{FloatQueue\_get@{FloatQueue\_get}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_get()}{FloatQueue\_get()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+get (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Get an item from the queue; return {\ttfamily None} if the queue is empty. \begin{DoxyReturn}{Returns}
+The oldest data in the queue, or {\ttfamily None} if none is present 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00435}{435}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00436\ \{}
+\DoxyCodeLine{00437\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ something\ to\ get}}
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ ==\ 0)}
+\DoxyCodeLine{00441\ \ \ \ \ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00443\ \ \ \ \ \}}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \ \ \textcolor{keywordtype}{float}\ to\_return\ =\ self-\/>p\_data[self-\/>read\_idx];}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \ \ \ \ \textcolor{comment}{//\ If\ we\ get\ here,\ the\ queue\ has\ some\ data\ in\ it}}
+\DoxyCodeLine{00448\ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{00449\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00450\ \ \ \ \ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00452\ \ \ \ \ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \ \ self-\/>num\_items-\/-\/;}
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)(self-\/>num\_items)\ <=\ 0)}
+\DoxyCodeLine{00456\ \ \ \ \ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{00458\ \ \ \ \ \}}
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_float(to\_return);}
+\DoxyCodeLine{00460\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a98af6f32f639676013f11fe2753d6a07}\index{cqueues.c@{cqueues.c}!FloatQueue\_make\_new@{FloatQueue\_make\_new}}
+\index{FloatQueue\_make\_new@{FloatQueue\_make\_new}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_make\_new()}{FloatQueue\_make\_new()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a98af6f32f639676013f11fe2753d6a07} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+make\+\_\+new (\begin{DoxyParamCaption}\item[{const mp\+\_\+obj\+\_\+type\+\_\+t \texorpdfstring{$\ast$}{*}}]{type}{, }\item[{size\+\_\+t}]{n\+\_\+args}{, }\item[{size\+\_\+t}]{n\+\_\+kw}{, }\item[{const mp\+\_\+obj\+\_\+t \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+Create a new queue, allocating memory in which to store the data. Preallocating the memory is important when we need to pass information from an interrupt callback, as interrupt code isn\textquotesingle{}t allowed to allocate memory. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00332}{332}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00336\ \{}
+\DoxyCodeLine{00337\ \ \ \ \ mp\_arg\_check\_num(n\_args,\ n\_kw,\ 1,\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00338\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ m\_new\_obj(\mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}});}
+\DoxyCodeLine{00339\ \ \ \ \ self-\/>base.type\ =\ \&\mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}};}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ self-\/>size\ =\ mp\_obj\_get\_int(args[0]);}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{FloatQueue\_clear}}\ (self);}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \ \ \ self-\/>p\_data\ =\ (\textcolor{keywordtype}{float}*)(m\_new(\textcolor{keywordtype}{byte},\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float})\ *\ self-\/>size));}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{return}\ MP\_OBJ\_FROM\_PTR(self);}
+\DoxyCodeLine{00348\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c}\index{cqueues.c@{cqueues.c}!FloatQueue\_max\_full@{FloatQueue\_max\_full}}
+\index{FloatQueue\_max\_full@{FloatQueue\_max\_full}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_max\_full()}{FloatQueue\_max\_full()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+max\+\_\+full (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return the maximum number of items which have been in the queue since it was created or last cleared. \begin{DoxyReturn}{Returns}
+The largest number of items in the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00480}{480}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00481\ \{}
+\DoxyCodeLine{00482\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>max\_full);}
+\DoxyCodeLine{00485\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_af6c14cca499d205058ac3659d432c46e}\index{cqueues.c@{cqueues.c}!FloatQueue\_print@{FloatQueue\_print}}
+\index{FloatQueue\_print@{FloatQueue\_print}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_print()}{FloatQueue\_print()}}
+{\footnotesize\ttfamily \label{cqueues_8c_af6c14cca499d205058ac3659d432c46e} 
+STATIC void Float\+Queue\+\_\+print (\begin{DoxyParamCaption}\item[{const mp\+\_\+print\+\_\+t \texorpdfstring{$\ast$}{*}}]{print}{, }\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{, }\item[{mp\+\_\+print\+\_\+kind\+\_\+t}]{kind}{}\end{DoxyParamCaption})}
+
+A way to print a Float\+Queue object; it\textquotesingle{}s used for debugging. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00302}{302}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00305\ \{}
+\DoxyCodeLine{00306\ \ \ \ \ (void)kind;}
+\DoxyCodeLine{00307\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00308\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}FloatQueue["{}});}
+\DoxyCodeLine{00309\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>size),\ PRINT\_REPR);}
+\DoxyCodeLine{00310\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}]:"{}});}
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ self-\/>size;\ index++)}
+\DoxyCodeLine{00312\ \ \ \ \ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_float(self-\/>p\_data[index]),\ }
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PRINT\_REPR);}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},"{}});}
+\DoxyCodeLine{00316\ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}W:"{}});}
+\DoxyCodeLine{00318\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>write\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{00319\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},R:"{}});}
+\DoxyCodeLine{00320\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>read\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{00321\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced}\index{cqueues.c@{cqueues.c}!FloatQueue\_put@{FloatQueue\_put}}
+\index{FloatQueue\_put@{FloatQueue\_put}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_put()}{FloatQueue\_put()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced} 
+STATIC mp\+\_\+obj\+\_\+t Float\+Queue\+\_\+put (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{, }\item[{mp\+\_\+obj\+\_\+t}]{to\+\_\+put}{}\end{DoxyParamCaption})}
+
+Put an item into the queue. Overwrite old data if queue is full. 
+\begin{DoxyParams}{Parameters}
+{\em to\+\_\+put} & The floating point number to be put into the queue \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00393}{393}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00394\ \{}
+\DoxyCodeLine{00395\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordtype}{float}\ putted\ =\ mp\_obj\_get\_float(to\_put);}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ self-\/>p\_data[self-\/>write\_idx]\ =\ putted;}
+\DoxyCodeLine{00399\ \ \ \ \ self-\/>write\_idx++;}
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>write\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00401\ \ \ \ \ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{00403\ \ \ \ \ \}}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \ \ \ \ \textcolor{comment}{//\ If\ the\ queue\ is\ full\ before\ writing,\ move\ the\ read\ pointer\ so\ we'll\ read}}
+\DoxyCodeLine{00406\ \ \ \ \ \textcolor{comment}{//\ old\ data,\ not\ new\ data}}
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{00408\ \ \ \ \ \{}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00414\ \ \ \ \ \}}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{comment}{//\ Now\ increase\ the\ fillage\ and\ check\ again\ if\ the\ queue\ is\ full}}
+\DoxyCodeLine{00417\ \ \ \ \ self-\/>num\_items++;}
+\DoxyCodeLine{00418\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{00419\ \ \ \ \ \{}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ self-\/>size;}
+\DoxyCodeLine{00421\ \ \ \ \ \}}
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >\ self-\/>max\_full)}
+\DoxyCodeLine{00423\ \ \ \ \ \{}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ self-\/>max\_full\ =\ self-\/>num\_items;}
+\DoxyCodeLine{00425\ \ \ \ \ \}}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00428\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a9e1186547af14130c2d0453854ddb827}\index{cqueues.c@{cqueues.c}!IntQueue\_any@{IntQueue\_any}}
+\index{IntQueue\_any@{IntQueue\_any}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_any()}{IntQueue\_any()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a9e1186547af14130c2d0453854ddb827} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+any (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return {\ttfamily True} if there are any items in the queue, {\ttfamily False} if it\textquotesingle{}s empty. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00132}{132}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00133\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >\ 0);}
+\DoxyCodeLine{00137\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a4381028f15e8d7da45d95671949069d3}\index{cqueues.c@{cqueues.c}!IntQueue\_available@{IntQueue\_available}}
+\index{IntQueue\_available@{IntQueue\_available}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_available()}{IntQueue\_available()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a4381028f15e8d7da45d95671949069d3} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+available (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return the number of items in the queue. \begin{DoxyReturn}{Returns}
+The number of items available to be read from the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00230}{230}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00231\ \{}
+\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>num\_items);}
+\DoxyCodeLine{00235\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}\index{cqueues.c@{cqueues.c}!IntQueue\_clear@{IntQueue\_clear}}
+\index{IntQueue\_clear@{IntQueue\_clear}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_clear()}{IntQueue\_clear()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+clear (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Set internal variables to indicate an empty queue. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00116}{116}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00117\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{00121\ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00122\ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{00123\ \ \ \ \ self-\/>max\_full\ =\ 0;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00126\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11}\index{cqueues.c@{cqueues.c}!IntQueue\_full@{IntQueue\_full}}
+\index{IntQueue\_full@{IntQueue\_full}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_full()}{IntQueue\_full()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+full (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return {\ttfamily True} if the queue is full or {\ttfamily False} if there\textquotesingle{}s still room for more items. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00144}{144}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00145\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >=\ self-\/>size);}
+\DoxyCodeLine{00149\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6}\index{cqueues.c@{cqueues.c}!IntQueue\_get@{IntQueue\_get}}
+\index{IntQueue\_get@{IntQueue\_get}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_get()}{IntQueue\_get()}}
+{\footnotesize\ttfamily \label{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+get (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Get an item from the queue. \begin{DoxyReturn}{Returns}
+The oldest data in the queue, or {\ttfamily None} if the queue is empty. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00198}{198}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00199\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ something\ to\ get}}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ ==\ 0)}
+\DoxyCodeLine{00204\ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00206\ \ \ \ \ \}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ int32\_t\ to\_return\ =\ self-\/>p\_data[self-\/>read\_idx];}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{comment}{//\ If\ we\ get\ here,\ the\ queue\ has\ some\ data\ in\ it}}
+\DoxyCodeLine{00211\ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00213\ \ \ \ \ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00215\ \ \ \ \ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ self-\/>num\_items-\/-\/;}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)(self-\/>num\_items)\ <=\ 0)}
+\DoxyCodeLine{00219\ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int(to\_return);}
+\DoxyCodeLine{00223\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc}\index{cqueues.c@{cqueues.c}!IntQueue\_make\_new@{IntQueue\_make\_new}}
+\index{IntQueue\_make\_new@{IntQueue\_make\_new}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_make\_new()}{IntQueue\_make\_new()}}
+{\footnotesize\ttfamily \label{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+make\+\_\+new (\begin{DoxyParamCaption}\item[{const mp\+\_\+obj\+\_\+type\+\_\+t \texorpdfstring{$\ast$}{*}}]{type}{, }\item[{size\+\_\+t}]{n\+\_\+args}{, }\item[{size\+\_\+t}]{n\+\_\+kw}{, }\item[{const mp\+\_\+obj\+\_\+t \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+Create a new queue, allocating memory in which to store the data. Preallocating the memory is important when we need to pass information from an interrupt callback, as interrupt code isn\textquotesingle{}t allowed to allocate memory. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00092}{92}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00096\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ mp\_arg\_check\_num(n\_args,\ n\_kw,\ 1,\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ m\_new\_obj(\mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}});}
+\DoxyCodeLine{00099\ \ \ \ \ self-\/>base.type\ =\ \&\mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}};}
+\DoxyCodeLine{00100\ \ \ \ \ self-\/>size\ =\ mp\_obj\_get\_int(args[0]);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{IntQueue\_clear}}\ (self);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//\ Tried\ using\ malloc();\ it\ usually\ works\ but\ occasionally\ crashes\ an\ ESP32}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ apparently\ when\ the\ memory\ is\ accessed\ some\ time\ after\ allocation.}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ After\ that,\ tried\ using\ n\_new()\ as\ in\ objarray.c's\ array\_new()}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//\ self-\/>p\_data\ =\ malloc\ (self-\/>size\ *\ sizeof\ (int32\_t));}}
+\DoxyCodeLine{00108\ \ \ \ \ self-\/>p\_data\ =\ (int32\_t*)(m\_new(\textcolor{keywordtype}{byte},\ \textcolor{keyword}{sizeof}(int32\_t)\ *\ self-\/>size));}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ MP\_OBJ\_FROM\_PTR(self);}
+\DoxyCodeLine{00111\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a6fd0d95f0305c17160c4880d55172721}\index{cqueues.c@{cqueues.c}!IntQueue\_max\_full@{IntQueue\_max\_full}}
+\index{IntQueue\_max\_full@{IntQueue\_max\_full}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_max\_full()}{IntQueue\_max\_full()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a6fd0d95f0305c17160c4880d55172721} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+max\+\_\+full (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{}\end{DoxyParamCaption})}
+
+Return the maximum number of items which have been in the queue since the queue was created or cleared. \begin{DoxyReturn}{Returns}
+The maximum number of items which have been in the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00243}{243}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00244\ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>max\_full);}
+\DoxyCodeLine{00248\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e}\index{cqueues.c@{cqueues.c}!IntQueue\_print@{IntQueue\_print}}
+\index{IntQueue\_print@{IntQueue\_print}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_print()}{IntQueue\_print()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e} 
+STATIC void Int\+Queue\+\_\+print (\begin{DoxyParamCaption}\item[{const mp\+\_\+print\+\_\+t \texorpdfstring{$\ast$}{*}}]{print}{, }\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{, }\item[{mp\+\_\+print\+\_\+kind\+\_\+t}]{kind}{}\end{DoxyParamCaption})}
+
+A way to print an Int\+Queue object; it\textquotesingle{}s used for debugging. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00062}{62}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ (void)kind;}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00068\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}IntQueue["{}});}
+\DoxyCodeLine{00069\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>size),\ PRINT\_REPR);}
+\DoxyCodeLine{00070\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}]:"{}});}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ self-\/>size;\ index++)}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>p\_data[index]),\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PRINT\_REPR);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},"{}});}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}W:"{}});}
+\DoxyCodeLine{00078\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>write\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{00079\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},R:"{}});}
+\DoxyCodeLine{00080\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>read\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{00081\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a8705f418364cc6da74782909c112df93}\index{cqueues.c@{cqueues.c}!IntQueue\_put@{IntQueue\_put}}
+\index{IntQueue\_put@{IntQueue\_put}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_put()}{IntQueue\_put()}}
+{\footnotesize\ttfamily \label{cqueues_8c_a8705f418364cc6da74782909c112df93} 
+STATIC mp\+\_\+obj\+\_\+t Int\+Queue\+\_\+put (\begin{DoxyParamCaption}\item[{mp\+\_\+obj\+\_\+t}]{self\+\_\+in}{, }\item[{mp\+\_\+obj\+\_\+t}]{to\+\_\+put}{}\end{DoxyParamCaption})}
+
+Put an item into the queue. Overwrite old data if the queue is full. 
+\begin{DoxyParams}{Parameters}
+{\em to\+\_\+put} & An integer to be put into the queue \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00156}{156}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00157\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{00159\ \ \ \ \ int32\_t\ putted\ =\ mp\_obj\_get\_int(to\_put);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ self-\/>p\_data[self-\/>write\_idx]\ =\ putted;}
+\DoxyCodeLine{00162\ \ \ \ \ self-\/>write\_idx++;}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>write\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00164\ \ \ \ \ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{00166\ \ \ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{//\ If\ the\ queue\ is\ full\ before\ writing,\ move\ the\ read\ pointer\ so\ we'll\ read}}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{comment}{//\ old\ data,\ not\ new\ data}}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{00171\ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{comment}{//\ Now\ increase\ the\ fillage\ and\ check\ again\ if\ the\ queue\ is\ full}}
+\DoxyCodeLine{00180\ \ \ \ \ self-\/>num\_items++;}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{00182\ \ \ \ \ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ self-\/>size;}
+\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >\ self-\/>max\_full)}
+\DoxyCodeLine{00186\ \ \ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ self-\/>max\_full\ =\ self-\/>num\_items;}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{00191\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7}\index{cqueues.c@{cqueues.c}!ByteQueue\_locals\_dict\_table@{ByteQueue\_locals\_dict\_table}}
+\index{ByteQueue\_locals\_dict\_table@{ByteQueue\_locals\_dict\_table}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{ByteQueue\_locals\_dict\_table}{ByteQueue\_locals\_dict\_table}}
+{\footnotesize\ttfamily \label{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7} 
+STATIC const mp\+\_\+rom\+\_\+map\+\_\+elem\+\_\+t Byte\+Queue\+\_\+locals\+\_\+dict\+\_\+table\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&ByteQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&ByteQueue\_any\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&ByteQueue\_full\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&ByteQueue\_put\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&ByteQueue\_get\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&ByteQueue\_available\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&ByteQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+A dictionary of names and functions which is used to register functions so they can be called from Micro\+Python. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00744}{744}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00745\ \{}
+\DoxyCodeLine{00746\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&ByteQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{00747\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&ByteQueue\_any\_obj)\ \},}
+\DoxyCodeLine{00748\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&ByteQueue\_full\_obj)\ \},}
+\DoxyCodeLine{00749\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&ByteQueue\_put\_obj)\ \},}
+\DoxyCodeLine{00750\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&ByteQueue\_get\_obj)\ \},}
+\DoxyCodeLine{00751\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&ByteQueue\_available\_obj)\ \},}
+\DoxyCodeLine{00752\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&ByteQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{00753\ \};}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}\index{cqueues.c@{cqueues.c}!cqueue\_ByteQueue\_type@{cqueue\_ByteQueue\_type}}
+\index{cqueue\_ByteQueue\_type@{cqueue\_ByteQueue\_type}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_ByteQueue\_type}{cqueue\_ByteQueue\_type}}
+{\footnotesize\ttfamily \label{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d} 
+const mp\+\_\+obj\+\_\+type\+\_\+t cqueue\+\_\+\+Byte\+Queue\+\_\+type}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\ \&mp\_type\_type\ \},}
+\DoxyCodeLine{\ \ \ \ .name\ =\ MP\_QSTR\_ByteQueue,}
+\DoxyCodeLine{\ \ \ \ .print\ =\ \mbox{\hyperlink{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90}{ByteQueue\_print}},}
+\DoxyCodeLine{\ \ \ \ .make\_new\ =\ \mbox{\hyperlink{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53}{ByteQueue\_make\_new}},}
+\DoxyCodeLine{\ \ \ \ .locals\_dict\ =\ (mp\_obj\_dict\_t*)\&ByteQueue\_locals\_dict,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+A type which contains the components of the {\ttfamily \doxylink{classcqueue_1_1_byte_queue}{cqueue.\+Byte\+Queue}} class in Micro\+Python. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00535}{535}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+\Hypertarget{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}\index{cqueues.c@{cqueues.c}!cqueue\_FloatQueue\_type@{cqueue\_FloatQueue\_type}}
+\index{cqueue\_FloatQueue\_type@{cqueue\_FloatQueue\_type}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_FloatQueue\_type}{cqueue\_FloatQueue\_type}}
+{\footnotesize\ttfamily \label{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e} 
+const mp\+\_\+obj\+\_\+type\+\_\+t cqueue\+\_\+\+Float\+Queue\+\_\+type}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\ \&mp\_type\_type\ \},}
+\DoxyCodeLine{\ \ \ \ .name\ =\ MP\_QSTR\_FloatQueue,}
+\DoxyCodeLine{\ \ \ \ .print\ =\ \mbox{\hyperlink{cqueues_8c_af6c14cca499d205058ac3659d432c46e}{FloatQueue\_print}},}
+\DoxyCodeLine{\ \ \ \ .make\_new\ =\ \mbox{\hyperlink{cqueues_8c_a98af6f32f639676013f11fe2753d6a07}{FloatQueue\_make\_new}},}
+\DoxyCodeLine{\ \ \ \ .locals\_dict\ =\ (mp\_obj\_dict\_t*)\&FloatQueue\_locals\_dict,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+A type which contains the components of the {\ttfamily \doxylink{classcqueue_1_1_float_queue}{cqueue.\+Float\+Queue}} class in Micro\+Python. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00297}{297}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+\Hypertarget{cqueues_8c_a7976151cf38e8efbfb143998f3e00619}\index{cqueues.c@{cqueues.c}!cqueue\_globals\_table@{cqueue\_globals\_table}}
+\index{cqueue\_globals\_table@{cqueue\_globals\_table}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_globals\_table}{cqueue\_globals\_table}}
+{\footnotesize\ttfamily \label{cqueues_8c_a7976151cf38e8efbfb143998f3e00619} 
+STATIC const mp\+\_\+map\+\_\+elem\+\_\+t cqueue\+\_\+globals\+\_\+table\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_\_\_name\_\_),\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_cqueue)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_IntQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_FloatQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_ByteQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}}\ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+This table holds the globals\+: module name and class(es). 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00775}{775}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00776\ \{}
+\DoxyCodeLine{00777\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_\_\_name\_\_),\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_cqueue)\ \},}
+\DoxyCodeLine{00778\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_IntQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}}\ \},}
+\DoxyCodeLine{00779\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_FloatQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}}\ \},}
+\DoxyCodeLine{00780\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_ByteQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}}\ \},}
+\DoxyCodeLine{00781\ \};}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_ac82846bda10051add9066127d87e6d0d}\index{cqueues.c@{cqueues.c}!cqueue\_IntQueue\_type@{cqueue\_IntQueue\_type}}
+\index{cqueue\_IntQueue\_type@{cqueue\_IntQueue\_type}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_IntQueue\_type}{cqueue\_IntQueue\_type}}
+{\footnotesize\ttfamily \label{cqueues_8c_ac82846bda10051add9066127d87e6d0d} 
+const mp\+\_\+obj\+\_\+type\+\_\+t cqueue\+\_\+\+Int\+Queue\+\_\+type}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\ \&mp\_type\_type\ \},}
+\DoxyCodeLine{\ \ \ \ .name\ =\ MP\_QSTR\_IntQueue,}
+\DoxyCodeLine{\ \ \ \ .print\ =\ \mbox{\hyperlink{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e}{IntQueue\_print}},}
+\DoxyCodeLine{\ \ \ \ .make\_new\ =\ \mbox{\hyperlink{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc}{IntQueue\_make\_new}},}
+\DoxyCodeLine{\ \ \ \ .locals\_dict\ =\ (mp\_obj\_dict\_t*)\&IntQueue\_locals\_dict,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+A type which contains the components of the {\ttfamily \doxylink{classcqueue_1_1_int_queue}{cqueue.\+Int\+Queue}} class in Micro\+Python. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00057}{57}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+\Hypertarget{cqueues_8c_ad8346e914c19213f26bc60a8ed4c2cf4}\index{cqueues.c@{cqueues.c}!cqueue\_user\_cmodule@{cqueue\_user\_cmodule}}
+\index{cqueue\_user\_cmodule@{cqueue\_user\_cmodule}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{cqueue\_user\_cmodule}{cqueue\_user\_cmodule}}
+{\footnotesize\ttfamily \label{cqueues_8c_ad8346e914c19213f26bc60a8ed4c2cf4} 
+const mp\+\_\+obj\+\_\+module\+\_\+t cqueue\+\_\+user\+\_\+cmodule}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ .base\ =\ \{\ \&mp\_type\_module\ \},}
+\DoxyCodeLine{\ \ \ \ .globals\ =\ (mp\_obj\_dict\_t*)\&mp\_module\_cqueue\_globals,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00790}{790}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00791\ \{}
+\DoxyCodeLine{00792\ \ \ \ \ .base\ =\ \{\ \&mp\_type\_module\ \},}
+\DoxyCodeLine{00793\ \ \ \ \ .globals\ =\ (mp\_obj\_dict\_t*)\&mp\_module\_cqueue\_globals,}
+\DoxyCodeLine{00794\ \};}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_a8419789c1ef4840cde96c331e644c467}\index{cqueues.c@{cqueues.c}!FloatQueue\_locals\_dict\_table@{FloatQueue\_locals\_dict\_table}}
+\index{FloatQueue\_locals\_dict\_table@{FloatQueue\_locals\_dict\_table}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{FloatQueue\_locals\_dict\_table}{FloatQueue\_locals\_dict\_table}}
+{\footnotesize\ttfamily \label{cqueues_8c_a8419789c1ef4840cde96c331e644c467} 
+STATIC const mp\+\_\+rom\+\_\+map\+\_\+elem\+\_\+t Float\+Queue\+\_\+locals\+\_\+dict\+\_\+table\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&FloatQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&FloatQueue\_any\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&FloatQueue\_full\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&FloatQueue\_put\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&FloatQueue\_get\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&FloatQueue\_available\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&FloatQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+A dictionary of names and functions which is used to register functions so they can be called from Micro\+Python. 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00492}{492}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00493\ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&FloatQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{00495\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&FloatQueue\_any\_obj)\ \},}
+\DoxyCodeLine{00496\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&FloatQueue\_full\_obj)\ \},}
+\DoxyCodeLine{00497\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&FloatQueue\_put\_obj)\ \},}
+\DoxyCodeLine{00498\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&FloatQueue\_get\_obj)\ \},}
+\DoxyCodeLine{00499\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&FloatQueue\_available\_obj)\ \},}
+\DoxyCodeLine{00500\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&FloatQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{00501\ \};}
+
+\end{DoxyCode}
+\Hypertarget{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718}\index{cqueues.c@{cqueues.c}!IntQueue\_locals\_dict\_table@{IntQueue\_locals\_dict\_table}}
+\index{IntQueue\_locals\_dict\_table@{IntQueue\_locals\_dict\_table}!cqueues.c@{cqueues.c}}
+\doxysubsubsection{\texorpdfstring{IntQueue\_locals\_dict\_table}{IntQueue\_locals\_dict\_table}}
+{\footnotesize\ttfamily \label{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718} 
+STATIC const mp\+\_\+rom\+\_\+map\+\_\+elem\+\_\+t Int\+Queue\+\_\+locals\+\_\+dict\+\_\+table\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&IntQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&IntQueue\_any\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&IntQueue\_full\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&IntQueue\_put\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&IntQueue\_get\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&IntQueue\_available\_obj)\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&IntQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+A dictionary of names and functions used to register the above functions with Micro\+Python 
+
+Definition at line \mbox{\hyperlink{cqueues_8c_source_l00255}{255}} of file \mbox{\hyperlink{cqueues_8c_source}{cqueues.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00256\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&IntQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{00258\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&IntQueue\_any\_obj)\ \},}
+\DoxyCodeLine{00259\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&IntQueue\_full\_obj)\ \},}
+\DoxyCodeLine{00260\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&IntQueue\_put\_obj)\ \},}
+\DoxyCodeLine{00261\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&IntQueue\_get\_obj)\ \},}
+\DoxyCodeLine{00262\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&IntQueue\_available\_obj)\ \},}
+\DoxyCodeLine{00263\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&IntQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{00264\ \};}
+
+\end{DoxyCode}

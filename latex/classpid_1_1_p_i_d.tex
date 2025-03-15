@@ -1,0 +1,102 @@
+\doxysection{pid.\+PID Class Reference}
+\hypertarget{classpid_1_1_p_i_d}{}\label{classpid_1_1_p_i_d}\index{pid.PID@{pid.PID}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpid_1_1_p_i_d_a261d93b61d4b2ad09ca9314782ef15db}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Kp, Ki, Kd, feedforward\+\_\+gain=0, feedforward\+\_\+offset=0, integral\+\_\+error\+\_\+max=500)
+\item 
+\mbox{\hyperlink{classpid_1_1_p_i_d_ab9dead91adb5a341d18bcfc4b963b556}{update}} (self, desire, actual)
+\item 
+\mbox{\hyperlink{classpid_1_1_p_i_d_a48b3cdc0153c2af0e6b056a2ff3a6767}{update\+\_\+error}} (self, error)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpid_1_1_p_i_d_aecf7d8876a07e413a52f7365bf62ff5d}\label{classpid_1_1_p_i_d_aecf7d8876a07e413a52f7365bf62ff5d} 
+{\bfseries Kp} = Kp
+\item 
+\Hypertarget{classpid_1_1_p_i_d_a2dcb614af42345b68f850bf856e4d5dc}\label{classpid_1_1_p_i_d_a2dcb614af42345b68f850bf856e4d5dc} 
+{\bfseries Ki} = Ki
+\item 
+\Hypertarget{classpid_1_1_p_i_d_a0ab436c7a806118cc882c82819a70222}\label{classpid_1_1_p_i_d_a0ab436c7a806118cc882c82819a70222} 
+{\bfseries Kd} = Kd
+\item 
+\Hypertarget{classpid_1_1_p_i_d_adf2e4774c5c138d85612c4b471f6b621}\label{classpid_1_1_p_i_d_adf2e4774c5c138d85612c4b471f6b621} 
+{\bfseries ff\+\_\+gain} = feedforward\+\_\+gain
+\item 
+\Hypertarget{classpid_1_1_p_i_d_a6ac4bfde4b0323d076396dffc0341d84}\label{classpid_1_1_p_i_d_a6ac4bfde4b0323d076396dffc0341d84} 
+{\bfseries ff\+\_\+offset} = feedforward\+\_\+offset
+\item 
+\Hypertarget{classpid_1_1_p_i_d_adab2ed58374cb6d02467b905efee88bb}\label{classpid_1_1_p_i_d_adab2ed58374cb6d02467b905efee88bb} 
+int {\bfseries integral\+\_\+error} = 0
+\item 
+\Hypertarget{classpid_1_1_p_i_d_a21ee7c045b900fc7455d6e5a0c6f6285}\label{classpid_1_1_p_i_d_a21ee7c045b900fc7455d6e5a0c6f6285} 
+int {\bfseries prev\+\_\+error} = 0
+\item 
+\Hypertarget{classpid_1_1_p_i_d_aa8e70648156dcc67946d547f8c8b4672}\label{classpid_1_1_p_i_d_aa8e70648156dcc67946d547f8c8b4672} 
+int {\bfseries prev\+\_\+time} = 0
+\item 
+\Hypertarget{classpid_1_1_p_i_d_a0fe92e1928a623a38be64f4400b48181}\label{classpid_1_1_p_i_d_a0fe92e1928a623a38be64f4400b48181} 
+{\bfseries integral\+\_\+error\+\_\+max} = integral\+\_\+error\+\_\+max
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class PID
+@brief A PID loop encapsulated in a Python class.
+@details
+  Includes proportional, integral, and derivative terms, as well as optional
+  feedforward gain and offset. Integrator windup is limited by integral_error_max.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpid_1_1_p_i_d_a261d93b61d4b2ad09ca9314782ef15db}\index{pid.PID@{pid.PID}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!pid.PID@{pid.PID}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classpid_1_1_p_i_d_a261d93b61d4b2ad09ca9314782ef15db} 
+pid.\+PID.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{Kp}{, }\item[{}]{Ki}{, }\item[{}]{Kd}{, }\item[{}]{feedforward\+\_\+gain}{ = {\ttfamily 0}, }\item[{}]{feedforward\+\_\+offset}{ = {\ttfamily 0}, }\item[{}]{integral\+\_\+error\+\_\+max}{ = {\ttfamily 500}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes PID gains and integral error parameters.
+@param Kp Proportional gain.
+@param Ki Integral gain.
+@param Kd Derivative gain.
+@param feedforward_gain Optional feedforward gain term applied to the desired setpoint.
+@param feedforward_offset Optional offset applied to the feedforward term based on direction.
+@param integral_error_max Maximum absolute value for the integrator to prevent windup.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpid_1_1_p_i_d_ab9dead91adb5a341d18bcfc4b963b556}\index{pid.PID@{pid.PID}!update@{update}}
+\index{update@{update}!pid.PID@{pid.PID}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classpid_1_1_p_i_d_ab9dead91adb5a341d18bcfc4b963b556} 
+pid.\+PID.\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{desire}{, }\item[{}]{actual}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Calculates a control effort using a PID approach (plus feedforward).
+@details
+  Uses the difference between desired and actual values (error) to compute the 
+  PID output. Limits integral error to prevent excessive windup.
+@param desire The target or desired value.
+@param actual The current or measured value.
+@return The control effort as a float (could be motor PWM, for example).
+\end{DoxyVerb}
+ \Hypertarget{classpid_1_1_p_i_d_a48b3cdc0153c2af0e6b056a2ff3a6767}\index{pid.PID@{pid.PID}!update\_error@{update\_error}}
+\index{update\_error@{update\_error}!pid.PID@{pid.PID}}
+\doxysubsubsection{\texorpdfstring{update\_error()}{update\_error()}}
+{\footnotesize\ttfamily \label{classpid_1_1_p_i_d_a48b3cdc0153c2af0e6b056a2ff3a6767} 
+pid.\+PID.\+update\+\_\+error (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{error}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Calculates a control effort given a direct error (without reading actual).
+@details
+  Similar to update(), but uses a provided error directly. 
+  Useful for situations where the user has precomputed the error externally.
+@param error The difference between the desired value and measured value.
+@return The control effort as a float.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/pid.\+py\end{DoxyCompactItemize}

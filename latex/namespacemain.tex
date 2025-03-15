@@ -1,0 +1,485 @@
+\doxysection{main Namespace Reference}
+\hypertarget{namespacemain}{}\label{namespacemain}\index{main@{main}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemain_a3898291b13bc49e1c4d3859b2071abfe}{task1\+\_\+main}} (shares)
+\item 
+\mbox{\hyperlink{namespacemain_a2761433ea92d27cdf41d774ef10220fe}{task2\+\_\+left\+\_\+motor\+\_\+controller}} (shares)
+\item 
+\mbox{\hyperlink{namespacemain_a7587f108dcb928de84aaf2644f8d8208}{task3\+\_\+right\+\_\+motor\+\_\+controller}} (shares)
+\item 
+\mbox{\hyperlink{namespacemain_a40eddb145230fd0b6ebaa9d85a7d328c}{task4\+\_\+path\+\_\+follow}} (shares)
+\item 
+\mbox{\hyperlink{namespacemain_add828372675b1c9e6565da3c26f70023}{follow\+\_\+line}} (chassis, line\+\_\+follower, cur\+\_\+left\+\_\+vel\+\_\+share, cur\+\_\+right\+\_\+vel\+\_\+share, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, max\+\_\+vel\+\_\+share)
+\item 
+\mbox{\hyperlink{namespacemain_abee5a8002f0200a65242da9812fbdec0}{go\+\_\+backward}} (chassis, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, cur\+\_\+left\+\_\+vel, cur\+\_\+right\+\_\+vel, cur\+\_\+heading, distance, continue\+\_\+val)
+\item 
+\mbox{\hyperlink{namespacemain_a9414a2b2f1daed28221d353cb095a7c0}{follow\+\_\+heading}} (chassis, imu\+\_\+obj, PID\+\_\+\+Omega, chassis\+\_\+vel\+\_\+share, cur\+\_\+left\+\_\+vel\+\_\+share, cur\+\_\+right\+\_\+vel\+\_\+share, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, max\+\_\+vel\+\_\+share, target\+\_\+heading)
+\item 
+\mbox{\hyperlink{namespacemain_aef812866eef08bec2fae312b26c55696}{follow\+\_\+turn}} (chassis, imu\+\_\+obj, PID\+\_\+\+Omega, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, max\+\_\+vel\+\_\+share, turn\+\_\+angle, continue\+\_\+val)
+\item 
+\mbox{\hyperlink{namespacemain_aa2d15d40756fca616210fcfd4d290b17}{task5\+\_\+bumper}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemain_a0456cb15cb03d0782a60ebea1c6e6655}{share\+\_\+motor\+\_\+controller\+\_\+period}}
+\item 
+\Hypertarget{namespacemain_a4b3538bf858b55ad25f6aa62bc0a59aa}\label{namespacemain_a4b3538bf858b55ad25f6aa62bc0a59aa} 
+{\bfseries share\+\_\+left\+\_\+effort} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Effort"{})
+\item 
+\Hypertarget{namespacemain_ad083741762dd7eca5deef385687f6e2e}\label{namespacemain_ad083741762dd7eca5deef385687f6e2e} 
+{\bfseries share\+\_\+left\+\_\+run\+\_\+dur} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Run\+\_\+\+Dur"{})
+\item 
+\Hypertarget{namespacemain_a75aff43a1280bd518cb4cfc2b3990181}\label{namespacemain_a75aff43a1280bd518cb4cfc2b3990181} 
+{\bfseries share\+\_\+right\+\_\+effort} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Effort"{})
+\item 
+\Hypertarget{namespacemain_ab11938f316cca0a507bc9652a1421ce2}\label{namespacemain_ab11938f316cca0a507bc9652a1421ce2} 
+{\bfseries share\+\_\+right\+\_\+run\+\_\+dur} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Run\+\_\+\+Dur"{})
+\item 
+\Hypertarget{namespacemain_a6e2a6db2039ceb5e06ab4c5c4c9c7905}\label{namespacemain_a6e2a6db2039ceb5e06ab4c5c4c9c7905} 
+int {\bfseries q\+\_\+len} = 500
+\item 
+\mbox{\hyperlink{namespacemain_a0e7bff739a6d43426790064d7604e67d}{queue\+\_\+left\+\_\+position}}
+\item 
+\mbox{\hyperlink{namespacemain_ac132acf5ce2695046aab857080b66583}{queue\+\_\+left\+\_\+velocity}}
+\item 
+\mbox{\hyperlink{namespacemain_a2346a11ae4ce661ea9831ecf2448a953}{queue\+\_\+right\+\_\+position}}
+\item 
+\mbox{\hyperlink{namespacemain_ada0b9312c38b796722d0c99246ce7ab5}{queue\+\_\+right\+\_\+velocity}}
+\item 
+\Hypertarget{namespacemain_a01cd60f30f626766e9e8b21e509ce05c}\label{namespacemain_a01cd60f30f626766e9e8b21e509ce05c} 
+{\bfseries share\+\_\+max\+\_\+vel} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Max\+\_\+\+Vel"{})
+\item 
+\Hypertarget{namespacemain_af7bc4ff58722c6affeee262012fcf55c}\label{namespacemain_af7bc4ff58722c6affeee262012fcf55c} 
+{\bfseries share\+\_\+max\+\_\+eff} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Max\+\_\+\+Eff"{})
+\item 
+\Hypertarget{namespacemain_aaf225447dd3b4f71c7c58cae495c7abf}\label{namespacemain_aaf225447dd3b4f71c7c58cae495c7abf} 
+{\bfseries share\+\_\+right\+\_\+vel} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Vel"{})
+\item 
+\Hypertarget{namespacemain_a2be8f3bce68f849361ad0518974ac5d4}\label{namespacemain_a2be8f3bce68f849361ad0518974ac5d4} 
+{\bfseries share\+\_\+left\+\_\+vel} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Vel"{})
+\item 
+\Hypertarget{namespacemain_a7f5ea24393ebcd9c0dc95fe5b1566474}\label{namespacemain_a7f5ea24393ebcd9c0dc95fe5b1566474} 
+{\bfseries share\+\_\+dir} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Dir"{})
+\item 
+\Hypertarget{namespacemain_a2900c777cd73ccd2e665b2603ad46578}\label{namespacemain_a2900c777cd73ccd2e665b2603ad46578} 
+{\bfseries share\+\_\+chassis\+\_\+vel} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Chassis\+\_\+\+Vel"{})
+\item 
+\Hypertarget{namespacemain_a256212a1b054fb7db00764673da653e3}\label{namespacemain_a256212a1b054fb7db00764673da653e3} 
+{\bfseries share\+\_\+cur\+\_\+left\+\_\+vel} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Cur\+\_\+\+Left\+\_\+\+Vel"{})
+\item 
+\Hypertarget{namespacemain_a08923618ea52835930772297cbca5586}\label{namespacemain_a08923618ea52835930772297cbca5586} 
+{\bfseries share\+\_\+cur\+\_\+right\+\_\+vel} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Cur\+\_\+\+Right\+\_\+\+Vel"{})
+\item 
+\Hypertarget{namespacemain_aa47776161cc656417f2687bd51eaec13}\label{namespacemain_aa47776161cc656417f2687bd51eaec13} 
+{\bfseries share\+\_\+wait} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Wait"{})
+\item 
+\Hypertarget{namespacemain_abe9060a06cf51d73765d64230ef0c465}\label{namespacemain_abe9060a06cf51d73765d64230ef0c465} 
+{\bfseries share\+\_\+stop} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Stop"{})
+\item 
+\Hypertarget{namespacemain_ac1648ed9341de347f664c2c000bd537c}\label{namespacemain_ac1648ed9341de347f664c2c000bd537c} 
+{\bfseries share\+\_\+mode} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Mode"{})
+\item 
+\Hypertarget{namespacemain_ab2e61c14a17da80ea8b6de8c12d06b6c}\label{namespacemain_ab2e61c14a17da80ea8b6de8c12d06b6c} 
+{\bfseries share\+\_\+heading} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Heading"{})
+\item 
+\Hypertarget{namespacemain_a7b1b6e7dc901fe09579cd581a2f71bcf}\label{namespacemain_a7b1b6e7dc901fe09579cd581a2f71bcf} 
+{\bfseries share\+\_\+continue} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Continue"{})
+\item 
+\mbox{\hyperlink{namespacemain_af4b8f4290f8d32e70654f6deb864787f}{task1}}
+\item 
+\mbox{\hyperlink{namespacemain_a99d189b8f9eb3784cf7d4e5c3241b562}{task2}}
+\item 
+\mbox{\hyperlink{namespacemain_a120516a5d42c212c898d4616d266077a}{task3}}
+\item 
+\mbox{\hyperlink{namespacemain_ac0ee3c5b5359f76becfe27534e82085f}{task4}}
+\item 
+\mbox{\hyperlink{namespacemain_a11ec9e490c402876467b9fdadecc93e8}{task5}}
+\item 
+\mbox{\hyperlink{namespacemain_ab40f26627816d82bd72f3a65ed8d82d5}{Motor\+\_\+\+Right}}
+\item 
+\mbox{\hyperlink{namespacemain_ac444a2dc99b98409a8b2fcff38ae4b6f}{Motor\+\_\+\+Left}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file main.py
+@brief Main execution file for the Romi autonomous navigation project.
+@details 
+   - Initializes tasks for motor control, path following, and bumper handling.  
+   - Starts the scheduler to manage real-time control of the robot.  
+   - Demonstrates line following, IMU-based heading control, and motor PID velocity control.
+
+@author 
+   - Toby Sagi
+   - Kyle Schumacher
+
+@date 2025
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemain_a9414a2b2f1daed28221d353cb095a7c0}\index{main@{main}!follow\_heading@{follow\_heading}}
+\index{follow\_heading@{follow\_heading}!main@{main}}
+\doxysubsubsection{\texorpdfstring{follow\_heading()}{follow\_heading()}}
+{\footnotesize\ttfamily \label{namespacemain_a9414a2b2f1daed28221d353cb095a7c0} 
+main.\+follow\+\_\+heading (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{imu\+\_\+obj}{, }\item[{}]{PID\+\_\+\+Omega}{, }\item[{}]{chassis\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+left\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+right\+\_\+vel\+\_\+share}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{max\+\_\+vel\+\_\+share}{, }\item[{}]{target\+\_\+heading}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Maintains a specific heading using IMU feedback and PID control.
+@details 
+  - Reads the current heading from the IMU.  
+  - Computes heading error and uses PID to calculate angular velocity (omega).  
+  - Converts chassis velocity and chassis_omega into left/right velocities.
+
+@param chassis           : Romi chassis object.
+@param imu_obj           : IMU object for heading data.
+@param PID_Omega         : PID controller for angular velocity.
+@param chassis_vel_share : Desired forward velocity of the chassis.
+@param cur_left_vel_share: Current left motor velocity.
+@param cur_right_vel_share: Current right motor velocity.
+@param left_vel_share    : Shared left motor velocity to be updated.
+@param right_vel_share   : Shared right motor velocity to be updated.
+@param max_vel_share     : Shared maximum velocity possible.
+@param target_heading    : Target heading in degrees.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_add828372675b1c9e6565da3c26f70023}\index{main@{main}!follow\_line@{follow\_line}}
+\index{follow\_line@{follow\_line}!main@{main}}
+\doxysubsubsection{\texorpdfstring{follow\_line()}{follow\_line()}}
+{\footnotesize\ttfamily \label{namespacemain_add828372675b1c9e6565da3c26f70023} 
+main.\+follow\+\_\+line (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{line\+\_\+follower}{, }\item[{}]{cur\+\_\+left\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+right\+\_\+vel\+\_\+share}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{max\+\_\+vel\+\_\+share}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief IR-based line following helper function.
+@details 
+  - Uses IR sensor readings to adjust left/right wheel velocities.  
+  - Updates the chassis object with current velocities for tracking.
+
+@param chassis        : Romi chassis object to track distance, heading, etc.
+@param line_follower  : LineFollow object handling IR sensor feedback.
+@param cur_left_vel_share  : Shared current left motor velocity.
+@param cur_right_vel_share : Shared current right motor velocity.
+@param left_vel_share : Shared desired left motor velocity (to be updated by this function).
+@param right_vel_share: Shared desired right motor velocity (to be updated by this function).
+@param max_vel_share  : Shared maximum velocity for line following.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_aef812866eef08bec2fae312b26c55696}\index{main@{main}!follow\_turn@{follow\_turn}}
+\index{follow\_turn@{follow\_turn}!main@{main}}
+\doxysubsubsection{\texorpdfstring{follow\_turn()}{follow\_turn()}}
+{\footnotesize\ttfamily \label{namespacemain_aef812866eef08bec2fae312b26c55696} 
+main.\+follow\+\_\+turn (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{imu\+\_\+obj}{, }\item[{}]{PID\+\_\+\+Omega}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{max\+\_\+vel\+\_\+share}{, }\item[{}]{turn\+\_\+angle}{, }\item[{}]{continue\+\_\+val}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Implements an in-place turn to a specific heading.
+@details 
+  - Uses a generator approach to step through the turn each iteration.  
+  - Zero linear velocity and apply an angular velocity until the desired heading is reached.
+
+@param chassis       : Romi chassis object.
+@param imu_obj       : IMU object to measure heading.
+@param PID_Omega     : PID controller for angular velocity.
+@param left_vel_share: Shared left motor velocity to be updated.
+@param right_vel_share: Shared right motor velocity to be updated.
+@param max_vel_share : Shared max velocity for limiting turning speed.
+@param turn_angle    : Relative target heading to turn to (e.g., +90 deg).
+@param continue_val  : Shared flag set to 1 when turn is complete.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_abee5a8002f0200a65242da9812fbdec0}\index{main@{main}!go\_backward@{go\_backward}}
+\index{go\_backward@{go\_backward}!main@{main}}
+\doxysubsubsection{\texorpdfstring{go\_backward()}{go\_backward()}}
+{\footnotesize\ttfamily \label{namespacemain_abee5a8002f0200a65242da9812fbdec0} 
+main.\+go\+\_\+backward (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+left\+\_\+vel}{, }\item[{}]{cur\+\_\+right\+\_\+vel}{, }\item[{}]{cur\+\_\+heading}{, }\item[{}]{distance}{, }\item[{}]{continue\+\_\+val}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Moves the robot backward by a certain distance.
+@details 
+  - Zeroes distance, then drives in reverse until distance traveled is met.  
+  - Sets wheel velocities to negative values, and stops when the condition is reached.
+
+@param chassis        : Romi chassis object.
+@param left_vel_share : Shared left motor velocity control.
+@param right_vel_share: Shared right motor velocity control.
+@param cur_left_vel   : Current left motor velocity (unused).
+@param cur_right_vel  : Current right motor velocity (unused).
+@param cur_heading    : Current heading of the chassis.
+@param distance       : Target distance to move backward (some distance metric).
+@param continue_val   : Shared flag to resume path follow after backward motion.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a3898291b13bc49e1c4d3859b2071abfe}\index{main@{main}!task1\_main@{task1\_main}}
+\index{task1\_main@{task1\_main}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task1\_main()}{task1\_main()}}
+{\footnotesize\ttfamily \label{namespacemain_a3898291b13bc49e1c4d3859b2071abfe} 
+main.\+task1\+\_\+main (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Task which controls user inputs and data logging.
+@details 
+  - Initializes motor control parameters.
+  - Collects positional/velocity data from motors.
+  - Logs data at each iteration until the run finishes.
+
+@param shares 
+  A tuple of references to shares and queues used by this task:
+  - share_motor_controller_period : The sampling period for motor control (ms).
+  - share_left_effort            : Reference to the left motor effort share.
+  - share_right_effort           : Reference to the right motor effort share.
+  - share_left_run_dur           : Left motor run duration (ms).
+  - share_left_run_dur           : (Repeated) Right motor run duration (ms).
+  - queue_left_position          : Queue storing left motor positions.
+  - queue_right_position         : Queue storing right motor positions.
+  - queue_left_velocity          : Queue storing left motor velocities.
+  - queue_right_velocity         : Queue storing right motor velocities.
+  - share_cur_left_vel           : Current left motor velocity share.
+  - share_cur_right_vel          : Current right motor velocity share.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a2761433ea92d27cdf41d774ef10220fe}\index{main@{main}!task2\_left\_motor\_controller@{task2\_left\_motor\_controller}}
+\index{task2\_left\_motor\_controller@{task2\_left\_motor\_controller}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task2\_left\_motor\_controller()}{task2\_left\_motor\_controller()}}
+{\footnotesize\ttfamily \label{namespacemain_a2761433ea92d27cdf41d774ef10220fe} 
+main.\+task2\+\_\+left\+\_\+motor\+\_\+controller (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Task which controls the left motor using PID velocity control.
+@details 
+  - Creates a Motor and Encoder object for the left motor.  
+  - Waits for a start signal before enabling the motor.  
+  - Once running, updates encoder feedback and computes PID effort to maintain set velocity.
+
+@param shares 
+  A tuple of references to the following:
+  - share_run_dur     : Duration to run the motor (ms).
+  - share_left_vel    : Desired left motor velocity (counts/second or similar).
+  - share_max_eff     : Maximum allowed effort for the motor (unused in original code).
+  - share_cur_left_vel: Current left motor velocity measured by the encoder.
+  - share_wait        : A flag (0 or 1) that indicates when to start the motor.
+  - share_stop        : A flag (0 or 1) that indicates when to stop the motor.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a7587f108dcb928de84aaf2644f8d8208}\index{main@{main}!task3\_right\_motor\_controller@{task3\_right\_motor\_controller}}
+\index{task3\_right\_motor\_controller@{task3\_right\_motor\_controller}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task3\_right\_motor\_controller()}{task3\_right\_motor\_controller()}}
+{\footnotesize\ttfamily \label{namespacemain_a7587f108dcb928de84aaf2644f8d8208} 
+main.\+task3\+\_\+right\+\_\+motor\+\_\+controller (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Task which controls the right motor using PID velocity control.
+@details 
+  - Similar to the left motor controller, but for the right motor.  
+  - Creates Motor and Encoder objects and uses PID to maintain the desired velocity.
+
+@param shares 
+  A tuple of references to:
+  - share_run_dur      : Duration to run the motor (ms).
+  - share_right_vel    : Desired right motor velocity.
+  - share_cur_right_vel: Current right motor velocity measured by the encoder.
+  - share_wait         : A flag indicating when to start the motor.
+  - share_stop         : A flag indicating when to stop the motor.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a40eddb145230fd0b6ebaa9d85a7d328c}\index{main@{main}!task4\_path\_follow@{task4\_path\_follow}}
+\index{task4\_path\_follow@{task4\_path\_follow}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task4\_path\_follow()}{task4\_path\_follow()}}
+{\footnotesize\ttfamily \label{namespacemain_a40eddb145230fd0b6ebaa9d85a7d328c} 
+main.\+task4\+\_\+path\+\_\+follow (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Task which controls path following for the Romi.
+@details 
+  - Creates IMU and IR objects, calibrates sensors, and then follows a preset path.  
+  - Uses scheduled mode changes (IR line following, heading hold, turn, etc.) based on distance traveled.  
+  - Utilizes a finite state machine for initialization, calibration, and run modes.
+
+@param shares 
+  A tuple of references to:
+  - share_chasssis_vel : Desired chassis velocity (m/s or other unit).
+  - share_left_vel     : Desired left motor velocity share (output of path logic).
+  - share_right_vel    : Desired right motor velocity share (output of path logic).
+  - share_cur_left_vel : Current left motor velocity.
+  - share_cur_right_vel: Current right motor velocity.
+  - share_wait         : A flag for waiting before starting.
+  - share_mode         : Holds the current mode (IR, HEADING, TURN, etc.).
+  - share_heading      : Desired heading for heading or turning modes.
+  - share_continue     : A flag to let path follow logic continue after certain maneuvers.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_aa2d15d40756fca616210fcfd4d290b17}\index{main@{main}!task5\_bumper@{task5\_bumper}}
+\index{task5\_bumper@{task5\_bumper}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task5\_bumper()}{task5\_bumper()}}
+{\footnotesize\ttfamily \label{namespacemain_aa2d15d40756fca616210fcfd4d290b17} 
+main.\+task5\+\_\+bumper (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Simple bumper task to demonstrate emergency stop or exit.
+@details 
+  - Monitors the bump sensors and raises KeyboardInterrupt when pressed.
+
+@exception KeyboardInterrupt 
+  Raises KeyboardInterrupt when a bumper is pressed, causing the main scheduler to stop.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacemain_ac444a2dc99b98409a8b2fcff38ae4b6f}\index{main@{main}!Motor\_Left@{Motor\_Left}}
+\index{Motor\_Left@{Motor\_Left}!main@{main}}
+\doxysubsubsection{\texorpdfstring{Motor\_Left}{Motor\_Left}}
+{\footnotesize\ttfamily \label{namespacemain_ac444a2dc99b98409a8b2fcff38ae4b6f} 
+main.\+Motor\+\_\+\+Left}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ Motor(motor\_left\_enable,\ motor\_left\_dir,}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_left\_timer,\ motor\_left\_channel,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_left\_pwm)}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_ab40f26627816d82bd72f3a65ed8d82d5}\index{main@{main}!Motor\_Right@{Motor\_Right}}
+\index{Motor\_Right@{Motor\_Right}!main@{main}}
+\doxysubsubsection{\texorpdfstring{Motor\_Right}{Motor\_Right}}
+{\footnotesize\ttfamily \label{namespacemain_ab40f26627816d82bd72f3a65ed8d82d5} 
+main.\+Motor\+\_\+\+Right}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ Motor(motor\_right\_enable,\ motor\_right\_dir,}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_right\_timer,\ motor\_right\_channel,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_right\_pwm)}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_a0e7bff739a6d43426790064d7604e67d}\index{main@{main}!queue\_left\_position@{queue\_left\_position}}
+\index{queue\_left\_position@{queue\_left\_position}!main@{main}}
+\doxysubsubsection{\texorpdfstring{queue\_left\_position}{queue\_left\_position}}
+{\footnotesize\ttfamily \label{namespacemain_a0e7bff739a6d43426790064d7604e67d} 
+main.\+queue\+\_\+left\+\_\+position}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'l'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Left\_Position"{}})}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_ac132acf5ce2695046aab857080b66583}\index{main@{main}!queue\_left\_velocity@{queue\_left\_velocity}}
+\index{queue\_left\_velocity@{queue\_left\_velocity}!main@{main}}
+\doxysubsubsection{\texorpdfstring{queue\_left\_velocity}{queue\_left\_velocity}}
+{\footnotesize\ttfamily \label{namespacemain_ac132acf5ce2695046aab857080b66583} 
+main.\+queue\+\_\+left\+\_\+velocity}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'f'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Left\_Velocity"{}})}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_a2346a11ae4ce661ea9831ecf2448a953}\index{main@{main}!queue\_right\_position@{queue\_right\_position}}
+\index{queue\_right\_position@{queue\_right\_position}!main@{main}}
+\doxysubsubsection{\texorpdfstring{queue\_right\_position}{queue\_right\_position}}
+{\footnotesize\ttfamily \label{namespacemain_a2346a11ae4ce661ea9831ecf2448a953} 
+main.\+queue\+\_\+right\+\_\+position}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'l'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Right\_Position"{}})}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_ada0b9312c38b796722d0c99246ce7ab5}\index{main@{main}!queue\_right\_velocity@{queue\_right\_velocity}}
+\index{queue\_right\_velocity@{queue\_right\_velocity}!main@{main}}
+\doxysubsubsection{\texorpdfstring{queue\_right\_velocity}{queue\_right\_velocity}}
+{\footnotesize\ttfamily \label{namespacemain_ada0b9312c38b796722d0c99246ce7ab5} 
+main.\+queue\+\_\+right\+\_\+velocity}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'f'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Right\_Velocity"{}})}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_a0456cb15cb03d0782a60ebea1c6e6655}\index{main@{main}!share\_motor\_controller\_period@{share\_motor\_controller\_period}}
+\index{share\_motor\_controller\_period@{share\_motor\_controller\_period}!main@{main}}
+\doxysubsubsection{\texorpdfstring{share\_motor\_controller\_period}{share\_motor\_controller\_period}}
+{\footnotesize\ttfamily \label{namespacemain_a0456cb15cb03d0782a60ebea1c6e6655} 
+main.\+share\+\_\+motor\+\_\+controller\+\_\+period}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_share}{task\_share.Share}}(\textcolor{stringliteral}{'i'},\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name=\textcolor{stringliteral}{"{}Share\_Left\_Motor\_Controller\_Period"{}})}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_af4b8f4290f8d32e70654f6deb864787f}\index{main@{main}!task1@{task1}}
+\index{task1@{task1}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task1}{task1}}
+{\footnotesize\ttfamily \label{namespacemain_af4b8f4290f8d32e70654f6deb864787f} 
+main.\+task1}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task1\_main,\ name=\textcolor{stringliteral}{"{}Task\_1"{}},\ priority=1,\ period=30,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_motor\_controller\_period,\ share\_left\_effort,\ share\_right\_effort,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_run\_dur,\ share\_left\_run\_dur,\ queue\_left\_position,}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \ \ \ \ queue\_right\_position,\ queue\_left\_velocity,\ queue\_right\_velocity,}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_cur\_right\_vel}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00010\ \ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_a99d189b8f9eb3784cf7d4e5c3241b562}\index{main@{main}!task2@{task2}}
+\index{task2@{task2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task2}{task2}}
+{\footnotesize\ttfamily \label{namespacemain_a99d189b8f9eb3784cf7d4e5c3241b562} 
+main.\+task2}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task2\_left\_motor\_controller,\ name=\textcolor{stringliteral}{"{}Task\_2"{}},\ priority=2,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ period=share\_motor\_controller\_period.get(),\ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_run\_dur,\ share\_left\_vel,\ share\_max\_eff,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_wait,\ share\_stop}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00008\ \ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_a120516a5d42c212c898d4616d266077a}\index{main@{main}!task3@{task3}}
+\index{task3@{task3}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task3}{task3}}
+{\footnotesize\ttfamily \label{namespacemain_a120516a5d42c212c898d4616d266077a} 
+main.\+task3}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task3\_right\_motor\_controller,\ name=\textcolor{stringliteral}{"{}Task\_3"{}},\ priority=2,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ period=share\_motor\_controller\_period.get(),\ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_right\_run\_dur,\ share\_right\_vel,\ share\_cur\_right\_vel,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_wait,\ share\_stop}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00008\ \ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_ac0ee3c5b5359f76becfe27534e82085f}\index{main@{main}!task4@{task4}}
+\index{task4@{task4}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task4}{task4}}
+{\footnotesize\ttfamily \label{namespacemain_ac0ee3c5b5359f76becfe27534e82085f} 
+main.\+task4}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task4\_path\_follow,\ name=\textcolor{stringliteral}{"{}Task\_4"{}},\ priority=3,\ period=200,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_chassis\_vel,\ share\_left\_vel,\ share\_right\_vel,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_cur\_right\_vel,\ share\_wait,}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \ \ \ \ share\_mode,\ share\_heading,\ share\_continue}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00009\ \ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{namespacemain_a11ec9e490c402876467b9fdadecc93e8}\index{main@{main}!task5@{task5}}
+\index{task5@{task5}!main@{main}}
+\doxysubsubsection{\texorpdfstring{task5}{task5}}
+{\footnotesize\ttfamily \label{namespacemain_a11ec9e490c402876467b9fdadecc93e8} 
+main.\+task5}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task5\_bumper,\ name=\textcolor{stringliteral}{"{}Task\_5"{}},\ priority=4,\ period=1000}
+\DoxyCodeLine{00003\ \ \ \ \ )}
+
+\end{DoxyCode}

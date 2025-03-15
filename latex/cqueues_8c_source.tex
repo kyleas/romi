@@ -1,0 +1,668 @@
+\doxysection{cqueues.\+c}
+\hypertarget{cqueues_8c_source}{}\label{cqueues_8c_source}\index{lib2/cqueues.c@{lib2/cqueues.c}}
+\mbox{\hyperlink{cqueues_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00038}00038\ \textcolor{preprocessor}{\#include\ "{}py/runtime.h"{}}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00039}00039\ \textcolor{preprocessor}{\#include\ "{}py/obj.h"{}}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00040}00040\ \textcolor{preprocessor}{\#include\ "{}py/objstr.h"{}}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00045}\mbox{\hyperlink{struct__cqueue___int_queue__obj__t}{00045}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__cqueue___int_queue__obj__t}{\_cqueue\_IntQueue\_obj\_t}}\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00047}00047\ \ \ \ \ mp\_obj\_base\_t\ base;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ the\ array}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00049}00049\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ write\_idx;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Array\ index\ of\ write\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ read\_idx;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Array\ index\ of\ read\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00051}00051\ \ \ \ \ int32\_t*\ p\_data;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ array\ of\ data}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ num\_items;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ items\ currently\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_full;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Maximum\ number\ of\ items\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00054}\mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{00054}}\ \}\ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00057}\mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{00057}}\ \textcolor{keyword}{const}\ mp\_obj\_type\_t\ \mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00062}\mbox{\hyperlink{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e}{00062}}\ STATIC\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e}{IntQueue\_print}}(\textcolor{keyword}{const}\ mp\_print\_t\ *print,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp\_obj\_t\ self\_in,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp\_print\_kind\_t\ kind)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00065}00065\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00066}00066\ \ \ \ \ (void)kind;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00067}00067\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00068}00068\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}IntQueue["{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00069}00069\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>size),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00070}00070\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}]:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ self-\/>size;\ index++)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00072}00072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>p\_data[index]),\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00077}00077\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}W:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00078}00078\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>write\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00079}00079\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},R:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00080}00080\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>read\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00084}00084\ \textcolor{comment}{//\ This\ forward\ reference\ is\ used\ a\ few\ lines\ down...}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00085}00085\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{IntQueue\_clear}}(mp\_obj\_t\ self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00092}\mbox{\hyperlink{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc}{00092}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc}{IntQueue\_make\_new}}(\textcolor{keyword}{const}\ mp\_obj\_type\_t\ *type,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\_args,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\_kw,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ mp\_obj\_t\ *args)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00096}00096\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00097}00097\ \ \ \ \ mp\_arg\_check\_num(n\_args,\ n\_kw,\ 1,\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00098}00098\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ m\_new\_obj(\mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00099}00099\ \ \ \ \ self-\/>base.type\ =\ \&\mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00100}00100\ \ \ \ \ self-\/>size\ =\ mp\_obj\_get\_int(args[0]);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00102}00102\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{IntQueue\_clear}}\ (self);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00104}00104\ \ \ \ \ \textcolor{comment}{//\ Tried\ using\ malloc();\ it\ usually\ works\ but\ occasionally\ crashes\ an\ ESP32}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00105}00105\ \ \ \ \ \textcolor{comment}{//\ apparently\ when\ the\ memory\ is\ accessed\ some\ time\ after\ allocation.}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{//\ After\ that,\ tried\ using\ n\_new()\ as\ in\ objarray.c's\ array\_new()}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00107}00107\ \ \ \ \ \textcolor{comment}{//\ self-\/>p\_data\ =\ malloc\ (self-\/>size\ *\ sizeof\ (int32\_t));}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00108}00108\ \ \ \ \ self-\/>p\_data\ =\ (int32\_t*)(m\_new(\textcolor{keywordtype}{byte},\ \textcolor{keyword}{sizeof}(int32\_t)\ *\ self-\/>size));}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{return}\ MP\_OBJ\_FROM\_PTR(self);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00116}\mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{00116}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{IntQueue\_clear}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00117}00117\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00118}00118\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00120}00120\ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00121}00121\ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00122}00122\ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00123}00123\ \ \ \ \ self-\/>max\_full\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00126}00126\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00127}00127\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(IntQueue\_clear\_obj,\ \mbox{\hyperlink{cqueues_8c_a7b9e863c026a3f3b09f828f592141b81}{IntQueue\_clear}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00132}\mbox{\hyperlink{cqueues_8c_a9e1186547af14130c2d0453854ddb827}{00132}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a9e1186547af14130c2d0453854ddb827}{IntQueue\_any}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00133}00133\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00134}00134\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00137}00137\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00138}00138\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(IntQueue\_any\_obj,\ \mbox{\hyperlink{cqueues_8c_a9e1186547af14130c2d0453854ddb827}{IntQueue\_any}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00144}\mbox{\hyperlink{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11}{00144}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11}{IntQueue\_full}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00145}00145\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00146}00146\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >=\ self-\/>size);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00149}00149\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00150}00150\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(IntQueue\_full\_obj,\ \mbox{\hyperlink{cqueues_8c_a5d8f55d7de468a7c4d2305f612648d11}{IntQueue\_full}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00156}\mbox{\hyperlink{cqueues_8c_a8705f418364cc6da74782909c112df93}{00156}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a8705f418364cc6da74782909c112df93}{IntQueue\_put}}(mp\_obj\_t\ self\_in,\ mp\_obj\_t\ to\_put)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00157}00157\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00158}00158\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00159}00159\ \ \ \ \ int32\_t\ putted\ =\ mp\_obj\_get\_int(to\_put);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00161}00161\ \ \ \ \ self-\/>p\_data[self-\/>write\_idx]\ =\ putted;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00162}00162\ \ \ \ \ self-\/>write\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>write\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00164}00164\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00166}00166\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00168}00168\ \ \ \ \ \textcolor{comment}{//\ If\ the\ queue\ is\ full\ before\ writing,\ move\ the\ read\ pointer\ so\ we'll\ read}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00169}00169\ \ \ \ \ \textcolor{comment}{//\ old\ data,\ not\ new\ data}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00170}00170\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00171}00171\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00177}00177\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00179}00179\ \ \ \ \ \textcolor{comment}{//\ Now\ increase\ the\ fillage\ and\ check\ again\ if\ the\ queue\ is\ full}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00180}00180\ \ \ \ \ self-\/>num\_items++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00181}00181\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00182}00182\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ self-\/>size;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00184}00184\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00185}00185\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >\ self-\/>max\_full)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00186}00186\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ self-\/>max\_full\ =\ self-\/>num\_items;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00190}00190\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00191}00191\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00192}00192\ MP\_DEFINE\_CONST\_FUN\_OBJ\_2(IntQueue\_put\_obj,\ \mbox{\hyperlink{cqueues_8c_a8705f418364cc6da74782909c112df93}{IntQueue\_put}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00198}\mbox{\hyperlink{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6}{00198}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6}{IntQueue\_get}}(mp\_obj\_t\ self\_in)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00199}00199\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00200}00200\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00202}00202\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ something\ to\ get}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00203}00203\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00204}00204\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00206}00206\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00208}00208\ \ \ \ \ int32\_t\ to\_return\ =\ self-\/>p\_data[self-\/>read\_idx];}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00210}00210\ \ \ \ \ \textcolor{comment}{//\ If\ we\ get\ here,\ the\ queue\ has\ some\ data\ in\ it}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00211}00211\ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00212}00212\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00213}00213\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00217}00217\ \ \ \ \ self-\/>num\_items-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00218}00218\ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)(self-\/>num\_items)\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00219}00219\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00221}00221\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00222}00222\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int(to\_return);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00223}00223\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00224}00224\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(IntQueue\_get\_obj,\ \mbox{\hyperlink{cqueues_8c_ac458d908f5e7501d245ae275db24d3f6}{IntQueue\_get}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00230}\mbox{\hyperlink{cqueues_8c_a4381028f15e8d7da45d95671949069d3}{00230}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a4381028f15e8d7da45d95671949069d3}{IntQueue\_available}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00231}00231\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00232}00232\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00234}00234\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>num\_items);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00235}00235\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00236}00236\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(IntQueue\_available\_obj,\ \mbox{\hyperlink{cqueues_8c_a4381028f15e8d7da45d95671949069d3}{IntQueue\_available}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00243}\mbox{\hyperlink{cqueues_8c_a6fd0d95f0305c17160c4880d55172721}{00243}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a6fd0d95f0305c17160c4880d55172721}{IntQueue\_max\_full}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00244}00244\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00245}00245\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_ae694fe86fbf7ef420deefa3cc8f07e45}{cqueue\_IntQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>max\_full);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00248}00248\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00249}00249\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(IntQueue\_max\_full\_obj,\ \mbox{\hyperlink{cqueues_8c_a6fd0d95f0305c17160c4880d55172721}{IntQueue\_max\_full}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00255}\mbox{\hyperlink{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718}{00255}}\ STATIC\ \textcolor{keyword}{const}\ mp\_rom\_map\_elem\_t\ \mbox{\hyperlink{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718}{IntQueue\_locals\_dict\_table}}[]\ =\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00256}00256\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00257}00257\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&IntQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00258}00258\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&IntQueue\_any\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00259}00259\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&IntQueue\_full\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00260}00260\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&IntQueue\_put\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00261}00261\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&IntQueue\_get\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00262}00262\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&IntQueue\_available\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00263}00263\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&IntQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00264}00264\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00265}00265\ STATIC\ MP\_DEFINE\_CONST\_DICT(IntQueue\_locals\_dict,\ \mbox{\hyperlink{cqueues_8c_ab503f5e14c8d1980b194698f0f9a4718}{IntQueue\_locals\_dict\_table}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00271}00271\ \textcolor{keyword}{const}\ mp\_obj\_type\_t\ \mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}}\ =\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00272}00272\ \ \ \ \ \{\ \&mp\_type\_type\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00273}00273\ \ \ \ \ .name\ =\ MP\_QSTR\_IntQueue,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00274}00274\ \ \ \ \ .print\ =\ \mbox{\hyperlink{cqueues_8c_a7c7a1e382c0766f5b8c5e57039513c6e}{IntQueue\_print}},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00275}00275\ \ \ \ \ .make\_new\ =\ \mbox{\hyperlink{cqueues_8c_af9642b10fa8e682466e9ddf1a822b3dc}{IntQueue\_make\_new}},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00276}00276\ \ \ \ \ .locals\_dict\ =\ (mp\_obj\_dict\_t*)\&IntQueue\_locals\_dict,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00277}00277\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00280}00280\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00285}\mbox{\hyperlink{struct__cqueue___float_queue__obj__t}{00285}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__cqueue___float_queue__obj__t}{\_cqueue\_FloatQueue\_obj\_t}}\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00286}00286\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00287}00287\ \ \ \ \ mp\_obj\_base\_t\ base;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00288}00288\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ the\ array}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00289}00289\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ write\_idx;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Array\ index\ of\ write\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00290}00290\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ read\_idx;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Array\ index\ of\ read\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00291}00291\ \ \ \ \ \textcolor{keywordtype}{float}*\ p\_data;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ array\ of\ data}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00292}00292\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ num\_items;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ items\ currently\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00293}00293\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_full;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Maximum\ number\ of\ items\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00294}\mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{00294}}\ \}\ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00297}\mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{00297}}\ \textcolor{keyword}{const}\ mp\_obj\_type\_t\ \mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00302}\mbox{\hyperlink{cqueues_8c_af6c14cca499d205058ac3659d432c46e}{00302}}\ STATIC\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cqueues_8c_af6c14cca499d205058ac3659d432c46e}{FloatQueue\_print}}(\textcolor{keyword}{const}\ mp\_print\_t\ *print,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp\_obj\_t\ self\_in,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp\_print\_kind\_t\ kind)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00305}00305\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00306}00306\ \ \ \ \ (void)kind;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00307}00307\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00308}00308\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}FloatQueue["{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00309}00309\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>size),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00310}00310\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}]:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00311}00311\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ self-\/>size;\ index++)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00312}00312\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00313}00313\ \ \ \ \ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_float(self-\/>p\_data[index]),\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00315}00315\ \ \ \ \ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00316}00316\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00317}00317\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}W:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00318}00318\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>write\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00319}00319\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},R:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00320}00320\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>read\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00321}00321\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00324}00324\ \textcolor{comment}{//\ This\ forward\ reference\ is\ used\ a\ few\ lines\ down...}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00325}00325\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{FloatQueue\_clear}}(mp\_obj\_t\ self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00332}\mbox{\hyperlink{cqueues_8c_a98af6f32f639676013f11fe2753d6a07}{00332}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a98af6f32f639676013f11fe2753d6a07}{FloatQueue\_make\_new}}(\textcolor{keyword}{const}\ mp\_obj\_type\_t\ *type,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\_args,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\_kw,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ mp\_obj\_t\ *args)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00336}00336\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00337}00337\ \ \ \ \ mp\_arg\_check\_num(n\_args,\ n\_kw,\ 1,\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00338}00338\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ m\_new\_obj(\mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00339}00339\ \ \ \ \ self-\/>base.type\ =\ \&\mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00341}00341\ \ \ \ \ self-\/>size\ =\ mp\_obj\_get\_int(args[0]);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00343}00343\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{FloatQueue\_clear}}\ (self);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00345}00345\ \ \ \ \ self-\/>p\_data\ =\ (\textcolor{keywordtype}{float}*)(m\_new(\textcolor{keywordtype}{byte},\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float})\ *\ self-\/>size));}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00347}00347\ \ \ \ \ \textcolor{keywordflow}{return}\ MP\_OBJ\_FROM\_PTR(self);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00348}00348\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00353}\mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{00353}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{FloatQueue\_clear}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00354}00354\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00355}00355\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00357}00357\ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00358}00358\ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00359}00359\ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00360}00360\ \ \ \ \ self-\/>max\_full\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00362}00362\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00363}00363\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00364}00364\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(FloatQueue\_clear\_obj,\ \mbox{\hyperlink{cqueues_8c_a70cdb8debe71dae32ded0d25e45f6e70}{FloatQueue\_clear}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00367}00367\ \textcolor{comment}{//\ Return\ True\ if\ there\ are\ any\ items\ in\ the\ queue,\ False\ if\ it's\ empty}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00368}00368\ STATIC\ mp\_obj\_t\ FloatQueue\_any(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00369}00369\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00370}00370\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00372}00372\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00373}00373\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00374}00374\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(FloatQueue\_any\_obj,\ FloatQueue\_any);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00376}00376\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00381}\mbox{\hyperlink{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe}{00381}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe}{FloatQueue\_full}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00382}00382\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00383}00383\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00385}00385\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >=\ self-\/>size);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00386}00386\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00387}00387\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(FloatQueue\_full\_obj,\ \mbox{\hyperlink{cqueues_8c_a3d0e5e53a4ec6984d23d8ba2abb01ebe}{FloatQueue\_full}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00388}00388\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00393}\mbox{\hyperlink{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced}{00393}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced}{FloatQueue\_put}}(mp\_obj\_t\ self\_in,\ mp\_obj\_t\ to\_put)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00394}00394\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00395}00395\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00396}00396\ \ \ \ \ \textcolor{keywordtype}{float}\ putted\ =\ mp\_obj\_get\_float(to\_put);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00398}00398\ \ \ \ \ self-\/>p\_data[self-\/>write\_idx]\ =\ putted;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00399}00399\ \ \ \ \ self-\/>write\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00400}00400\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>write\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00401}00401\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00402}00402\ \ \ \ \ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00403}00403\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00404}00404\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00405}00405\ \ \ \ \ \textcolor{comment}{//\ If\ the\ queue\ is\ full\ before\ writing,\ move\ the\ read\ pointer\ so\ we'll\ read}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00406}00406\ \ \ \ \ \textcolor{comment}{//\ old\ data,\ not\ new\ data}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00407}00407\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00408}00408\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00409}00409\ \ \ \ \ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00413}00413\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00414}00414\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00416}00416\ \ \ \ \ \textcolor{comment}{//\ Now\ increase\ the\ fillage\ and\ check\ again\ if\ the\ queue\ is\ full}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00417}00417\ \ \ \ \ self-\/>num\_items++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00418}00418\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00419}00419\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ self-\/>size;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00421}00421\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00422}00422\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >\ self-\/>max\_full)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00423}00423\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ self-\/>max\_full\ =\ self-\/>num\_items;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00425}00425\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00427}00427\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00428}00428\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00429}00429\ MP\_DEFINE\_CONST\_FUN\_OBJ\_2(FloatQueue\_put\_obj,\ \mbox{\hyperlink{cqueues_8c_a60fedc06fb48fb8885fc039ebc269ced}{FloatQueue\_put}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00431}00431\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00435}\mbox{\hyperlink{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80}{00435}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80}{FloatQueue\_get}}(mp\_obj\_t\ self\_in)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00436}00436\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00437}00437\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00439}00439\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ something\ to\ get}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00440}00440\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00441}00441\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00443}00443\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00445}00445\ \ \ \ \ \textcolor{keywordtype}{float}\ to\_return\ =\ self-\/>p\_data[self-\/>read\_idx];}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00447}00447\ \ \ \ \ \textcolor{comment}{//\ If\ we\ get\ here,\ the\ queue\ has\ some\ data\ in\ it}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00448}00448\ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00449}00449\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00450}00450\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00451}00451\ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00452}00452\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00454}00454\ \ \ \ \ self-\/>num\_items-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00455}00455\ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)(self-\/>num\_items)\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00456}00456\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00458}00458\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00459}00459\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_float(to\_return);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00460}00460\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00461}00461\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(FloatQueue\_get\_obj,\ \mbox{\hyperlink{cqueues_8c_a240cfaca57cf877fc39c114c8ad43e80}{FloatQueue\_get}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00467}\mbox{\hyperlink{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50}{00467}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50}{FloatQueue\_available}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00468}00468\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00469}00469\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00470}00470\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00471}00471\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>num\_items);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00472}00472\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00473}00473\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(FloatQueue\_available\_obj,\ \mbox{\hyperlink{cqueues_8c_a6d208f3f7bcca3d0ffea4873746a0a50}{FloatQueue\_available}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00474}00474\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00480}\mbox{\hyperlink{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c}{00480}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c}{FloatQueue\_max\_full}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00481}00481\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00482}00482\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a26c46827c0251e5a17ec40a0b37a8836}{cqueue\_FloatQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00483}00483\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00484}00484\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>max\_full);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00485}00485\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00486}00486\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(FloatQueue\_max\_full\_obj,\ \mbox{\hyperlink{cqueues_8c_a90e72a5ae7ccce030acd089f3e70e83c}{FloatQueue\_max\_full}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00488}00488\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00492}\mbox{\hyperlink{cqueues_8c_a8419789c1ef4840cde96c331e644c467}{00492}}\ STATIC\ \textcolor{keyword}{const}\ mp\_rom\_map\_elem\_t\ \mbox{\hyperlink{cqueues_8c_a8419789c1ef4840cde96c331e644c467}{FloatQueue\_locals\_dict\_table}}[]\ =\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00493}00493\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00494}00494\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&FloatQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00495}00495\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&FloatQueue\_any\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00496}00496\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&FloatQueue\_full\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00497}00497\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&FloatQueue\_put\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00498}00498\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&FloatQueue\_get\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00499}00499\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&FloatQueue\_available\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00500}00500\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&FloatQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00501}00501\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00502}00502\ STATIC\ MP\_DEFINE\_CONST\_DICT(FloatQueue\_locals\_dict,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a8419789c1ef4840cde96c331e644c467}{FloatQueue\_locals\_dict\_table}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00504}00504\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00509}00509\ \textcolor{keyword}{const}\ mp\_obj\_type\_t\ \mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}}\ =\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00510}00510\ \ \ \ \ \{\ \&mp\_type\_type\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00511}00511\ \ \ \ \ .name\ =\ MP\_QSTR\_FloatQueue,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00512}00512\ \ \ \ \ .print\ =\ \mbox{\hyperlink{cqueues_8c_af6c14cca499d205058ac3659d432c46e}{FloatQueue\_print}},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00513}00513\ \ \ \ \ .make\_new\ =\ \mbox{\hyperlink{cqueues_8c_a98af6f32f639676013f11fe2753d6a07}{FloatQueue\_make\_new}},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00514}00514\ \ \ \ \ .locals\_dict\ =\ (mp\_obj\_dict\_t*)\&FloatQueue\_locals\_dict,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00515}00515\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00518}00518\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00523}\mbox{\hyperlink{struct__cqueue___byte_queue__obj__t}{00523}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__cqueue___byte_queue__obj__t}{\_cqueue\_ByteQueue\_obj\_t}}\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00524}00524\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00525}00525\ \ \ \ \ mp\_obj\_base\_t\ base;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00526}00526\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ the\ array}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00527}00527\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ write\_idx;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Array\ index\ of\ write\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00528}00528\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ read\_idx;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Array\ index\ of\ read\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00529}00529\ \ \ \ \ \textcolor{keywordtype}{byte}*\ p\_data;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ array\ of\ data}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00530}00530\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ num\_items;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ items\ currently\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00531}00531\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_full;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Maximum\ number\ of\ items\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00532}\mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{00532}}\ \}\ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00533}00533\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00534}00534\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00535}\mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{00535}}\ \textcolor{keyword}{const}\ mp\_obj\_type\_t\ \mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00536}00536\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00540}\mbox{\hyperlink{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90}{00540}}\ STATIC\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90}{ByteQueue\_print}}(\textcolor{keyword}{const}\ mp\_print\_t\ *print,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp\_obj\_t\ self\_in,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp\_print\_kind\_t\ kind)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00543}00543\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00544}00544\ \ \ \ \ (void)kind;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00545}00545\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00546}00546\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}ByteQueue["{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00547}00547\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>size),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00548}00548\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}]:b'"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00549}00549\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ self-\/>size;\ index++)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00550}00550\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00551}00551\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ characters\ in\ approximately\ Python\ string\ printing\ style}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00552}00552\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>p\_data[index]\ >\ 31\ \&\&\ self-\/>p\_data[index]\ <\ 127)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00553}00553\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ mp\_printf(print,\ \textcolor{stringliteral}{"{}\%c"{}},\ self-\/>p\_data[index]);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00555}00555\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00556}00556\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00557}00557\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ mp\_printf(print,\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)x\%02x"{}},\ self-\/>p\_data[index]);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00559}00559\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00560}00560\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00561}00561\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{}'\ W:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00562}00562\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>write\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00563}00563\ \ \ \ \ mp\_print\_str(print,\ \textcolor{stringliteral}{"{},\ R:"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00564}00564\ \ \ \ \ mp\_obj\_print\_helper(print,\ mp\_obj\_new\_int(self-\/>read\_idx),\ PRINT\_REPR);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00565}00565\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00567}00567\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00568}00568\ \textcolor{comment}{//\ This\ forward\ reference\ is\ used\ a\ few\ lines\ down...}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00569}00569\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{ByteQueue\_clear}}(mp\_obj\_t\ self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00576}\mbox{\hyperlink{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53}{00576}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53}{ByteQueue\_make\_new}}(\textcolor{keyword}{const}\ mp\_obj\_type\_t\ *type,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\_args,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\_kw,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ mp\_obj\_t\ *args)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00580}00580\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00581}00581\ \ \ \ \ mp\_arg\_check\_num(n\_args,\ n\_kw,\ 1,\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00582}00582\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ m\_new\_obj(\mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00583}00583\ \ \ \ \ self-\/>base.type\ =\ \&\mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00584}00584\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00585}00585\ \ \ \ \ self-\/>size\ =\ mp\_obj\_get\_int(args[0]);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00587}00587\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{ByteQueue\_clear}}\ (self);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00588}00588\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00589}00589\ \ \ \ \ self-\/>p\_data\ =\ (\textcolor{keywordtype}{byte}*)(m\_new(\textcolor{keywordtype}{byte},\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{byte})\ *\ self-\/>size));}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00591}00591\ \ \ \ \ \textcolor{keywordflow}{return}\ MP\_OBJ\_FROM\_PTR(self);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00592}00592\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00593}00593\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00597}\mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{00597}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{ByteQueue\_clear}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00598}00598\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00599}00599\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00601}00601\ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00602}00602\ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00603}00603\ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00604}00604\ \ \ \ \ self-\/>max\_full\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00606}00606\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00607}00607\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00608}00608\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(ByteQueue\_clear\_obj,\ \mbox{\hyperlink{cqueues_8c_a9f6062702aed4ed0b500b4480bba8312}{ByteQueue\_clear}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00609}00609\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00610}00610\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00613}\mbox{\hyperlink{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5}{00613}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5}{ByteQueue\_any}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00614}00614\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00615}00615\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00617}00617\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00618}00618\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00619}00619\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(ByteQueue\_any\_obj,\ \mbox{\hyperlink{cqueues_8c_a3c6c647a729c200d941a70d0350ccde5}{ByteQueue\_any}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00620}00620\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00626}\mbox{\hyperlink{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71}{00626}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71}{ByteQueue\_full}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00627}00627\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00628}00628\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00629}00629\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00630}00630\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bool\ (self-\/>num\_items\ >=\ self-\/>size);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00631}00631\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00632}00632\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(ByteQueue\_full\_obj,\ \mbox{\hyperlink{cqueues_8c_a60058a475e8646fb598d7a4292b7ba71}{ByteQueue\_full}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00633}00633\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00638}\mbox{\hyperlink{cqueues_8c_a31557e11065497fa793bc6dc02859017}{00638}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a31557e11065497fa793bc6dc02859017}{ByteQueue\_put}}(mp\_obj\_t\ self\_in,\ mp\_obj\_t\ str\_obj\_in)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00639}00639\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00640}00640\ \ \ \ \ \textcolor{comment}{//\ Ensure\ that\ the\ input\ is\ a\ valid\ type\ (prevents\ crashes)}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00641}00641\ \ \ \ \ \textcolor{keywordflow}{if}\ (!mp\_obj\_is\_str\_or\_bytes(str\_obj\_in))}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00642}00642\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00643}00643\ \ \ \ \ \ \ \ \ mp\_raise\_TypeError(\textcolor{stringliteral}{"{}Bytes\ or\ string\ required"{}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00644}00644\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00645}00645\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00646}00646\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00647}00647\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00648}00648\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ length\ of\ the\ bytearray\ or\ string\ and\ a\ data\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00649}00649\ \ \ \ \ GET\_STR\_DATA\_LEN(str\_obj\_in,\ my\_str,\ str\_len);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00650}00650\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00651}00651\ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ data\ into\ the\ queue,\ overwriting\ old\ data\ if\ it's\ there}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00652}00652\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ index\ =\ 0;\ index\ <\ str\_len;\ index++)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00653}00653\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00654}00654\ \ \ \ \ \ \ \ \ self-\/>p\_data[self-\/>write\_idx]\ =\ my\_str[index];}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00655}00655\ \ \ \ \ \ \ \ \ self-\/>write\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00656}00656\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>write\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00657}00657\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>write\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00659}00659\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00660}00660\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)\ \ \ \ \ \textcolor{comment}{//\ If\ the\ queue\ is\ full\ before\ }}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00661}00661\ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ writing,\ move\ read\ pointer}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00662}00662\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ we'll\ read\ old\ data,}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00663}00663\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)\ \ \textcolor{comment}{//\ not\ new\ data}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00664}00664\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00667}00667\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00668}00668\ \ \ \ \ \ \ \ \ self-\/>num\_items++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ increase\ the\ fillage\ and}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00669}00669\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >=\ self-\/>size)\ \ \ \ \ \textcolor{comment}{//\ check\ again\ if\ the\ queue\ is}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00670}00670\ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ full}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00671}00671\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ self-\/>size;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00672}00672\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00673}00673\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ >\ self-\/>max\_full)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00674}00674\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00675}00675\ \ \ \ \ \ \ \ \ \ \ \ \ self-\/>max\_full\ =\ self-\/>num\_items;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00676}00676\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00677}00677\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00678}00678\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00679}00679\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00680}00680\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00681}00681\ MP\_DEFINE\_CONST\_FUN\_OBJ\_2(ByteQueue\_put\_obj,\ \mbox{\hyperlink{cqueues_8c_a31557e11065497fa793bc6dc02859017}{ByteQueue\_put}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00687}\mbox{\hyperlink{cqueues_8c_acc7db03de23d547479c6a75064e6f962}{00687}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_acc7db03de23d547479c6a75064e6f962}{ByteQueue\_get}}(mp\_obj\_t\ self\_in)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00688}00688\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00689}00689\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00690}00690\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00691}00691\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ something\ to\ get}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00692}00692\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>num\_items\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00693}00693\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00694}00694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_const\_none;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00695}00695\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00696}00696\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00697}00697\ \ \ \ \ \textcolor{keywordtype}{byte}\ to\_return\ =\ self-\/>p\_data[self-\/>read\_idx];}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00698}00698\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00699}00699\ \ \ \ \ \textcolor{comment}{//\ If\ we\ get\ here,\ the\ queue\ has\ some\ data\ in\ it}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00700}00700\ \ \ \ \ self-\/>read\_idx++;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00701}00701\ \ \ \ \ \textcolor{keywordflow}{if}\ (self-\/>read\_idx\ >=\ self-\/>size)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00702}00702\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00703}00703\ \ \ \ \ \ \ \ \ self-\/>read\_idx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00704}00704\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00706}00706\ \ \ \ \ self-\/>num\_items-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00707}00707\ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)(self-\/>num\_items)\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00708}00708\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00709}00709\ \ \ \ \ \ \ \ \ self-\/>num\_items\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00710}00710\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00711}00711\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_bytes(\&to\_return,\ 1);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00712}00712\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00713}00713\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(ByteQueue\_get\_obj,\ \mbox{\hyperlink{cqueues_8c_acc7db03de23d547479c6a75064e6f962}{ByteQueue\_get}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00714}00714\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00715}00715\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00719}\mbox{\hyperlink{cqueues_8c_af52c2ce74e037392395894a1e12719fa}{00719}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_af52c2ce74e037392395894a1e12719fa}{ByteQueue\_available}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00720}00720\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00721}00721\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00722}00722\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00723}00723\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>num\_items);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00724}00724\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00725}00725\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(ByteQueue\_available\_obj,\ \mbox{\hyperlink{cqueues_8c_af52c2ce74e037392395894a1e12719fa}{ByteQueue\_available}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00726}00726\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00727}00727\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00732}\mbox{\hyperlink{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e}{00732}}\ STATIC\ mp\_obj\_t\ \mbox{\hyperlink{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e}{ByteQueue\_max\_full}}(mp\_obj\_t\ self\_in)\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00733}00733\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00734}00734\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a9bfc23d5da21dab7bbb3d15825f57b8d}{cqueue\_ByteQueue\_obj\_t}}\ *self\ =\ MP\_OBJ\_TO\_PTR(self\_in);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00735}00735\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00736}00736\ \ \ \ \ \textcolor{keywordflow}{return}\ mp\_obj\_new\_int\ (self-\/>max\_full);}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00737}00737\ \}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00738}00738\ MP\_DEFINE\_CONST\_FUN\_OBJ\_1(ByteQueue\_max\_full\_obj,\ \mbox{\hyperlink{cqueues_8c_a4eab0699d5ba27aa99e1c652e108ea5e}{ByteQueue\_max\_full}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00739}00739\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00740}00740\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00744}\mbox{\hyperlink{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7}{00744}}\ STATIC\ \textcolor{keyword}{const}\ mp\_rom\_map\_elem\_t\ \mbox{\hyperlink{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7}{ByteQueue\_locals\_dict\_table}}[]\ =\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00745}00745\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00746}00746\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_clear),\ MP\_ROM\_PTR(\&ByteQueue\_clear\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00747}00747\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_any),\ MP\_ROM\_PTR(\&ByteQueue\_any\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00748}00748\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_full),\ MP\_ROM\_PTR(\&ByteQueue\_full\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00749}00749\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_put),\ MP\_ROM\_PTR(\&ByteQueue\_put\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00750}00750\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_get),\ MP\_ROM\_PTR(\&ByteQueue\_get\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00751}00751\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_available),\ MP\_ROM\_PTR(\&ByteQueue\_available\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00752}00752\ \ \ \ \ \{\ MP\_ROM\_QSTR(MP\_QSTR\_max\_full),\ MP\_ROM\_PTR(\&ByteQueue\_max\_full\_obj)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00753}00753\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00754}00754\ STATIC\ MP\_DEFINE\_CONST\_DICT(ByteQueue\_locals\_dict,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a1825df1ccf83832980572249f9f3f6e7}{ByteQueue\_locals\_dict\_table}});}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00756}00756\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00757}00757\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00761}00761\ \textcolor{keyword}{const}\ mp\_obj\_type\_t\ \mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}}\ =\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00762}00762\ \ \ \ \ \{\ \&mp\_type\_type\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00763}00763\ \ \ \ \ .name\ =\ MP\_QSTR\_ByteQueue,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00764}00764\ \ \ \ \ .print\ =\ \mbox{\hyperlink{cqueues_8c_ad8de5d3d0af403dacbd277aad9e37a90}{ByteQueue\_print}},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00765}00765\ \ \ \ \ .make\_new\ =\ \mbox{\hyperlink{cqueues_8c_a5fd7098e76d637fc8b3a2cc4d0c5ec53}{ByteQueue\_make\_new}},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00766}00766\ \ \ \ \ .locals\_dict\ =\ (mp\_obj\_dict\_t*)\&ByteQueue\_locals\_dict,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00767}00767\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00768}00768\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00769}00769\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00770}00770\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00771}00771\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00772}00772\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00775}\mbox{\hyperlink{cqueues_8c_a7976151cf38e8efbfb143998f3e00619}{00775}}\ STATIC\ \textcolor{keyword}{const}\ mp\_map\_elem\_t\ \mbox{\hyperlink{cqueues_8c_a7976151cf38e8efbfb143998f3e00619}{cqueue\_globals\_table}}[]\ =\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00776}00776\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00777}00777\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_\_\_name\_\_),\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_cqueue)\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00778}00778\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_IntQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_ac82846bda10051add9066127d87e6d0d}{cqueue\_IntQueue\_type}}\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00779}00779\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_FloatQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_a79db10c5ea71cd71010b6bdeeb6eec4e}{cqueue\_FloatQueue\_type}}\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00780}00780\ \ \ \ \ \{\ MP\_OBJ\_NEW\_QSTR(MP\_QSTR\_ByteQueue),\ (mp\_obj\_t)\&\mbox{\hyperlink{cqueues_8c_a30c91982c6ba805fabc7e53e055a914d}{cqueue\_ByteQueue\_type}}\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00781}00781\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00782}00782\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00783}00783\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00784}00784\ STATIC\ MP\_DEFINE\_CONST\_DICT\ (}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00785}00785\ \ \ \ \ mp\_module\_cqueue\_globals,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00786}00786\ \ \ \ \ \mbox{\hyperlink{cqueues_8c_a7976151cf38e8efbfb143998f3e00619}{cqueue\_globals\_table}}}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00787}00787\ );}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00788}00788\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00789}00789\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00790}00790\ \textcolor{keyword}{const}\ mp\_obj\_module\_t\ cqueue\_user\_cmodule\ =\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00791}00791\ \{}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00792}00792\ \ \ \ \ .base\ =\ \{\ \&mp\_type\_module\ \},}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00793}00793\ \ \ \ \ .globals\ =\ (mp\_obj\_dict\_t*)\&mp\_module\_cqueue\_globals,}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00794}00794\ \};}
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00796}00796\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00797}00797\ MP\_REGISTER\_MODULE(MP\_QSTR\_cqueue,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00798}00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cqueue\_user\_cmodule,\ }
+\DoxyCodeLine{\Hypertarget{cqueues_8c_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1);}
+
+\end{DoxyCode}

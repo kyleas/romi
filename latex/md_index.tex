@@ -1,0 +1,22 @@
+\chapter{Romi Time-\/\+Trials\+: ME405 Term Project}
+\hypertarget{md_index}{}\label{md_index}\index{Romi Time-\/Trials: ME405 Term Project@{Romi Time-\/Trials: ME405 Term Project}}
+\label{md_index_autotoc_md0}%
+\Hypertarget{md_index_autotoc_md0}%
+\hypertarget{md_index_autotoc_md1}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_index_autotoc_md1}
+This project is part of {\bfseries{ME 405}} and focuses on {\bfseries{autonomous robot navigation}} using a Romi chassis. The robot follows a predefined track while utilizing {\bfseries{PID control, IR sensors, and IMU-\/based navigation}}. The goal is to complete time trials efficiently while demonstrating robustness in design and implementation.\hypertarget{md_index_autotoc_md2}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md_index_autotoc_md2}
+
+\begin{DoxyItemize}
+\item {\bfseries{Motor Control}}\+: PID-\/based velocity control for left and right motors.
+\item {\bfseries{IR Sensor Navigation}}\+: Line-\/following algorithm to track the predefined course.
+\item {\bfseries{IMU-\/\+Assisted Navigation}}\+: Heading control for precise turns and orientation adjustments.
+\item {\bfseries{Finite-\/\+State Machine (FSM)}}\+: Task-\/based execution for structured control flow.
+\item {\bfseries{Multitasking Framework}}\+: Implemented using {\ttfamily cotask.\+py} and {\ttfamily task\+\_\+share.\+py} for real-\/time control.
+\end{DoxyItemize}\hypertarget{md_index_autotoc_md3}{}\doxysection{\texorpdfstring{System Architecture}{System Architecture}}\label{md_index_autotoc_md3}
+The system is designed using {\bfseries{task-\/based multitasking}}, where each component operates as a separate task\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Task 1}}\+: Handles user inputs and data logging.
+\item {\bfseries{Task 2 \& 3}}\+: Left and right motor controllers using PID velocity control.
+\item {\bfseries{Task 4}}\+: Path-\/following logic using IR and IMU sensors.
+\item {\bfseries{Task 5}} (Optional)\+: Emergency stop using bumper sensors.
+\end{DoxyEnumerate}\hypertarget{md_index_autotoc_md4}{}\doxysection{\texorpdfstring{Code Structure}{Code Structure}}\label{md_index_autotoc_md4}
+The project\textquotesingle{}s Python code is organized as follows\+: 

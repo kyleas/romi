@@ -1,0 +1,174 @@
+\doxysection{romi.\+py}
+\hypertarget{romi_8py_source}{}\label{romi_8py_source}\index{lib2/romi.py@{lib2/romi.py}}
+\mbox{\hyperlink{romi_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00001}00001\ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00002}00002\ \textcolor{stringliteral}{@file\ romi.py}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00003}00003\ \textcolor{stringliteral}{@brief\ Provides\ high-\/level\ kinematic\ calculations\ for\ the\ ROMI\ robot.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00004}00004\ \textcolor{stringliteral}{@details}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ The\ Romi\ class\ calculates\ the\ robot's\ linear\ and\ angular\ motion\ (x,\ y,\ heading)\ }}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ using\ left/right\ wheel\ velocities.\ It\ contains\ methods\ to\ calculate\ velocity,\ }}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ reset\ distances,\ and\ handle\ heading\ offsets.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00008}00008\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00010}00010\ \textcolor{keyword}{import}\ math}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00011}00011\ \textcolor{keyword}{from}\ time\ \textcolor{keyword}{import}\ ticks\_ms,\ ticks\_diff}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00013}00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_romi}{Romi}}:}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00014}00014\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00015}\mbox{\hyperlink{class_romi}{00015}}\ \textcolor{stringliteral}{\ \ \ \ @class\ Romi}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ @brief\ Encapsulates\ the\ ROMI\ chassis\ kinematics\ and\ state.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ \ \ Stores\ parameters\ like\ wheel\ radius\ and\ axle\ width.\ Keeps\ track\ of\ position,}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ heading,\ and\ distance\ traveled,\ updating\ them\ based\ on\ current\ wheel\ velocities.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructs\ the\ Romi\ object\ with\ default\ geometry\ and\ initial\ states.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ self.width\ =\ 0.141\ \ \ \ \ \ \ \textcolor{comment}{\#\ Distance\ between\ wheels\ (m)}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ self.r\_w\ =\ 0.036\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Wheel\ radius\ (m)}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ self.left\_velocity\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ self.right\_velocity\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ self.left\_position\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ self.right\_position\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ self.angle\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ self.linear\_distance\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ self.xpos\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ self.ypos\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{def\ }zero\_heading(self,\ heading):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00040}00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Sets\ an\ offset\ for\ the\ IMU\ heading\ so\ the\ robot\ can\ be\ oriented\ to\ 0.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ heading\ The\ current\ heading\ reading\ from\ the\ IMU,\ used\ as\ the\ new\ 0\ reference.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00042}00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ self.heading\_offset\ =\ heading}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Heading\ offset:\ \{self.heading\_offset\}"{}})}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{def\ }update\_time(self):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Records\ the\ current\ time\ for\ subsequent\ motion\ calculations.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ ticks\_ms()}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{def\ }update(self,\ left\_velocity,\ right\_velocity,\ heading):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Updates\ the\ robot's\ estimated\ position\ and\ heading.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00055}00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Calculates\ linear\ velocity\ and\ angular\ velocity\ from\ the\ left/right\ velocities.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00057}00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Then\ integrates\ over\ the\ elapsed\ time\ to\ update\ x/y\ coordinates,\ heading,\ }}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00058}00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ and\ total\ linear\ distance.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ left\_velocity\ \ Left\ wheel\ velocity\ in\ [RPM]\ (or\ similar).}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ right\_velocity\ Right\ wheel\ velocity\ in\ [RPM].}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ heading\ \ \ \ \ \ \ \ The\ current\ absolute\ heading\ (deg),\ typically\ from\ an\ IMU.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ self.left\_velocity\ =\ left\_velocity}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ self.right\_velocity\ =\ right\_velocity}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ linear\_velocity\ =\ self.calc\_linear\_velocity(left\_velocity,\ right\_velocity)}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ angular\_velocity\ =\ self.calc\_angular\_velocity(left\_velocity,\ right\_velocity)}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ current\_time\ =\ ticks\_ms()}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ dt\ =\ ticks\_diff(current\_time,\ self.prev\_time)\ /\ 1000}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ current\_time}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ self.angle\ =\ heading\ -\/\ self.heading\_offset}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ x\_vel\ =\ linear\_velocity\ *\ math.cos(self.angle)}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ y\_vel\ =\ linear\_velocity\ *\ math.sin(self.angle)}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ self.xpos\ +=\ x\_vel\ *\ dt}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ self.ypos\ +=\ y\_vel\ *\ dt}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ prev\_lin\_distance\ =\ self.linear\_distance}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ self.linear\_distance\ +=\ (linear\_velocity\ *\ dt)}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ there's\ an\ unreasonable\ jump,\ revert\ it\ (example\ logic)}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ abs(self.linear\_distance\ -\/\ prev\_lin\_distance)\ >\ 1:}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Reset\ lin\ distance"{}})}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ self.linear\_distance\ =\ prev\_lin\_distance}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{def\ }update\_angle(self,\ heading):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00092}00092\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Updates\ only\ the\ angle,\ skipping\ linear\ distance\ computations.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00093}00093\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ heading\ The\ current\ absolute\ heading\ from\ the\ IMU.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00094}00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ self.angle\ =\ heading\ -\/\ self.heading\_offset}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00097}00097\ \ \ \ \ \textcolor{keyword}{def\ }calc\_des\_wheel\_vel(self,\ linear,\ angular,\ MAX\_VEL):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00099}00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Converts\ desired\ chassis\ linear/angular\ speeds\ into\ left/right\ wheel\ RPMs.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00100}00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00101}00101\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Also\ checks\ against\ a\ max\ velocity\ limit\ (if\ you\ decide\ to\ implement\ it).}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00102}00102\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00103}00103\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ linear\ \ Desired\ linear\ velocity\ in\ m/s.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00104}00104\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ angular\ Desired\ angular\ velocity\ in\ rad/s.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00105}00105\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ MAX\_VEL\ A\ shared\ variable\ holding\ the\ maximum\ allowed\ wheel\ RPM.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00106}00106\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ (left\_rpm,\ right\_rpm)\ as\ a\ tuple\ of\ floats\ in\ RPM.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00107}00107\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ max\_vel\ =\ MAX\_VEL.get()}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Convert\ linear\ and\ angular\ velocities\ to\ wheel\ RPM}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ left\ =\ (linear\ /\ self.r\_w\ -\/\ angular\ *\ self.width\ /\ 2\ /\ self.r\_w)\ *\ 9.5492968}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ right\ =\ (linear\ /\ self.r\_w\ +\ angular\ *\ self.width\ /\ 2\ /\ self.r\_w)\ *\ 9.5492968}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}linear:\ \{linear/self.r\_w\},\ angular:\ \{angular\ *\ self.width\ /\ 2\ /\ self.r\_w\}"{}})}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Example\ limit\ check\ (commented\ out\ by\ default)}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ left\ =\ max(min(left,\ max\_vel),\ -\/max\_vel)}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ right\ =\ max(min(right,\ max\_vel),\ -\/max\_vel)}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (left,\ right)}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00121}00121\ \ \ \ \ \textcolor{keyword}{def\ }calc\_linear\_velocity(self,\ left,\ right):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00123}00123\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Computes\ the\ robot's\ linear\ velocity\ from\ wheel\ RPMs.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00124}00124\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ left\ \ Left\ wheel\ velocity\ in\ RPM.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00125}00125\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ right\ Right\ wheel\ velocity\ in\ RPM.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00126}00126\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Robot\ linear\ velocity\ in\ m/s.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00127}00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (left\ +\ right)\ *\ self.r\_w\ /\ 2\ /\ 9.5492968}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00130}00130\ \ \ \ \ \textcolor{keyword}{def\ }calc\_angular\_velocity(self,\ left,\ right):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00132}00132\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Computes\ the\ robot's\ angular\ velocity\ from\ wheel\ RPMs.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00133}00133\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ left\ \ Left\ wheel\ velocity\ in\ RPM.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00134}00134\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ right\ Right\ wheel\ velocity\ in\ RPM.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00135}00135\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Robot\ angular\ velocity\ in\ rad/s.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00136}00136\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (right\ -\/\ left)\ /\ 9.5492968\ /\ self.width\ *\ self.r\_w}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00139}00139\ \ \ \ \ \textcolor{keyword}{def\ }get\_distance(self):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00141}00141\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ the\ integrated\ linear\ distance\ traveled.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00142}00142\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ total\ linear\ distance\ in\ meters\ since\ last\ reset.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00143}00143\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.linear\_distance}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00146}00146\ \ \ \ \ \textcolor{keyword}{def\ }zero\_distance(self):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00148}00148\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Resets\ the\ integrated\ linear\ distance\ to\ 0.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00149}00149\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details\ }}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00150}00150\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Also\ updates\ prev\_time\ to\ current\ time,\ ensuring\ subsequent\ distance\ calculations}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00151}00151\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ start\ from\ this\ moment.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00152}00152\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ self.linear\_distance\ =\ 0}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ ticks\_ms()}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00156}00156\ \ \ \ \ \textcolor{keyword}{def\ }get\_angle(self):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00158}00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ the\ current\ heading\ angle\ offset\ by\ heading\_offset.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00159}00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Current\ heading\ in\ degrees\ (approx).}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00160}00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.angle}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00163}00163\ \ \ \ \ \textcolor{keyword}{def\ }set\_distance(self,\ distance):}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00165}00165\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Forces\ the\ integrated\ linear\ distance\ to\ a\ specific\ value.}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00166}00166\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ distance\ The\ new\ distance\ to\ set\ (meters).}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00167}00167\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{romi_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ self.linear\_distance\ =\ distance}
+
+\end{DoxyCode}

@@ -1,0 +1,89 @@
+\doxysection{bump.\+py}
+\hypertarget{bump_8py_source}{}\label{bump_8py_source}\index{lib2/bump.py@{lib2/bump.py}}
+\mbox{\hyperlink{bump_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00001}00001\ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00002}00002\ \textcolor{stringliteral}{@file\ bump.py}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00003}00003\ \textcolor{stringliteral}{Provides\ a\ Bump\ class\ that\ reads\ six\ bumper\ (tactile\ switch)\ pins\ on\ the}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00004}00004\ \textcolor{stringliteral}{ROMI\ chassis.\ It\ can\ update\ the\ state\ of\ each\ pin\ and\ detect\ if\ any\ bumper\ }}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00005}00005\ \textcolor{stringliteral}{is\ pressed\ (active\ low).}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00006}00006\ \textcolor{stringliteral}{@brief\ Bumper\ switch\ interface\ for\ the\ ROMI\ robot.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00007}00007\ \textcolor{stringliteral}{@details}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ Provides\ a\ Bump\ class\ that\ reads\ six\ bumper\ (tactile\ switch)\ pins\ on\ the}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00009}00009\ \textcolor{stringliteral}{\ \ ROMI\ chassis.\ It\ can\ update\ the\ state\ of\ each\ pin\ and\ detect\ if\ any\ bumper\ }}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00010}00010\ \textcolor{stringliteral}{\ \ is\ pressed\ (active\ low).}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00011}00011\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00013}00013\ \textcolor{keyword}{import}\ pyb}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00014}00014\ \textcolor{keyword}{from}\ pyb\ \textcolor{keyword}{import}\ Pin}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00015}00015\ \textcolor{keyword}{from}\ array\ \textcolor{keyword}{import}\ array}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00016}00016\ \textcolor{keyword}{from}\ \mbox{\hyperlink{namespacelib2_1_1pin__definitions}{lib2.pin\_definitions}}\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00018}00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bump}{Bump}}:}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00019}00019\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00020}\mbox{\hyperlink{class_bump}{00020}}\ \textcolor{stringliteral}{\ \ \ \ @class\ Bump}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ @brief\ Encapsulates\ ROMI\ bumper\ switch\ reading.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00022}00022\ \textcolor{stringliteral}{\ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ The\ ROMI\ can\ have\ up\ to\ six\ bump/tactile\ switches.\ Each\ is\ read\ as\ }}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ a\ digital\ input\ with\ pull-\/up,\ returning\ 0\ if\ pressed,\ 1\ if\ released.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ BUMP0,\ BUMP1,\ BUMP2,\ BUMP3,\ BUMP4,\ BUMP5):}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructs\ a\ Bump\ object\ with\ pin\ references\ for\ six\ switches.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00030}00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ BUMP0\ Pin\ identifier\ for\ bumper\ 0.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ BUMP1\ Pin\ identifier\ for\ bumper\ 1.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ BUMP2\ Pin\ identifier\ for\ bumper\ 2.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00033}00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ BUMP3\ Pin\ identifier\ for\ bumper\ 3.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00034}00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ BUMP4\ Pin\ identifier\ for\ bumper\ 4.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00035}00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ BUMP5\ Pin\ identifier\ for\ bumper\ 5.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00036}00036\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ self.BUMP0\_pin\ =\ Pin(BUMP0,\ Pin.IN,\ Pin.PULL\_UP)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ self.BUMP1\_pin\ =\ Pin(BUMP1,\ Pin.IN,\ Pin.PULL\_UP)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ self.BUMP2\_pin\ =\ Pin(BUMP2,\ Pin.IN,\ Pin.PULL\_UP)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ self.BUMP3\_pin\ =\ Pin(BUMP3,\ Pin.IN,\ Pin.PULL\_UP)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ self.BUMP4\_pin\ =\ Pin(BUMP4,\ Pin.IN,\ Pin.PULL\_UP)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ self.BUMP5\_pin\ =\ Pin(BUMP5,\ Pin.IN,\ Pin.PULL\_UP)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ self.BUMP\_Array\ =\ array(\textcolor{stringliteral}{'i'},\ [0,\ 0,\ 0,\ 0,\ 0,\ 0])}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{def\ }update(self):}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Updates\ the\ bumper\ readings\ (populates\ BUMP\_Array).}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00050}00050\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ The\ array\ is\ stored\ in\ an\ order\ that\ correlates\ with\ the\ physical\ }}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ layout.\ A\ 0\ value\ indicates\ pressed\ (pin\ driven\ low).}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ self.BUMP\_Array[5]\ =\ self.BUMP0\_pin.value()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ self.BUMP\_Array[4]\ =\ self.BUMP1\_pin.value()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ self.BUMP\_Array[3]\ =\ self.BUMP2\_pin.value()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ self.BUMP\_Array[2]\ =\ self.BUMP3\_pin.value()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ self.BUMP\_Array[1]\ =\ self.BUMP4\_pin.value()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ self.BUMP\_Array[0]\ =\ self.BUMP5\_pin.value()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{def\ }get(self):}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ True\ if\ any\ bumper\ is\ pressed,\ False\ otherwise.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Iterates\ through\ BUMP\_Array\ looking\ for\ a\ 0\ (pressed).}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00065}00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ any\ switch\ is\ pressed,\ False\ if\ none\ are\ pressed.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ val\ \textcolor{keywordflow}{in}\ self.BUMP\_Array:}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ val\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00073}00073\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00074}00074\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00075}00075\ \textcolor{stringliteral}{\ \ \ \ @brief\ Test\ code\ for\ the\ Bump\ class.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00076}00076\ \textcolor{stringliteral}{\ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00077}00077\ \textcolor{stringliteral}{\ \ \ \ \ \ Continuously\ reads\ bumper\ pins\ and\ prints\ the\ result\ every\ second.}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00079}00079\ \ \ \ \ bump\ =\ \mbox{\hyperlink{class_bump}{Bump}}(bump0,\ bump1,\ bump2,\ bump3,\ bump4,\ bump5)}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ bump.update()}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ print(bump.get())}
+\DoxyCodeLine{\Hypertarget{bump_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ pyb.delay(1000)}
+
+\end{DoxyCode}

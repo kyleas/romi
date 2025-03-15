@@ -1,232 +1,317 @@
+"""!
+@file imu.py
+@brief Provides an interface to the BNO055 IMU for orientation and calibration.
+@details
+  Communicates with the BNO055 sensor over I2C to read euler angles, gyroscope,
+  magnetometer data, and handle calibration. Can store/read calibration data 
+  from a binary file to speed up repeated usage.
+"""
+
 import pyb
 from pyb import Pin, Timer, ADC, I2C
 from array import array
-from lib2.pin_definitions import * 
+from lib2.pin_definitions import *
 from time import sleep_ms
 import struct
 import os
 import time
 
 class IMU:
-  """
-  A motor driver interface encapsulated in a Pytohn class. Works with
-  motor drivers using separate PWM and direction inputs such as the DRV8838
-  drivers present on the ROMI chassis from Polulu.
-  """
-  
-  # Operative Mode Variables
-  REG_OPR_MODE = 0x3D     # Register Address
-  # Operating Mode Values: page 21
-  CONFIG = 0x00           # CONFIG MODE
-  IMU = 0x08              # Fusion Mode: IMU
-  COMPASS = 0x09          # Fusion Mode: COMPASS
-  M4G = 0x0A              # Fusion Mode: M4G
-  NDOF_FMC_OFF = 0x0B     # Fusion Mode: NDOF_FMC_OFF
-  NDOF = 0x0C             # Fusion Mode: NDOF
-
-  # Calibration Variable
-  REG_CALIB_STAT = 0x35   # page 67
-  REG_CAL_DATA_START = 0x55  # Start of calibration coefficient registers
-
-  # Euler Variables
-  REG_EULER = 0x1A        # Euler begins at 1A ends at 1F
-
-  # Gyro Variables
-  REG_GYRO = 0x14
-
-  # Magnetometer Variables
-  REG_MAG = 0x0E
-  
-  def __init__(self, id=2, addr=0x28):
+    """!
+    @class IMU
+    @brief A class for interacting with a BNO055 IMU over I2C.
+    @details 
+      Supports reading euler angles, gyro, magnetometer, and storing/retrieving 
+      calibration data in a local file named 'calibrations.bin'.
     """
-    Initializes an IMU object
-    """    
-    self.IMU = I2C(id, I2C.CONTROLLER)
-    self.addr = addr
-    self.accel_offset = [0, 0, 0]
-    self.mag_offset = [0, 0, 0]
-    self.gyr_offset = [0, 0, 0]
-    self.accel_rad = 0
-    self.mag_rad = 0
-    self.mode = IMU.NDOF  # Default mode is NDOF
-    self.file = True
 
-  def startup(self):
-    status = False
-    if self.file == True and IMU.file_exists('calibrations.bin'):
-      print("Calibration file found.")
-      # Check if the binary calibration file exists
-      status = self.write_calibration_coeff()
+    # Operating mode register and possible modes
+    REG_OPR_MODE = 0x3D
+    CONFIG    = 0x00
+    IMU       = 0x08
+    COMPASS   = 0x09
+    M4G       = 0x0A
+    NDOF_FMC_OFF = 0x0B
+    NDOF      = 0x0C
 
-    if self.file == True and status == False:
-      # First run and no valid calibration found
-      # Set to CONFIG mode to calibrate 
-      self.set_mode(IMU.NDOF)
+    # Calibration register addresses
+    REG_CALIB_STAT = 0x35
+    REG_CAL_DATA_START = 0x55  # Start of calibration data registers
 
-    self.file = False
-    
-    if status == False:
-      print("Calibration file not legit/doesn't exist. Continue calibration...")
-      # Wait for the calibration to complete
-      if self.retrieve_calibration_coeff() == -1:
-        return False 
-      print("Calibration completed.")
+    # Euler angle register start
+    REG_EULER = 0x1A
 
-    print("Startup complete.")
-    return True
-  
-  def file_exists(filename):
-    try:
-      # Attempt to open the file to check if it exists
-      with open(filename, 'rb') as f:
-        print("file present")
+    # Gyroscope register start
+    REG_GYRO = 0x14
+
+    # Magnetometer register start
+    REG_MAG = 0x0E
+
+    def __init__(self, id=2, addr=0x28):
+        """!
+        @brief Initializes the IMU object with I2C and default parameters.
+        @param id I2C bus ID (on STM32, commonly 1 or 2).
+        @param addr I2C address of the BNO055 (default 0x28).
+        """
+        self.IMU = I2C(id, I2C.CONTROLLER)
+        self.addr = addr
+        self.accel_offset = [0, 0, 0]
+        self.mag_offset = [0, 0, 0]
+        self.gyr_offset = [0, 0, 0]
+        self.accel_rad = 0
+        self.mag_rad = 0
+        self.mode = IMU.NDOF
+        self.file = True
+
+    def startup(self):
+        """!
+        @brief Prepares the IMU with calibration data if present, else enters calibration mode.
+        @details
+          - If 'calibrations.bin' exists, attempts to write calibration coefficients to IMU.
+          - If that fails, instructs user to calibrate manually.
+          - Once calibration is done, sets operating mode to NDOF.
+        @return True if startup completed successfully, False otherwise.
+        """
+        status = False
+        if self.file and IMU.file_exists('calibrations.bin'):
+            print("Calibration file found.")
+            status = self.write_calibration_coeff()
+
+        if self.file and not status:
+            self.set_mode(IMU.NDOF)
+
+        self.file = False
+
+        if not status:
+            print("Calibration file not legit/doesn't exist. Continue calibration...")
+            if self.retrieve_calibration_coeff() == -1:
+                return False
+            print("Calibration completed.")
+
+        print("Startup complete.")
         return True
-    except OSError:
-      # If an error occurs, the file does not exist
-      print("file not present")
-      return False
 
-  def read_file(filename):
-    try:
-        with open(filename, 'rb') as f:  # Open the file in binary read mode
-            data = f.read()  # Read the entire binary content of the file
-        print("File content (in bytes):", data)  # Print the content in byte format
-        return data  # Return the binary data
-    except OSError:
-        print(f"Error: The file {filename} does not exist or cannot be accessed.")
-        return None
+    @staticmethod
+    def file_exists(filename):
+        """!
+        @brief Checks if the specified file exists.
+        @param filename Name of the file to check.
+        @return True if file exists, False otherwise.
+        """
+        try:
+            with open(filename, 'rb') as f:
+                print("file present")
+                return True
+        except OSError:
+            print("file not present")
+            return False
 
-  def set_mode(self, mode):
-    # sets IMU to mode specified in first parameter
-    self.mode = mode
-    self.IMU.mem_write(mode, self.addr, IMU.REG_OPR_MODE)
-    sleep_ms(100)
+    @staticmethod
+    def read_file(filename):
+        """!
+        @brief Reads binary data from a file and returns it.
+        @param filename The file to read from.
+        @return The file content in bytes or None if error.
+        """
+        try:
+            with open(filename, 'rb') as f:
+                data = f.read()
+            print("File content (in bytes):", data)
+            return data
+        except OSError:
+            print(f"Error: The file {filename} does not exist or cannot be accessed.")
+            return None
 
-  def calibration_status(self):
-    # page 67
-    buf = bytearray((0 for n in range(1)))
-    self.IMU.mem_read(buf, self.addr, IMU.REG_CALIB_STAT)
-    bits = [((b >> i) & 1) for b in buf for i in range(7, -1, -1)]
-    print(bits)
- 
-    compare = bytearray((0 for n in range(1)))
-    compare[0] = 0xff
-    if (buf == compare):
-      return 1
-    return 0
+    def set_mode(self, mode):
+        """!
+        @brief Changes the operating mode of the BNO055.
+        @param mode One of the mode constants (e.g. IMU.NDOF, IMU.CONFIG, etc.).
+        """
+        self.mode = mode
+        self.IMU.mem_write(mode, self.addr, IMU.REG_OPR_MODE)
+        sleep_ms(100)
 
-  def retrieve_calibration_coeff(self):
-    # Ensure calibration status is 1 before proceeding
-    if self.calibration_status() == 0:
-      print("Calibration not completed. Exiting.")
-      return -1
-    self.set_mode(IMU.CONFIG)
-    offset = bytearray(22)  # 22 bytes expected for calibration data
-    self.IMU.mem_read(offset, self.addr, IMU.REG_CAL_DATA_START)
-    try:
-      # Unpack the data into individual values for accel, mag, and gyr offsets
-      accel_x, accel_y, accel_z, mag_x, mag_y, mag_z, gyr_x, gyr_y, gyr_z, accel_rad, mag_rad = struct.unpack("<hhhhhhhhhhh", offset)
-      # Store the offsets in the instance
-      self.accel_offset = [accel_x, accel_y, accel_z]
-      self.mag_offset = [mag_x, mag_y, mag_z]
-      self.gyr_offset = [gyr_x, gyr_y, gyr_z]
-      self.accel_rad = accel_rad
-      self.mag_rad = mag_rad
-      # Calibration data as a tuple needed to write to file
-      calibration_data = (accel_x, accel_y, accel_z, mag_x, mag_y, mag_z, gyr_x, gyr_y, gyr_z, accel_rad, mag_rad)
-      with open('calibrations.bin', 'wb') as f:  # Open in binary write mode
-        f.write(struct.pack("<hhhhhhhhhhh", *calibration_data))
-        print("Calibration data written to binary file.")
-      self.set_mode(self.mode)
-    except struct.error as e:
-      print(f"Error unpacking calibration data: {e}")
-    except IOError as e:
-      print(f"Error writing to binary file: {e}")
+    def calibration_status(self):
+        """!
+        @brief Reads the calibration status register.
+        @details 
+          If it returns 0xFF, it might indicate an error. 
+          This function also prints bit-level data for debugging.
+        @return 1 if calibration register is 0xFF, else 0.
+        """
+        buf = bytearray(1)
+        self.IMU.mem_read(buf, self.addr, IMU.REG_CALIB_STAT)
+        bits = [((b >> i) & 1) for b in buf for i in range(7, -1, -1)]
+        print(bits)
 
-    # For testing read back from file
-    try:
-      with open('calibrations.bin', 'rb') as f:
-        read_data = f.read(22)  # 22 bytes (because we're storing 10 2-byte integers)
-        unpacked_data = struct.unpack("<hhhhhhhhhhh", read_data)
-        print(f"Data read from binary file: {unpacked_data}")
-    except IOError as e:
-      print(f"Error reading from binary file: {e}")
-  
-  def write_calibration_coeff(self, filename='calibrations.bin'):
-    success = False
-    self.set_mode(IMU.CONFIG)
-    try:
-      with open(filename, 'rb') as f:  # Open the file in binary read mode
-        data = f.read()  # Read the entire binary content of the file
-      print("File content (in bytes):", data)  # Print the content in byte format
-      if len(data) != 22:
-        print("Error: The calibration data must be 22 bytes long.")
-        return False
-      decoded_data = struct.unpack("<hhhhhhhhhhh", data)
-      print("Decoded Data:", decoded_data)
-      self.IMU.mem_write(data, self.addr, IMU.REG_CAL_DATA_START)
-      success = True
-    except OSError:
-      print(f"Error: The file {filename} does not exist or cannot be accessed.")
-      raise
-    except struct.error as e:
-      print(f"Error unpacking data: {e}")
-      raise
-    finally:
-      self.set_mode(self.mode)
-      return success
+        compare = bytearray(1)
+        compare[0] = 0xff
+        if buf == compare:
+            return 1
+        return 0
 
-  def read_euler(self):
-    euler = bytearray((0 for n in range(6)))
-    self.IMU.mem_read(euler, self.addr, IMU.REG_EULER)
-    eul_heading, eul_roll, eul_pitch = struct.unpack("<hhh", euler) 
-    eul_heading /= 16
-    eul_roll /= 16
-    eul_pitch /= 16
-    return (eul_heading, eul_pitch, eul_roll)
+    def retrieve_calibration_coeff(self):
+        """!
+        @brief Reads calibration coefficients from the IMU and saves them to 'calibrations.bin'.
+        @details 
+          The IMU must be fully calibrated prior to calling this function 
+          (checks calibration_status first). 
+          Writes data to local file and verifies by reading back.
+        @return -1 if calibration incomplete, else 0 or None.
+        """
+        if self.calibration_status() == 0:
+            print("Calibration not completed. Exiting.")
+            return -1
 
-  def read_euler_heading(self):
-    euler_x, euler_y, euler_z = self.read_euler()
-    return (euler_x)
-  
-  def read_angular_velocity(self):
-    gyro = bytearray((0 for n in range(6)))
-    self.IMU.mem_read(gyro, self.addr, IMU.REG_GYRO)
-    gyro_x, gyro_y, gyro_z = struct.unpack("<hhh", gyro)
-    return (gyro_x, gyro_y, gyro_z)
+        self.set_mode(IMU.CONFIG)
+        offset = bytearray(22)
+        self.IMU.mem_read(offset, self.addr, IMU.REG_CAL_DATA_START)
+        try:
+            accel_x, accel_y, accel_z, \
+            mag_x, mag_y, mag_z, \
+            gyr_x, gyr_y, gyr_z, \
+            accel_rad, mag_rad = struct.unpack("<hhhhhhhhhhh", offset)
 
-  def read_angular_yaw_rate(self):
-    roll_rate, pitch_rate, yaw_rate = self.read_angular_velocity()
-    return yaw_rate
-  
-  def read_mag(self): 
-    mag = bytearray((0 for n in range(6)))
-    self.IMU.mem_read(mag, self.addr, IMU.REG_MAG)
-    mag_x, mag_y, mag_z = struct.unpack("<hhh", mag)
-    return (mag_x, mag_y, mag_z)
-  
-  def read_mag_x(self):
-    mag_x, mag_y, mag_z = self.read_mag()
-    return mag_x
+            self.accel_offset = [accel_x, accel_y, accel_z]
+            self.mag_offset = [mag_x, mag_y, mag_z]
+            self.gyr_offset = [gyr_x, gyr_y, gyr_z]
+            self.accel_rad = accel_rad
+            self.mag_rad = mag_rad
+
+            calibration_data = (accel_x, accel_y, accel_z, mag_x, mag_y, mag_z,
+                                gyr_x, gyr_y, gyr_z, accel_rad, mag_rad)
+
+            with open('calibrations.bin', 'wb') as f:
+                f.write(struct.pack("<hhhhhhhhhhh", *calibration_data))
+                print("Calibration data written to binary file.")
+            
+            self.set_mode(self.mode)
+        except struct.error as e:
+            print(f"Error unpacking calibration data: {e}")
+        except IOError as e:
+            print(f"Error writing to binary file: {e}")
+
+        try:
+            with open('calibrations.bin', 'rb') as f:
+                read_data = f.read(22)
+                unpacked_data = struct.unpack("<hhhhhhhhhhh", read_data)
+                print(f"Data read from binary file: {unpacked_data}")
+        except IOError as e:
+            print(f"Error reading from binary file: {e}")
+
+    def write_calibration_coeff(self, filename='calibrations.bin'):
+        """!
+        @brief Writes calibration coefficients from a local file to the IMU.
+        @details 
+          Sets IMU to CONFIG mode, reads 'calibrations.bin', and writes 
+          those bytes directly to the sensor's calibration registers. 
+          Then restores the previous mode.
+        @param filename Name of the calibration file (default 'calibrations.bin').
+        @return True if successful, False otherwise.
+        """
+        success = False
+        self.set_mode(IMU.CONFIG)
+        try:
+            with open(filename, 'rb') as f:
+                data = f.read()
+            print("File content (in bytes):", data)
+            if len(data) != 22:
+                print("Error: The calibration data must be 22 bytes long.")
+                return False
+            decoded_data = struct.unpack("<hhhhhhhhhhh", data)
+            print("Decoded Data:", decoded_data)
+            self.IMU.mem_write(data, self.addr, IMU.REG_CAL_DATA_START)
+            success = True
+        except OSError:
+            print(f"Error: The file {filename} does not exist or cannot be accessed.")
+            raise
+        except struct.error as e:
+            print(f"Error unpacking data: {e}")
+            raise
+        finally:
+            self.set_mode(self.mode)
+            return success
+
+    def read_euler(self):
+        """!
+        @brief Reads Euler angles (heading, pitch, roll) from the IMU.
+        @details 
+          Each angle is scaled by 1/16. heading is eul_heading, pitch is eul_pitch, roll is eul_roll.
+        @return (heading, pitch, roll) in degrees.
+        """
+        euler = bytearray(6)
+        self.IMU.mem_read(euler, self.addr, IMU.REG_EULER)
+        eul_heading, eul_roll, eul_pitch = struct.unpack("<hhh", euler)
+        eul_heading /= 16
+        eul_roll /= 16
+        eul_pitch /= 16
+        return (eul_heading, eul_pitch, eul_roll)
+
+    def read_euler_heading(self):
+        """!
+        @brief Convenience function to get just the heading (X Euler angle).
+        @return Heading in degrees.
+        """
+        euler_x, euler_y, euler_z = self.read_euler()
+        return euler_x
+
+    def read_angular_velocity(self):
+        """!
+        @brief Reads gyroscope data (roll rate, pitch rate, yaw rate).
+        @return (gyro_x, gyro_y, gyro_z) as signed 16-bit integers.
+        """
+        gyro = bytearray(6)
+        self.IMU.mem_read(gyro, self.addr, IMU.REG_GYRO)
+        gyro_x, gyro_y, gyro_z = struct.unpack("<hhh", gyro)
+        return (gyro_x, gyro_y, gyro_z)
+
+    def read_angular_yaw_rate(self):
+        """!
+        @brief Returns only the yaw rate from the gyro data.
+        @return Yaw rate in IMU units (raw).
+        """
+        roll_rate, pitch_rate, yaw_rate = self.read_angular_velocity()
+        return yaw_rate
+
+    def read_mag(self):
+        """!
+        @brief Reads raw magnetometer data (X, Y, Z).
+        @return (mag_x, mag_y, mag_z) as signed 16-bit integers.
+        """
+        mag = bytearray(6)
+        self.IMU.mem_read(mag, self.addr, IMU.REG_MAG)
+        mag_x, mag_y, mag_z = struct.unpack("<hhh", mag)
+        return (mag_x, mag_y, mag_z)
+
+    def read_mag_x(self):
+        """!
+        @brief Convenience function to get just the X-axis magnetometer reading.
+        @return X-axis magnetometer raw value.
+        """
+        mag_x, mag_y, mag_z = self.read_mag()
+        return mag_x
+
 
 if __name__ == "__main__":
-  def oldmain():
-    IMU_obj = IMU()
-    IMU_obj.set_mode(IMU.NDOF)
-    if IMU.file_exists('calibrations.bin'):
-      IMU_obj.write_calibration_coeff()
-      print("Calibration data obtained through file")
-    else:
-      print("Manually calibrate the IMU")
-      while True: 
-        yes = IMU_obj.calibration_status()
-        print(yes)
-        if yes == 1:
-          IMU_obj.retrieve_calibration_coeff()
-          print("Calibration complete and written to file")
-          break
-        sleep_ms(1000)
+    """!
+    @brief Demonstration or testing routine if imu.py is run directly.
+    """
+    def oldmain():
+        IMU_obj = IMU()
+        IMU_obj.set_mode(IMU.NDOF)
+        if IMU.file_exists('calibrations.bin'):
+            IMU_obj.write_calibration_coeff()
+            print("Calibration data obtained through file")
+        else:
+            print("Manually calibrate the IMU")
+            while True:
+                yes = IMU_obj.calibration_status()
+                print(yes)
+                if yes == 1:
+                    IMU_obj.retrieve_calibration_coeff()
+                    print("Calibration complete and written to file")
+                    break
+                sleep_ms(1000)
 
-  oldmain()
-  #IMU_obj = IMU()
-  #IMU_obj.startup()
+    oldmain()
+    # Or: IMU_obj = IMU(); IMU_obj.startup()

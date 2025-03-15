@@ -1,0 +1,1554 @@
+\doxysection{main.\+py File Reference}
+\hypertarget{main_8py}{}\label{main_8py}\index{main.py@{main.py}}
+
+
+Main execution file for the \doxylink{class_romi}{Romi} autonomous navigation project.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8py_a3898291b13bc49e1c4d3859b2071abfe}{main.\+task1\+\_\+main}} (shares)
+\begin{DoxyCompactList}\small\item\em Task which controls user inputs and data logging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_a2761433ea92d27cdf41d774ef10220fe}{main.\+task2\+\_\+left\+\_\+motor\+\_\+controller}} (shares)
+\begin{DoxyCompactList}\small\item\em Task which controls the left motor using \doxylink{class_p_i_d}{PID} velocity control. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_a7587f108dcb928de84aaf2644f8d8208}{main.\+task3\+\_\+right\+\_\+motor\+\_\+controller}} (shares)
+\begin{DoxyCompactList}\small\item\em Task which controls the right motor using \doxylink{class_p_i_d}{PID} velocity control. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_a40eddb145230fd0b6ebaa9d85a7d328c}{main.\+task4\+\_\+path\+\_\+follow}} (shares)
+\begin{DoxyCompactList}\small\item\em Task which controls path following for the \doxylink{class_romi}{Romi}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_add828372675b1c9e6565da3c26f70023}{main.\+follow\+\_\+line}} (chassis, line\+\_\+follower, cur\+\_\+left\+\_\+vel\+\_\+share, cur\+\_\+right\+\_\+vel\+\_\+share, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, max\+\_\+vel\+\_\+share)
+\begin{DoxyCompactList}\small\item\em IR-\/based line following helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_abee5a8002f0200a65242da9812fbdec0}{main.\+go\+\_\+backward}} (chassis, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, cur\+\_\+left\+\_\+vel, cur\+\_\+right\+\_\+vel, cur\+\_\+heading, distance, continue\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Moves the robot backward by a certain distance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_a9414a2b2f1daed28221d353cb095a7c0}{main.\+follow\+\_\+heading}} (chassis, imu\+\_\+obj, PID\+\_\+\+Omega, chassis\+\_\+vel\+\_\+share, cur\+\_\+left\+\_\+vel\+\_\+share, cur\+\_\+right\+\_\+vel\+\_\+share, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, max\+\_\+vel\+\_\+share, target\+\_\+heading)
+\begin{DoxyCompactList}\small\item\em Maintains a specific heading using \doxylink{class_i_m_u}{IMU} feedback and \doxylink{class_p_i_d}{PID} control. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_aef812866eef08bec2fae312b26c55696}{main.\+follow\+\_\+turn}} (chassis, imu\+\_\+obj, PID\+\_\+\+Omega, left\+\_\+vel\+\_\+share, right\+\_\+vel\+\_\+share, max\+\_\+vel\+\_\+share, turn\+\_\+angle, continue\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Implements an in-\/place turn to a specific heading. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8py_aa2d15d40756fca616210fcfd4d290b17}{main.\+task5\+\_\+bumper}} ()
+\begin{DoxyCompactList}\small\item\em Simple bumper task to demonstrate emergency stop or exit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8py_a0456cb15cb03d0782a60ebea1c6e6655}{main.\+share\+\_\+motor\+\_\+controller\+\_\+period}}
+\item 
+\mbox{\hyperlink{main_8py_a4b3538bf858b55ad25f6aa62bc0a59aa}{main.\+share\+\_\+left\+\_\+effort}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Effort"{})
+\item 
+\mbox{\hyperlink{main_8py_ad083741762dd7eca5deef385687f6e2e}{main.\+share\+\_\+left\+\_\+run\+\_\+dur}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Run\+\_\+\+Dur"{})
+\item 
+\mbox{\hyperlink{main_8py_a75aff43a1280bd518cb4cfc2b3990181}{main.\+share\+\_\+right\+\_\+effort}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Effort"{})
+\item 
+\mbox{\hyperlink{main_8py_ab11938f316cca0a507bc9652a1421ce2}{main.\+share\+\_\+right\+\_\+run\+\_\+dur}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Run\+\_\+\+Dur"{})
+\item 
+int \mbox{\hyperlink{main_8py_a6e2a6db2039ceb5e06ab4c5c4c9c7905}{main.\+q\+\_\+len}} = 500
+\item 
+\mbox{\hyperlink{main_8py_a0e7bff739a6d43426790064d7604e67d}{main.\+queue\+\_\+left\+\_\+position}}
+\item 
+\mbox{\hyperlink{main_8py_ac132acf5ce2695046aab857080b66583}{main.\+queue\+\_\+left\+\_\+velocity}}
+\item 
+\mbox{\hyperlink{main_8py_a2346a11ae4ce661ea9831ecf2448a953}{main.\+queue\+\_\+right\+\_\+position}}
+\item 
+\mbox{\hyperlink{main_8py_ada0b9312c38b796722d0c99246ce7ab5}{main.\+queue\+\_\+right\+\_\+velocity}}
+\item 
+\mbox{\hyperlink{main_8py_a01cd60f30f626766e9e8b21e509ce05c}{main.\+share\+\_\+max\+\_\+vel}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Max\+\_\+\+Vel"{})
+\item 
+\mbox{\hyperlink{main_8py_af7bc4ff58722c6affeee262012fcf55c}{main.\+share\+\_\+max\+\_\+eff}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Max\+\_\+\+Eff"{})
+\item 
+\mbox{\hyperlink{main_8py_aaf225447dd3b4f71c7c58cae495c7abf}{main.\+share\+\_\+right\+\_\+vel}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Vel"{})
+\item 
+\mbox{\hyperlink{main_8py_a2be8f3bce68f849361ad0518974ac5d4}{main.\+share\+\_\+left\+\_\+vel}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Vel"{})
+\item 
+\mbox{\hyperlink{main_8py_a7f5ea24393ebcd9c0dc95fe5b1566474}{main.\+share\+\_\+dir}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Dir"{})
+\item 
+\mbox{\hyperlink{main_8py_a2900c777cd73ccd2e665b2603ad46578}{main.\+share\+\_\+chassis\+\_\+vel}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Chassis\+\_\+\+Vel"{})
+\item 
+\mbox{\hyperlink{main_8py_a256212a1b054fb7db00764673da653e3}{main.\+share\+\_\+cur\+\_\+left\+\_\+vel}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Cur\+\_\+\+Left\+\_\+\+Vel"{})
+\item 
+\mbox{\hyperlink{main_8py_a08923618ea52835930772297cbca5586}{main.\+share\+\_\+cur\+\_\+right\+\_\+vel}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Cur\+\_\+\+Right\+\_\+\+Vel"{})
+\item 
+\mbox{\hyperlink{main_8py_aa47776161cc656417f2687bd51eaec13}{main.\+share\+\_\+wait}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Wait"{})
+\item 
+\mbox{\hyperlink{main_8py_abe9060a06cf51d73765d64230ef0c465}{main.\+share\+\_\+stop}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Stop"{})
+\item 
+\mbox{\hyperlink{main_8py_ac1648ed9341de347f664c2c000bd537c}{main.\+share\+\_\+mode}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Mode"{})
+\item 
+\mbox{\hyperlink{main_8py_ab2e61c14a17da80ea8b6de8c12d06b6c}{main.\+share\+\_\+heading}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Heading"{})
+\item 
+\mbox{\hyperlink{main_8py_a7b1b6e7dc901fe09579cd581a2f71bcf}{main.\+share\+\_\+continue}} = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Continue"{})
+\item 
+\mbox{\hyperlink{main_8py_af4b8f4290f8d32e70654f6deb864787f}{main.\+task1}}
+\item 
+\mbox{\hyperlink{main_8py_a99d189b8f9eb3784cf7d4e5c3241b562}{main.\+task2}}
+\item 
+\mbox{\hyperlink{main_8py_a120516a5d42c212c898d4616d266077a}{main.\+task3}}
+\item 
+\mbox{\hyperlink{main_8py_ac0ee3c5b5359f76becfe27534e82085f}{main.\+task4}}
+\item 
+\mbox{\hyperlink{main_8py_a11ec9e490c402876467b9fdadecc93e8}{main.\+task5}}
+\item 
+\mbox{\hyperlink{main_8py_ab40f26627816d82bd72f3a65ed8d82d5}{main.\+Motor\+\_\+\+Right}}
+\item 
+\mbox{\hyperlink{main_8py_ac444a2dc99b98409a8b2fcff38ae4b6f}{main.\+Motor\+\_\+\+Left}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main execution file for the \doxylink{class_romi}{Romi} autonomous navigation project. 
+
+
+\begin{DoxyItemize}
+\item Initializes tasks for motor control, path following, and bumper handling. ~\newline
+
+\item Starts the scheduler to manage real-\/time control of the robot. ~\newline
+
+\item Demonstrates line following, IMU-\/based heading control, and motor \doxylink{class_p_i_d}{PID} velocity control.
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+
+\begin{DoxyItemize}
+\item Toby Sagi
+\item Kyle Schumacher
+\end{DoxyItemize}
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8py_a9414a2b2f1daed28221d353cb095a7c0}\index{main.py@{main.py}!follow\_heading@{follow\_heading}}
+\index{follow\_heading@{follow\_heading}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{follow\_heading()}{follow\_heading()}}
+{\footnotesize\ttfamily \label{main_8py_a9414a2b2f1daed28221d353cb095a7c0} 
+main.\+follow\+\_\+heading (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{imu\+\_\+obj}{, }\item[{}]{PID\+\_\+\+Omega}{, }\item[{}]{chassis\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+left\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+right\+\_\+vel\+\_\+share}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{max\+\_\+vel\+\_\+share}{, }\item[{}]{target\+\_\+heading}{}\end{DoxyParamCaption})}
+
+
+
+Maintains a specific heading using \doxylink{class_i_m_u}{IMU} feedback and \doxylink{class_p_i_d}{PID} control. 
+
+
+\begin{DoxyItemize}
+\item Reads the current heading from the \doxylink{class_i_m_u}{IMU}. ~\newline
+
+\item Computes heading error and uses \doxylink{class_p_i_d}{PID} to calculate angular velocity (omega). ~\newline
+
+\item Converts chassis velocity and chassis\+\_\+omega into left/right velocities.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em chassis} & \+: \doxylink{class_romi}{Romi} chassis object. \\
+\hline
+{\em imu\+\_\+obj} & \+: \doxylink{class_i_m_u}{IMU} object for heading data. \\
+\hline
+{\em PID\+\_\+\+Omega} & \+: \doxylink{class_p_i_d}{PID} controller for angular velocity. \\
+\hline
+{\em chassis\+\_\+vel\+\_\+share} & \+: Desired forward velocity of the chassis. \\
+\hline
+{\em cur\+\_\+left\+\_\+vel\+\_\+share} & Current left motor velocity. \\
+\hline
+{\em cur\+\_\+right\+\_\+vel\+\_\+share} & Current right motor velocity. \\
+\hline
+{\em left\+\_\+vel\+\_\+share} & \+: Shared left motor velocity to be updated. \\
+\hline
+{\em right\+\_\+vel\+\_\+share} & \+: Shared right motor velocity to be updated. \\
+\hline
+{\em max\+\_\+vel\+\_\+share} & \+: Shared maximum velocity possible. \\
+\hline
+{\em target\+\_\+heading} & \+: Target heading in degrees. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00573}{573}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_vel\_share,\ target\_heading):}
+\DoxyCodeLine{00577\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00578\ \textcolor{stringliteral}{\ \ \ \ @brief\ Maintains\ a\ specific\ heading\ using\ IMU\ feedback\ and\ PID\ control.}}
+\DoxyCodeLine{00579\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00580\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Reads\ the\ current\ heading\ from\ the\ IMU.\ \ }}
+\DoxyCodeLine{00581\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Computes\ heading\ error\ and\ uses\ PID\ to\ calculate\ angular\ velocity\ (omega).\ \ }}
+\DoxyCodeLine{00582\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Converts\ chassis\ velocity\ and\ chassis\_omega\ into\ left/right\ velocities.}}
+\DoxyCodeLine{00583\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00584\ \textcolor{stringliteral}{\ \ \ \ @param\ chassis\ \ \ \ \ \ \ \ \ \ \ :\ Romi\ chassis\ object.}}
+\DoxyCodeLine{00585\ \textcolor{stringliteral}{\ \ \ \ @param\ imu\_obj\ \ \ \ \ \ \ \ \ \ \ :\ IMU\ object\ for\ heading\ data.}}
+\DoxyCodeLine{00586\ \textcolor{stringliteral}{\ \ \ \ @param\ PID\_Omega\ \ \ \ \ \ \ \ \ :\ PID\ controller\ for\ angular\ velocity.}}
+\DoxyCodeLine{00587\ \textcolor{stringliteral}{\ \ \ \ @param\ chassis\_vel\_share\ :\ Desired\ forward\ velocity\ of\ the\ chassis.}}
+\DoxyCodeLine{00588\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_left\_vel\_share:\ Current\ left\ motor\ velocity.}}
+\DoxyCodeLine{00589\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_right\_vel\_share:\ Current\ right\ motor\ velocity.}}
+\DoxyCodeLine{00590\ \textcolor{stringliteral}{\ \ \ \ @param\ left\_vel\_share\ \ \ \ :\ Shared\ left\ motor\ velocity\ to\ be\ updated.}}
+\DoxyCodeLine{00591\ \textcolor{stringliteral}{\ \ \ \ @param\ right\_vel\_share\ \ \ :\ Shared\ right\ motor\ velocity\ to\ be\ updated.}}
+\DoxyCodeLine{00592\ \textcolor{stringliteral}{\ \ \ \ @param\ max\_vel\_share\ \ \ \ \ :\ Shared\ maximum\ velocity\ possible.}}
+\DoxyCodeLine{00593\ \textcolor{stringliteral}{\ \ \ \ @param\ target\_heading\ \ \ \ :\ Target\ heading\ in\ degrees.}}
+\DoxyCodeLine{00594\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00595\ \ \ \ \ chassis\_vel\ =\ chassis\_vel\_share.get()}
+\DoxyCodeLine{00596\ \ \ \ \ current\_heading\ =\ imu\_obj.read\_euler\_heading()}
+\DoxyCodeLine{00597\ }
+\DoxyCodeLine{00598\ \ \ \ \ cur\_left\_vel\ =\ cur\_left\_vel\_share.get()}
+\DoxyCodeLine{00599\ \ \ \ \ cur\_right\_vel\ =\ cur\_right\_vel\_share.get()}
+\DoxyCodeLine{00600\ \ \ \ \ chassis.update(cur\_left\_vel,\ cur\_right\_vel,\ current\_heading)}
+\DoxyCodeLine{00601\ }
+\DoxyCodeLine{00602\ \ \ \ \ \textcolor{comment}{\#\ Calculate\ heading\ error\ (normalize\ to\ [-\/180,\ 180])}}
+\DoxyCodeLine{00603\ \ \ \ \ error\ =\ target\_heading\ -\/\ chassis.get\_angle()}
+\DoxyCodeLine{00604\ \ \ \ \ \textcolor{keywordflow}{if}\ error\ >\ 180:}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ error\ -\/=\ 360}
+\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keywordflow}{elif}\ error\ <\ -\/180:}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ error\ +=\ 360}
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ \ \ \ \ chassis\_omega\ =\ -\/1\ *\ PID\_Omega.update\_error(error)}
+\DoxyCodeLine{00610\ \ \ \ \ left\_vel,\ right\_vel\ =\ chassis.calc\_des\_wheel\_vel(chassis\_vel,\ chassis\_omega,\ max\_vel\_share)}
+\DoxyCodeLine{00611\ \ \ \ \ left\_vel\_share.put(left\_vel)}
+\DoxyCodeLine{00612\ \ \ \ \ right\_vel\_share.put(right\_vel)}
+\DoxyCodeLine{00613\ }
+\DoxyCodeLine{00614\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_add828372675b1c9e6565da3c26f70023}\index{main.py@{main.py}!follow\_line@{follow\_line}}
+\index{follow\_line@{follow\_line}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{follow\_line()}{follow\_line()}}
+{\footnotesize\ttfamily \label{main_8py_add828372675b1c9e6565da3c26f70023} 
+main.\+follow\+\_\+line (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{line\+\_\+follower}{, }\item[{}]{cur\+\_\+left\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+right\+\_\+vel\+\_\+share}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{max\+\_\+vel\+\_\+share}{}\end{DoxyParamCaption})}
+
+
+
+IR-\/based line following helper function. 
+
+
+\begin{DoxyItemize}
+\item Uses \doxylink{class_i_r}{IR} sensor readings to adjust left/right wheel velocities. ~\newline
+
+\item Updates the chassis object with current velocities for tracking.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em chassis} & \+: \doxylink{class_romi}{Romi} chassis object to track distance, heading, etc. \\
+\hline
+{\em line\+\_\+follower} & \+: \doxylink{class_line_follow}{Line\+Follow} object handling \doxylink{class_i_r}{IR} sensor feedback. \\
+\hline
+{\em cur\+\_\+left\+\_\+vel\+\_\+share} & \+: Shared current left motor velocity. \\
+\hline
+{\em cur\+\_\+right\+\_\+vel\+\_\+share} & \+: Shared current right motor velocity. \\
+\hline
+{\em left\+\_\+vel\+\_\+share} & \+: Shared desired left motor velocity (to be updated by this function). \\
+\hline
+{\em right\+\_\+vel\+\_\+share} & Shared desired right motor velocity (to be updated by this function). \\
+\hline
+{\em max\+\_\+vel\+\_\+share} & \+: Shared maximum velocity for line following. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00509}{509}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ left\_vel\_share,\ right\_vel\_share,\ max\_vel\_share):}
+\DoxyCodeLine{00511\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00512\ \textcolor{stringliteral}{\ \ \ \ @brief\ IR-\/based\ line\ following\ helper\ function.}}
+\DoxyCodeLine{00513\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00514\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Uses\ IR\ sensor\ readings\ to\ adjust\ left/right\ wheel\ velocities.\ \ }}
+\DoxyCodeLine{00515\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Updates\ the\ chassis\ object\ with\ current\ velocities\ for\ tracking.}}
+\DoxyCodeLine{00516\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00517\ \textcolor{stringliteral}{\ \ \ \ @param\ chassis\ \ \ \ \ \ \ \ :\ Romi\ chassis\ object\ to\ track\ distance,\ heading,\ etc.}}
+\DoxyCodeLine{00518\ \textcolor{stringliteral}{\ \ \ \ @param\ line\_follower\ \ :\ LineFollow\ object\ handling\ IR\ sensor\ feedback.}}
+\DoxyCodeLine{00519\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_left\_vel\_share\ \ :\ Shared\ current\ left\ motor\ velocity.}}
+\DoxyCodeLine{00520\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_right\_vel\_share\ :\ Shared\ current\ right\ motor\ velocity.}}
+\DoxyCodeLine{00521\ \textcolor{stringliteral}{\ \ \ \ @param\ left\_vel\_share\ :\ Shared\ desired\ left\ motor\ velocity\ (to\ be\ updated\ by\ this\ function).}}
+\DoxyCodeLine{00522\ \textcolor{stringliteral}{\ \ \ \ @param\ right\_vel\_share:\ Shared\ desired\ right\ motor\ velocity\ (to\ be\ updated\ by\ this\ function).}}
+\DoxyCodeLine{00523\ \textcolor{stringliteral}{\ \ \ \ @param\ max\_vel\_share\ \ :\ Shared\ maximum\ velocity\ for\ line\ following.}}
+\DoxyCodeLine{00524\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00525\ \ \ \ \ cur\_left\_vel\ =\ cur\_left\_vel\_share.get()}
+\DoxyCodeLine{00526\ \ \ \ \ cur\_right\_vel\ =\ cur\_right\_vel\_share.get()}
+\DoxyCodeLine{00527\ \ \ \ \ chassis.update(cur\_left\_vel,\ cur\_right\_vel,\ chassis.get\_angle())}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00529\ \ \ \ \ left\_vel,\ right\_vel\ =\ line\_follower.update(max\_vel\_share)}
+\DoxyCodeLine{00530\ \ \ \ \ left\_vel\_share.put(left\_vel)}
+\DoxyCodeLine{00531\ \ \ \ \ right\_vel\_share.put(right\_vel)}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_aef812866eef08bec2fae312b26c55696}\index{main.py@{main.py}!follow\_turn@{follow\_turn}}
+\index{follow\_turn@{follow\_turn}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{follow\_turn()}{follow\_turn()}}
+{\footnotesize\ttfamily \label{main_8py_aef812866eef08bec2fae312b26c55696} 
+main.\+follow\+\_\+turn (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{imu\+\_\+obj}{, }\item[{}]{PID\+\_\+\+Omega}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{max\+\_\+vel\+\_\+share}{, }\item[{}]{turn\+\_\+angle}{, }\item[{}]{continue\+\_\+val}{}\end{DoxyParamCaption})}
+
+
+
+Implements an in-\/place turn to a specific heading. 
+
+
+\begin{DoxyItemize}
+\item Uses a generator approach to step through the turn each iteration. ~\newline
+
+\item Zero linear velocity and apply an angular velocity until the desired heading is reached.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em chassis} & \+: \doxylink{class_romi}{Romi} chassis object. \\
+\hline
+{\em imu\+\_\+obj} & \+: \doxylink{class_i_m_u}{IMU} object to measure heading. \\
+\hline
+{\em PID\+\_\+\+Omega} & \+: \doxylink{class_p_i_d}{PID} controller for angular velocity. \\
+\hline
+{\em left\+\_\+vel\+\_\+share} & Shared left motor velocity to be updated. \\
+\hline
+{\em right\+\_\+vel\+\_\+share} & Shared right motor velocity to be updated. \\
+\hline
+{\em max\+\_\+vel\+\_\+share} & \+: Shared max velocity for limiting turning speed. \\
+\hline
+{\em turn\+\_\+angle} & \+: Relative target heading to turn to (e.\+g., +90 deg). \\
+\hline
+{\em continue\+\_\+val} & \+: Shared flag set to 1 when turn is complete. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00615}{615}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_vel\_share,\ turn\_angle,\ continue\_val):}
+\DoxyCodeLine{00617\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00618\ \textcolor{stringliteral}{\ \ \ \ @brief\ Implements\ an\ in-\/place\ turn\ to\ a\ specific\ heading.}}
+\DoxyCodeLine{00619\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00620\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Uses\ a\ generator\ approach\ to\ step\ through\ the\ turn\ each\ iteration.\ \ }}
+\DoxyCodeLine{00621\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Zero\ linear\ velocity\ and\ apply\ an\ angular\ velocity\ until\ the\ desired\ heading\ is\ reached.}}
+\DoxyCodeLine{00622\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00623\ \textcolor{stringliteral}{\ \ \ \ @param\ chassis\ \ \ \ \ \ \ :\ Romi\ chassis\ object.}}
+\DoxyCodeLine{00624\ \textcolor{stringliteral}{\ \ \ \ @param\ imu\_obj\ \ \ \ \ \ \ :\ IMU\ object\ to\ measure\ heading.}}
+\DoxyCodeLine{00625\ \textcolor{stringliteral}{\ \ \ \ @param\ PID\_Omega\ \ \ \ \ :\ PID\ controller\ for\ angular\ velocity.}}
+\DoxyCodeLine{00626\ \textcolor{stringliteral}{\ \ \ \ @param\ left\_vel\_share:\ Shared\ left\ motor\ velocity\ to\ be\ updated.}}
+\DoxyCodeLine{00627\ \textcolor{stringliteral}{\ \ \ \ @param\ right\_vel\_share:\ Shared\ right\ motor\ velocity\ to\ be\ updated.}}
+\DoxyCodeLine{00628\ \textcolor{stringliteral}{\ \ \ \ @param\ max\_vel\_share\ :\ Shared\ max\ velocity\ for\ limiting\ turning\ speed.}}
+\DoxyCodeLine{00629\ \textcolor{stringliteral}{\ \ \ \ @param\ turn\_angle\ \ \ \ :\ Relative\ target\ heading\ to\ turn\ to\ (e.g.,\ +90\ deg).}}
+\DoxyCodeLine{00630\ \textcolor{stringliteral}{\ \ \ \ @param\ continue\_val\ \ :\ Shared\ flag\ set\ to\ 1\ when\ turn\ is\ complete.}}
+\DoxyCodeLine{00631\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00632\ \ \ \ \ print(\textcolor{stringliteral}{"{}Initiating\ turn\ to\ angle:"{}},\ turn\_angle)}
+\DoxyCodeLine{00633\ \ \ \ \ target\_heading\ =\ turn\_angle}
+\DoxyCodeLine{00634\ \ \ \ \ initial\_distance\ =\ chassis.get\_distance()}
+\DoxyCodeLine{00635\ \ \ \ \ continue\_val.put(0)}
+\DoxyCodeLine{00636\ }
+\DoxyCodeLine{00637\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ current\_heading\ =\ imu\_obj.read\_euler\_heading()}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ chassis.update\_angle(current\_heading)}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ error\ =\ target\_heading\ -\/\ chassis.get\_angle()}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ error\ >\ 180:}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ error\ -\/=\ 360}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ error\ <\ -\/180:}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ error\ +=\ 360}
+\DoxyCodeLine{00646\ }
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ abs(error)\ <\ 3:}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Turn\ complete\ at\ heading:"{}},\ chassis.get\_angle())}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ left\_vel\_share.put(0)}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ right\_vel\_share.put(0)}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ chassis.set\_distance(initial\_distance)}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ chassis.update\_time()}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \ \ \ \ continue\_val.put(1)}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break}}
+\DoxyCodeLine{00655\ }
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ chassis\_omega\ =\ -\/1\ *\ PID\_Omega.update\_error(error)}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ left\_vel,\ right\_vel\ =\ chassis.calc\_des\_wheel\_vel(0,\ chassis\_omega,\ max\_vel\_share)}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ left\_vel\_share.put(left\_vel)}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ right\_vel\_share.put(right\_vel)}
+\DoxyCodeLine{00660\ }
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}}
+\DoxyCodeLine{00662\ }
+\DoxyCodeLine{00663\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_abee5a8002f0200a65242da9812fbdec0}\index{main.py@{main.py}!go\_backward@{go\_backward}}
+\index{go\_backward@{go\_backward}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{go\_backward()}{go\_backward()}}
+{\footnotesize\ttfamily \label{main_8py_abee5a8002f0200a65242da9812fbdec0} 
+main.\+go\+\_\+backward (\begin{DoxyParamCaption}\item[{}]{chassis}{, }\item[{}]{left\+\_\+vel\+\_\+share}{, }\item[{}]{right\+\_\+vel\+\_\+share}{, }\item[{}]{cur\+\_\+left\+\_\+vel}{, }\item[{}]{cur\+\_\+right\+\_\+vel}{, }\item[{}]{cur\+\_\+heading}{, }\item[{}]{distance}{, }\item[{}]{continue\+\_\+val}{}\end{DoxyParamCaption})}
+
+
+
+Moves the robot backward by a certain distance. 
+
+
+\begin{DoxyItemize}
+\item Zeroes distance, then drives in reverse until distance traveled is met. ~\newline
+
+\item Sets wheel velocities to negative values, and stops when the condition is reached.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em chassis} & \+: \doxylink{class_romi}{Romi} chassis object. \\
+\hline
+{\em left\+\_\+vel\+\_\+share} & \+: Shared left motor velocity control. \\
+\hline
+{\em right\+\_\+vel\+\_\+share} & Shared right motor velocity control. \\
+\hline
+{\em cur\+\_\+left\+\_\+vel} & \+: Current left motor velocity (unused). \\
+\hline
+{\em cur\+\_\+right\+\_\+vel} & \+: Current right motor velocity (unused). \\
+\hline
+{\em cur\+\_\+heading} & \+: Current heading of the chassis. \\
+\hline
+{\em distance} & \+: Target distance to move backward (some distance metric). \\
+\hline
+{\em continue\+\_\+val} & \+: Shared flag to resume path follow after backward motion. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00534}{534}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ distance,\ continue\_val):}
+\DoxyCodeLine{00537\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00538\ \textcolor{stringliteral}{\ \ \ \ @brief\ Moves\ the\ robot\ backward\ by\ a\ certain\ distance.}}
+\DoxyCodeLine{00539\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00540\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Zeroes\ distance,\ then\ drives\ in\ reverse\ until\ distance\ traveled\ is\ met.\ \ }}
+\DoxyCodeLine{00541\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Sets\ wheel\ velocities\ to\ negative\ values,\ and\ stops\ when\ the\ condition\ is\ reached.}}
+\DoxyCodeLine{00542\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00543\ \textcolor{stringliteral}{\ \ \ \ @param\ chassis\ \ \ \ \ \ \ \ :\ Romi\ chassis\ object.}}
+\DoxyCodeLine{00544\ \textcolor{stringliteral}{\ \ \ \ @param\ left\_vel\_share\ :\ Shared\ left\ motor\ velocity\ control.}}
+\DoxyCodeLine{00545\ \textcolor{stringliteral}{\ \ \ \ @param\ right\_vel\_share:\ Shared\ right\ motor\ velocity\ control.}}
+\DoxyCodeLine{00546\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_left\_vel\ \ \ :\ Current\ left\ motor\ velocity\ (unused).}}
+\DoxyCodeLine{00547\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_right\_vel\ \ :\ Current\ right\ motor\ velocity\ (unused).}}
+\DoxyCodeLine{00548\ \textcolor{stringliteral}{\ \ \ \ @param\ cur\_heading\ \ \ \ :\ Current\ heading\ of\ the\ chassis.}}
+\DoxyCodeLine{00549\ \textcolor{stringliteral}{\ \ \ \ @param\ distance\ \ \ \ \ \ \ :\ Target\ distance\ to\ move\ backward\ (some\ distance\ metric).}}
+\DoxyCodeLine{00550\ \textcolor{stringliteral}{\ \ \ \ @param\ continue\_val\ \ \ :\ Shared\ flag\ to\ resume\ path\ follow\ after\ backward\ motion.}}
+\DoxyCodeLine{00551\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00552\ \ \ \ \ chassis.zero\_distance()}
+\DoxyCodeLine{00553\ \ \ \ \ continue\_val.put(0)}
+\DoxyCodeLine{00554\ \ \ \ \ print(\textcolor{stringliteral}{"{}Going\ backward."{}})}
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ left\_vel\_share.put(-\/20)}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ right\_vel\_share.put(-\/20)}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ chassis.update(left\_vel\_share.get(),\ right\_vel\_share.get(),\ cur\_heading)}
+\DoxyCodeLine{00559\ }
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ error\ =\ distance\ +\ chassis.get\_distance()}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ error\ <\ 0.001:}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Backward\ movement\ complete."{}})}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ left\_vel\_share.put(0)}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ right\_vel\_share.put(0)}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ chassis.zero\_distance()}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ chassis.update\_time()}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ continue\_val.put(1)}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break}}
+\DoxyCodeLine{00569\ }
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_a3898291b13bc49e1c4d3859b2071abfe}\index{main.py@{main.py}!task1\_main@{task1\_main}}
+\index{task1\_main@{task1\_main}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task1\_main()}{task1\_main()}}
+{\footnotesize\ttfamily \label{main_8py_a3898291b13bc49e1c4d3859b2071abfe} 
+main.\+task1\+\_\+main (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+
+
+Task which controls user inputs and data logging. 
+
+
+\begin{DoxyItemize}
+\item Initializes motor control parameters.
+\item Collects positional/velocity data from motors.
+\item Logs data at each iteration until the run finishes.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em shares} & A tuple of references to shares and queues used by this task\+:
+\begin{DoxyItemize}
+\item share\+\_\+motor\+\_\+controller\+\_\+period \+: The sampling period for motor control (ms).
+\item share\+\_\+left\+\_\+effort \+: Reference to the left motor effort share.
+\item share\+\_\+right\+\_\+effort \+: Reference to the right motor effort share.
+\item share\+\_\+left\+\_\+run\+\_\+dur \+: Left motor run duration (ms).
+\item share\+\_\+left\+\_\+run\+\_\+dur \+: (Repeated) Right motor run duration (ms).
+\item queue\+\_\+left\+\_\+position \+: Queue storing left motor positions.
+\item queue\+\_\+right\+\_\+position \+: Queue storing right motor positions.
+\item queue\+\_\+left\+\_\+velocity \+: Queue storing left motor velocities.
+\item queue\+\_\+right\+\_\+velocity \+: Queue storing right motor velocities.
+\item share\+\_\+cur\+\_\+left\+\_\+vel \+: Current left motor velocity share.
+\item share\+\_\+cur\+\_\+right\+\_\+vel \+: Current right motor velocity share. 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00036}{36}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \textcolor{keyword}{def\ }task1\_main(shares):}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ @brief\ Task\ which\ controls\ user\ inputs\ and\ data\ logging.}}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Initializes\ motor\ control\ parameters.}}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Collects\ positional/velocity\ data\ from\ motors.}}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Logs\ data\ at\ each\ iteration\ until\ the\ run\ finishes.}}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ \ \ @param\ shares\ }}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \ \ \ A\ tuple\ of\ references\ to\ shares\ and\ queues\ used\ by\ this\ task:}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_motor\_controller\_period\ :\ The\ sampling\ period\ for\ motor\ control\ (ms).}}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_left\_effort\ \ \ \ \ \ \ \ \ \ \ \ :\ Reference\ to\ the\ left\ motor\ effort\ share.}}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_right\_effort\ \ \ \ \ \ \ \ \ \ \ :\ Reference\ to\ the\ right\ motor\ effort\ share.}}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_left\_run\_dur\ \ \ \ \ \ \ \ \ \ \ :\ Left\ motor\ run\ duration\ (ms).}}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_left\_run\_dur\ \ \ \ \ \ \ \ \ \ \ :\ (Repeated)\ Right\ motor\ run\ duration\ (ms).}}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ queue\_left\_position\ \ \ \ \ \ \ \ \ \ :\ Queue\ storing\ left\ motor\ positions.}}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ queue\_right\_position\ \ \ \ \ \ \ \ \ :\ Queue\ storing\ right\ motor\ positions.}}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ queue\_left\_velocity\ \ \ \ \ \ \ \ \ \ :\ Queue\ storing\ left\ motor\ velocities.}}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ queue\_right\_velocity\ \ \ \ \ \ \ \ \ :\ Queue\ storing\ right\ motor\ velocities.}}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_cur\_left\_vel\ \ \ \ \ \ \ \ \ \ \ :\ Current\ left\ motor\ velocity\ share.}}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_cur\_right\_vel\ \ \ \ \ \ \ \ \ \ :\ Current\ right\ motor\ velocity\ share.}}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{\#\ Unpack\ shares\ and\ queues}}
+\DoxyCodeLine{00059\ \ \ \ \ share\_motor\_controller\_period,\ \(\backslash\)}
+\DoxyCodeLine{00060\ \ \ \ \ share\_left\_effort,\ \(\backslash\)}
+\DoxyCodeLine{00061\ \ \ \ \ share\_right\_effort,\ \(\backslash\)}
+\DoxyCodeLine{00062\ \ \ \ \ share\_left\_run\_dur,\ \(\backslash\)}
+\DoxyCodeLine{00063\ \ \ \ \ share\_left\_run\_dur,\ \(\backslash\)}
+\DoxyCodeLine{00064\ \ \ \ \ queue\_left\_position,\ \(\backslash\)}
+\DoxyCodeLine{00065\ \ \ \ \ queue\_right\_position,\ \(\backslash\)}
+\DoxyCodeLine{00066\ \ \ \ \ queue\_left\_velocity,\ \(\backslash\)}
+\DoxyCodeLine{00067\ \ \ \ \ queue\_right\_velocity,\ \(\backslash\)}
+\DoxyCodeLine{00068\ \ \ \ \ share\_cur\_left\_vel,\ \(\backslash\)}
+\DoxyCodeLine{00069\ \ \ \ \ share\_cur\_right\_vel\ =\ shares}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{\#\ State\ machine\ definitions}}
+\DoxyCodeLine{00072\ \ \ \ \ state\ =\ 0}
+\DoxyCodeLine{00073\ \ \ \ \ S0\_INIT\_PARAMS\ =\ 0}
+\DoxyCodeLine{00074\ \ \ \ \ S1\_INIT\_DATA\_STORAGE\ =\ 1}
+\DoxyCodeLine{00075\ \ \ \ \ S2\_RUN\_AND\_COLLECT\_DATA\ =\ 2}
+\DoxyCodeLine{00076\ \ \ \ \ S3\_PRINT\_RESULTS\ =\ 3}
+\DoxyCodeLine{00077\ \ \ \ \ S4\_HOLD\ =\ 4}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ effort\ =\ 0}
+\DoxyCodeLine{00080\ \ \ \ \ run\_dur\ =\ 0}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ state\ ==\ S0\_INIT\_PARAMS:}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T1\ S0\ -\/\ Initialize\ parameters."{}})}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Example\ motor\ effort\ and\ duration}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ effort\ =\ 25}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ run\_dur\ =\ 2000\ \ \textcolor{comment}{\#\ ms}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_INIT\_DATA\_STORAGE}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S1\_INIT\_DATA\_STORAGE:}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T1\ S1\ -\/\ Preparing\ data\ storage."{}})}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Calculate\ how\ many\ data\ points\ to\ store}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ points\ =\ int(run\_dur\ /\ share\_motor\_controller\_period.get())\ +\ 1}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Pre-\/allocate\ arrays\ (just\ a\ demonstration;\ commented\ out\ usage\ below)}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ data\_L\_pos\ =\ array(\textcolor{stringliteral}{'H'},\ points\ *\ [0])}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ data\_R\_pos\ =\ array(\textcolor{stringliteral}{'H'},\ points\ *\ [0])}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ data\_L\_vel\ =\ array(\textcolor{stringliteral}{'f'},\ points\ *\ [0])}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ data\_R\_vel\ =\ array(\textcolor{stringliteral}{'f'},\ points\ *\ [0])}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ 0}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Set\ shared\ variables\ for\ motor\ efforts\ and\ durations}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_effort.put(effort)}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ share\_right\_effort.put(effort)}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_run\_dur.put(run\_dur)}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ share\_right\_run\_dur.put(run\_dur)}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S2\_RUN\_AND\_COLLECT\_DATA}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S2\_RUN\_AND\_COLLECT\_DATA:}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Continually\ check\ if\ motor\ run\ is\ finished\ \&\ queue\ is\ empty}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (share\_left\_run\_dur.get()\ ==\ 0\ \textcolor{keywordflow}{and}\ share\_right\_run\_dur.get()\ ==\ 0}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{and}\ share\_left\_effort.get()\ ==\ 0\ \textcolor{keywordflow}{and}\ share\_right\_effort.get()\ ==\ 0}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{and}\ queue\_left\_position.empty()\ \textcolor{keywordflow}{and}\ queue\_right\_position.empty()}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{and}\ queue\_left\_velocity.empty()\ \textcolor{keywordflow}{and}\ queue\_right\_velocity.empty()):}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S3\_PRINT\_RESULTS}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Example\ data\ retrieval\ (commented\ out\ in\ user\ code)}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ data\_L\_pos[idx]\ =\ queue\_left\_position.get()}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ data\_R\_pos[idx]\ =\ queue\_right\_position.get()}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ data\_L\_vel[idx]\ =\ queue\_left\_velocity.get()}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ data\_R\_vel[idx]\ =\ queue\_right\_velocity.get()}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ idx\ +=\ 1}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S3\_PRINT\_RESULTS:}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T1\ S3\ -\/\ Printing\ results\ (example)."{}})}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Example\ printing\ of\ stored\ data\ (commented\ out\ in\ user\ code)}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ for\ i\ in\ range(len(data\_L\_vel)):}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ print(f"{}\{i\ /\ points\ *\ (run\_dur\ /\ 1000)\},\ "{}}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ \ \ f"{}\{data\_L\_pos[i]\},\ \{data\_R\_pos[i]\},\ "{}}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ \ \ f"{}\{data\_L\_vel[i]\},\ \{data\_R\_vel[i]\}"{})}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S4\_HOLD}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S4\_HOLD:}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Idle\ /\ hold\ state}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S0\_INIT\_PARAMS}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(\textcolor{stringliteral}{"{}State\ machine\ in\ task1\_main\ is\ in\ an\ illegal\ state.\ Resetting\ to\ S0."{}})}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_a2761433ea92d27cdf41d774ef10220fe}\index{main.py@{main.py}!task2\_left\_motor\_controller@{task2\_left\_motor\_controller}}
+\index{task2\_left\_motor\_controller@{task2\_left\_motor\_controller}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task2\_left\_motor\_controller()}{task2\_left\_motor\_controller()}}
+{\footnotesize\ttfamily \label{main_8py_a2761433ea92d27cdf41d774ef10220fe} 
+main.\+task2\+\_\+left\+\_\+motor\+\_\+controller (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+
+
+Task which controls the left motor using \doxylink{class_p_i_d}{PID} velocity control. 
+
+
+\begin{DoxyItemize}
+\item Creates a \doxylink{class_motor}{Motor} and \doxylink{class_encoder}{Encoder} object for the left motor. ~\newline
+
+\item Waits for a start signal before enabling the motor. ~\newline
+
+\item Once running, updates encoder feedback and computes \doxylink{class_p_i_d}{PID} effort to maintain set velocity.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em shares} & A tuple of references to the following\+:
+\begin{DoxyItemize}
+\item share\+\_\+run\+\_\+dur \+: Duration to run the motor (ms).
+\item share\+\_\+left\+\_\+vel \+: Desired left motor velocity (counts/second or similar).
+\item share\+\_\+max\+\_\+eff \+: Maximum allowed effort for the motor (unused in original code).
+\item share\+\_\+cur\+\_\+left\+\_\+vel\+: Current left motor velocity measured by the encoder.
+\item share\+\_\+wait \+: A flag (0 or 1) that indicates when to start the motor.
+\item share\+\_\+stop \+: A flag (0 or 1) that indicates when to stop the motor. 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00150}{150}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00150\ \textcolor{keyword}{def\ }task2\_left\_motor\_controller(shares):}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00152\ \textcolor{stringliteral}{\ \ \ \ @brief\ Task\ which\ controls\ the\ left\ motor\ using\ PID\ velocity\ control.}}
+\DoxyCodeLine{00153\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00154\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Creates\ a\ Motor\ and\ Encoder\ object\ for\ the\ left\ motor.\ \ }}
+\DoxyCodeLine{00155\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Waits\ for\ a\ start\ signal\ before\ enabling\ the\ motor.\ \ }}
+\DoxyCodeLine{00156\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Once\ running,\ updates\ encoder\ feedback\ and\ computes\ PID\ effort\ to\ maintain\ set\ velocity.}}
+\DoxyCodeLine{00157\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00158\ \textcolor{stringliteral}{\ \ \ \ @param\ shares\ }}
+\DoxyCodeLine{00159\ \textcolor{stringliteral}{\ \ \ \ \ \ A\ tuple\ of\ references\ to\ the\ following:}}
+\DoxyCodeLine{00160\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_run\_dur\ \ \ \ \ :\ Duration\ to\ run\ the\ motor\ (ms).}}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_left\_vel\ \ \ \ :\ Desired\ left\ motor\ velocity\ (counts/second\ or\ similar).}}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_max\_eff\ \ \ \ \ :\ Maximum\ allowed\ effort\ for\ the\ motor\ (unused\ in\ original\ code).}}
+\DoxyCodeLine{00163\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_cur\_left\_vel:\ Current\ left\ motor\ velocity\ measured\ by\ the\ encoder.}}
+\DoxyCodeLine{00164\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_wait\ \ \ \ \ \ \ \ :\ A\ flag\ (0\ or\ 1)\ that\ indicates\ when\ to\ start\ the\ motor.}}
+\DoxyCodeLine{00165\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_stop\ \ \ \ \ \ \ \ :\ A\ flag\ (0\ or\ 1)\ that\ indicates\ when\ to\ stop\ the\ motor.}}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00167\ \ \ \ \ (share\_run\_dur,\ }
+\DoxyCodeLine{00168\ \ \ \ \ \ share\_left\_vel,\ }
+\DoxyCodeLine{00169\ \ \ \ \ \ share\_max\_eff,\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ share\_cur\_left\_vel,\ }
+\DoxyCodeLine{00171\ \ \ \ \ \ share\_wait,\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ share\_stop)\ =\ shares}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{\#\ State\ machine\ definitions}}
+\DoxyCodeLine{00175\ \ \ \ \ state\ =\ 0}
+\DoxyCodeLine{00176\ \ \ \ \ S0\_CREATE\_OBJECTS\ =\ 0}
+\DoxyCodeLine{00177\ \ \ \ \ S1\_STANDBY\ =\ 1}
+\DoxyCodeLine{00178\ \ \ \ \ S2\_RUN\ =\ 2}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ state\ ==\ S0\_CREATE\_OBJECTS:}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T2\ Left\ Motor\ -\/\ Creating\ objects."{}})}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Left\ =\ \mbox{\hyperlink{class_motor}{Motor}}(motor\_left\_enable,\ motor\_left\_dir,\ }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_left\_timer,\ motor\_left\_channel,\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_left\_pwm)}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ Encoder\_Left\ =\ \mbox{\hyperlink{class_encoder}{Encoder}}(encoder\_left\_timer,\ encoder\_left\_A,\ encoder\_left\_B)}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Tuned\ PID\ gains\ for\ left\ motor}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ PID\_Motor\_Left\ =\ \mbox{\hyperlink{class_p_i_d}{PID}}(0.3,\ 0.009,\ 0,\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 100\ /\ 34.8\ /\ 7.2,\ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.44\ /\ 7.2\ *\ 100,\ }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ integral\_error\_max=500)}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_STANDBY}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S1\_STANDBY:}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Wait\ for\ the\ share\_wait\ flag\ to\ go\ low\ (0)\ to\ start}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ share\_wait.get()\ ==\ 0:}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T2\ Left\ Motor\ -\/\ Wait\ is\ over,\ enabling\ motor."{}})}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Left.enable()}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S2\_RUN}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S2\_RUN:}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Update\ encoder\ reading}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ Encoder\_Left.update()}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ current\_velocity\ =\ Encoder\_Left.get\_velocity()}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel.put(current\_velocity)}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ new\ motor\ effort\ via\ PID}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ effort\ =\ PID\_Motor\_Left.update(share\_left\_vel.get(),\ current\_velocity)}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Saturate\ effort\ between\ -\/100\ and\ 100}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ effort\ =\ max(min(effort,\ 100),\ -\/100)}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Left.set\_effort(effort)}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ if\ we\ should\ stop}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ share\_stop.get()\ ==\ 1:}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T2\ Left\ Motor\ -\/\ Stop\ signal\ received,\ disabling\ motor."{}})}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Left.disable()}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Left.set\_effort(0)}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_run\_dur.put(0)}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_vel.put(0)}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Error\ handling}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_STANDBY}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T2\ Error\ -\/\ Left\ Motor\ Controller"{}})}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(\textcolor{stringliteral}{"{}Task2\_left\_motor\_controller\ in\ illegal\ state.\ Reset\ to\ S1."{}})}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_a7587f108dcb928de84aaf2644f8d8208}\index{main.py@{main.py}!task3\_right\_motor\_controller@{task3\_right\_motor\_controller}}
+\index{task3\_right\_motor\_controller@{task3\_right\_motor\_controller}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task3\_right\_motor\_controller()}{task3\_right\_motor\_controller()}}
+{\footnotesize\ttfamily \label{main_8py_a7587f108dcb928de84aaf2644f8d8208} 
+main.\+task3\+\_\+right\+\_\+motor\+\_\+controller (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+
+
+Task which controls the right motor using \doxylink{class_p_i_d}{PID} velocity control. 
+
+
+\begin{DoxyItemize}
+\item Similar to the left motor controller, but for the right motor. ~\newline
+
+\item Creates \doxylink{class_motor}{Motor} and \doxylink{class_encoder}{Encoder} objects and uses \doxylink{class_p_i_d}{PID} to maintain the desired velocity.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em shares} & A tuple of references to\+:
+\begin{DoxyItemize}
+\item share\+\_\+run\+\_\+dur \+: Duration to run the motor (ms).
+\item share\+\_\+right\+\_\+vel \+: Desired right motor velocity.
+\item share\+\_\+cur\+\_\+right\+\_\+vel\+: Current right motor velocity measured by the encoder.
+\item share\+\_\+wait \+: A flag indicating when to start the motor.
+\item share\+\_\+stop \+: A flag indicating when to stop the motor. 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00232}{232}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00232\ \textcolor{keyword}{def\ }task3\_right\_motor\_controller(shares):}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00234\ \textcolor{stringliteral}{\ \ \ \ @brief\ Task\ which\ controls\ the\ right\ motor\ using\ PID\ velocity\ control.}}
+\DoxyCodeLine{00235\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00236\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Similar\ to\ the\ left\ motor\ controller,\ but\ for\ the\ right\ motor.\ \ }}
+\DoxyCodeLine{00237\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Creates\ Motor\ and\ Encoder\ objects\ and\ uses\ PID\ to\ maintain\ the\ desired\ velocity.}}
+\DoxyCodeLine{00238\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00239\ \textcolor{stringliteral}{\ \ \ \ @param\ shares\ }}
+\DoxyCodeLine{00240\ \textcolor{stringliteral}{\ \ \ \ \ \ A\ tuple\ of\ references\ to:}}
+\DoxyCodeLine{00241\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_run\_dur\ \ \ \ \ \ :\ Duration\ to\ run\ the\ motor\ (ms).}}
+\DoxyCodeLine{00242\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_right\_vel\ \ \ \ :\ Desired\ right\ motor\ velocity.}}
+\DoxyCodeLine{00243\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_cur\_right\_vel:\ Current\ right\ motor\ velocity\ measured\ by\ the\ encoder.}}
+\DoxyCodeLine{00244\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_wait\ \ \ \ \ \ \ \ \ :\ A\ flag\ indicating\ when\ to\ start\ the\ motor.}}
+\DoxyCodeLine{00245\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_stop\ \ \ \ \ \ \ \ \ :\ A\ flag\ indicating\ when\ to\ stop\ the\ motor.}}
+\DoxyCodeLine{00246\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00247\ \ \ \ \ (share\_run\_dur,}
+\DoxyCodeLine{00248\ \ \ \ \ \ share\_right\_vel,}
+\DoxyCodeLine{00249\ \ \ \ \ \ share\_cur\_right\_vel,}
+\DoxyCodeLine{00250\ \ \ \ \ \ share\_wait,}
+\DoxyCodeLine{00251\ \ \ \ \ \ share\_stop)\ =\ shares}
+\DoxyCodeLine{00252\ \ \ \ \ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{comment}{\#\ State\ machine\ definitions}}
+\DoxyCodeLine{00254\ \ \ \ \ state\ =\ 0}
+\DoxyCodeLine{00255\ \ \ \ \ S0\_CREATE\_OBJECTS\ =\ 0}
+\DoxyCodeLine{00256\ \ \ \ \ S1\_STANDBY\ =\ 1}
+\DoxyCodeLine{00257\ \ \ \ \ S2\_RUN\ =\ 2}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ state\ ==\ S0\_CREATE\_OBJECTS:}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T3\ Right\ Motor\ -\/\ Creating\ objects."{}})}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Right\ =\ \mbox{\hyperlink{class_motor}{Motor}}(motor\_right\_enable,\ motor\_right\_dir,\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_right\_timer,\ motor\_right\_channel,\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_right\_pwm)}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ Encoder\_Right\ =\ \mbox{\hyperlink{class_encoder}{Encoder}}(encoder\_right\_timer,\ encoder\_right\_A,\ encoder\_right\_B)}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Tuned\ PID\ gains\ for\ right\ motor}}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ PID\_Motor\_Right\ =\ \mbox{\hyperlink{class_p_i_d}{PID}}(0.3,\ 0.009,\ 0,\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 100\ /\ 33.7\ /\ 7.2,\ }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.49\ /\ 7.2\ *\ 100,\ }
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ integral\_error\_max=500)}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_STANDBY}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S1\_STANDBY:}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ share\_wait.get()\ ==\ 0:}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T3\ Right\ Motor\ -\/\ Wait\ is\ over,\ enabling\ motor."{}})}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Right.enable()}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S2\_RUN}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S2\_RUN:}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Update\ encoder\ reading}}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ Encoder\_Right.update()}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ current\_velocity\ =\ Encoder\_Right.get\_velocity()}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_right\_vel.put(current\_velocity)}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ PID\ effort}}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ effort\ =\ PID\_Motor\_Right.update(share\_right\_vel.get(),\ current\_velocity)}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ effort\ =\ max(min(effort,\ 100),\ -\/100)}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Right.set\_effort(effort)}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ for\ stop}}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ share\_stop.get()\ ==\ 1:}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T3\ Right\ Motor\ -\/\ Stop\ signal\ received,\ disabling\ motor."{}})}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Right.disable()}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Motor\_Right.set\_effort(0)}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_run\_dur.put(0)}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_right\_vel.put(0)}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_STANDBY}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(\textcolor{stringliteral}{"{}Task3\_right\_motor\_controller\ in\ illegal\ state.\ Reset\ to\ S1."{}})}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_a40eddb145230fd0b6ebaa9d85a7d328c}\index{main.py@{main.py}!task4\_path\_follow@{task4\_path\_follow}}
+\index{task4\_path\_follow@{task4\_path\_follow}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task4\_path\_follow()}{task4\_path\_follow()}}
+{\footnotesize\ttfamily \label{main_8py_a40eddb145230fd0b6ebaa9d85a7d328c} 
+main.\+task4\+\_\+path\+\_\+follow (\begin{DoxyParamCaption}\item[{}]{shares}{}\end{DoxyParamCaption})}
+
+
+
+Task which controls path following for the \doxylink{class_romi}{Romi}. 
+
+
+\begin{DoxyItemize}
+\item Creates \doxylink{class_i_m_u}{IMU} and \doxylink{class_i_r}{IR} objects, calibrates sensors, and then follows a preset path. ~\newline
+
+\item Uses scheduled mode changes (\doxylink{class_i_r}{IR} line following, heading hold, turn, etc.) based on distance traveled. ~\newline
+
+\item Utilizes a finite state machine for initialization, calibration, and run modes.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em shares} & A tuple of references to\+:
+\begin{DoxyItemize}
+\item share\+\_\+chasssis\+\_\+vel \+: Desired chassis velocity (m/s or other unit).
+\item share\+\_\+left\+\_\+vel \+: Desired left motor velocity share (output of path logic).
+\item share\+\_\+right\+\_\+vel \+: Desired right motor velocity share (output of path logic).
+\item share\+\_\+cur\+\_\+left\+\_\+vel \+: Current left motor velocity.
+\item share\+\_\+cur\+\_\+right\+\_\+vel\+: Current right motor velocity.
+\item share\+\_\+wait \+: A flag for waiting before starting.
+\item share\+\_\+mode \+: Holds the current mode (\doxylink{class_i_r}{IR}, HEADING, TURN, etc.).
+\item share\+\_\+heading \+: Desired heading for heading or turning modes.
+\item share\+\_\+continue \+: A flag to let path follow logic continue after certain maneuvers. 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00306}{306}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00306\ \textcolor{keyword}{def\ }task4\_path\_follow(shares):}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00308\ \textcolor{stringliteral}{\ \ \ \ @brief\ Task\ which\ controls\ path\ following\ for\ the\ Romi.}}
+\DoxyCodeLine{00309\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00310\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Creates\ IMU\ and\ IR\ objects,\ calibrates\ sensors,\ and\ then\ follows\ a\ preset\ path.\ \ }}
+\DoxyCodeLine{00311\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Uses\ scheduled\ mode\ changes\ (IR\ line\ following,\ heading\ hold,\ turn,\ etc.)\ based\ on\ distance\ traveled.\ \ }}
+\DoxyCodeLine{00312\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Utilizes\ a\ finite\ state\ machine\ for\ initialization,\ calibration,\ and\ run\ modes.}}
+\DoxyCodeLine{00313\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00314\ \textcolor{stringliteral}{\ \ \ \ @param\ shares\ }}
+\DoxyCodeLine{00315\ \textcolor{stringliteral}{\ \ \ \ \ \ A\ tuple\ of\ references\ to:}}
+\DoxyCodeLine{00316\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_chasssis\_vel\ :\ Desired\ chassis\ velocity\ (m/s\ or\ other\ unit).}}
+\DoxyCodeLine{00317\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_left\_vel\ \ \ \ \ :\ Desired\ left\ motor\ velocity\ share\ (output\ of\ path\ logic).}}
+\DoxyCodeLine{00318\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_right\_vel\ \ \ \ :\ Desired\ right\ motor\ velocity\ share\ (output\ of\ path\ logic).}}
+\DoxyCodeLine{00319\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_cur\_left\_vel\ :\ Current\ left\ motor\ velocity.}}
+\DoxyCodeLine{00320\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_cur\_right\_vel:\ Current\ right\ motor\ velocity.}}
+\DoxyCodeLine{00321\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_wait\ \ \ \ \ \ \ \ \ :\ A\ flag\ for\ waiting\ before\ starting.}}
+\DoxyCodeLine{00322\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_mode\ \ \ \ \ \ \ \ \ :\ Holds\ the\ current\ mode\ (IR,\ HEADING,\ TURN,\ etc.).}}
+\DoxyCodeLine{00323\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_heading\ \ \ \ \ \ :\ Desired\ heading\ for\ heading\ or\ turning\ modes.}}
+\DoxyCodeLine{00324\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ share\_continue\ \ \ \ \ :\ A\ flag\ to\ let\ path\ follow\ logic\ continue\ after\ certain\ maneuvers.}}
+\DoxyCodeLine{00325\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00326\ \ \ \ \ (share\_chasssis\_vel,}
+\DoxyCodeLine{00327\ \ \ \ \ \ share\_left\_vel,}
+\DoxyCodeLine{00328\ \ \ \ \ \ share\_right\_vel,}
+\DoxyCodeLine{00329\ \ \ \ \ \ share\_cur\_left\_vel,}
+\DoxyCodeLine{00330\ \ \ \ \ \ share\_cur\_right\_vel,}
+\DoxyCodeLine{00331\ \ \ \ \ \ share\_wait,}
+\DoxyCodeLine{00332\ \ \ \ \ \ share\_mode,}
+\DoxyCodeLine{00333\ \ \ \ \ \ share\_heading,}
+\DoxyCodeLine{00334\ \ \ \ \ \ share\_continue)\ =\ shares}
+\DoxyCodeLine{00335\ \ \ \ \ }
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{comment}{\#\ State\ machine\ definitions}}
+\DoxyCodeLine{00337\ \ \ \ \ state\ =\ 0}
+\DoxyCodeLine{00338\ \ \ \ \ S0\_INIT\ =\ 0}
+\DoxyCodeLine{00339\ \ \ \ \ S1\_CALIBRATE\ =\ 1}
+\DoxyCodeLine{00340\ \ \ \ \ S2\_RUN\ =\ 2}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{comment}{\#\ Mode\ definitions}}
+\DoxyCodeLine{00343\ \ \ \ \ MODE\_HEADING\ =\ 0}
+\DoxyCodeLine{00344\ \ \ \ \ MODE\_IR\ =\ 1}
+\DoxyCodeLine{00345\ \ \ \ \ MODE\_TURN\ =\ 2}
+\DoxyCodeLine{00346\ \ \ \ \ MODE\_BACKWARD\ =\ 3}
+\DoxyCodeLine{00347\ \ \ \ \ MODE\_STOP\ =\ 4}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{comment}{\#\ Example\ scheduled\ modes\ based\ on\ distance}}
+\DoxyCodeLine{00350\ \ \ \ \ mode\_schedule\ =\ [}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ (0.00,\ MODE\_IR),}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ (0.9,\ MODE\_HEADING,\ 90),}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ (1.0,\ MODE\_IR),}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ (3.70,\ MODE\_HEADING,\ 179),}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ (4.42,\ MODE\_TURN,\ 270),}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ (4.30,\ MODE\_HEADING,\ 270),}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ (4.5,\ MODE\_IR),}
+\DoxyCodeLine{00358\ \ \ \ \ ]}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \ \ \ \ mode\_schedule2\ =\ [}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ (0.00,\ MODE\_BACKWARD,\ 0.02),}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ (-\/0.10,\ MODE\_TURN,\ 0),}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ (-\/0.10,\ MODE\_HEADING,\ 0),}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ (0.3,\ MODE\_TURN,\ 270),}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ (0.3,\ MODE\_HEADING,\ 270),}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ (0.53,\ MODE\_TURN,\ 180),}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ (0.53,\ MODE\_IR),}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ (1,\ MODE\_STOP),}
+\DoxyCodeLine{00369\ \ \ \ \ ]}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ button\ =\ pyb.Pin(blue\_button,\ pyb.Pin.IN,\ pyb.Pin.PULL\_UP)}
+\DoxyCodeLine{00372\ \ \ \ \ bumper\_status\ =\ 0}
+\DoxyCodeLine{00373\ \ \ \ \ share\_continue.put(1)}
+\DoxyCodeLine{00374\ \ \ \ \ turn\_gen\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ mode\_index\ =\ 0}
+\DoxyCodeLine{00377\ \ \ \ \ test\_mode\ =\ 0}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ state\ ==\ S0\_INIT:}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}T4\ Path\ Follow\ -\/\ Initializing\ objects."{}})}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ imu\_obj\ =\ \mbox{\hyperlink{class_i_m_u}{IMU}}()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ IMU\ for\ heading}}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ PID\_Omega\ =\ \mbox{\hyperlink{class_p_i_d}{PID}}(0.08,\ 0.00,\ 0.0)\ \ \textcolor{comment}{\#\ PID\ for\ angular\ control}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ chassis\ =\ \mbox{\hyperlink{class_romi}{Romi}}()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Romi\ chassis\ for\ distance/heading}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ ir\_sensor\ =\ \mbox{\hyperlink{class_i_r}{IR}}(ir\_ctrl,\ [ir\_1,\ ir\_3,\ ir\_5,\ ir\_7])}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ bumper\ =\ \mbox{\hyperlink{class_bump}{Bump}}(bump0,\ bump1,\ bump2,\ bump3,\ bump4,\ bump5)}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ line\_follower\ =\ \mbox{\hyperlink{class_line_follow}{LineFollow}}(ir\_sensor)}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ share\_wait.put(1)}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}IMU\ object\ created."{}})}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_CALIBRATE}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S1\_CALIBRATE:}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ IMU\ calibration}}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ imu\_obj.startup()\ ==\ \textcolor{keyword}{False}:}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(1000):}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Default\ IR\ sensor\ calibration}}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ ir\_sensor.default\_calibration()}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Cal\ done.\ Press\ the\ blue\ button\ to\ start"{}})}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ button.value()\ ==\ 1:}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ imu\_obj.set\_mode(IMU.NDOF)}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ chassis.zero\_heading(imu\_obj.read\_euler\_heading())}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ test\_mode\ ==\ 1:}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chassis.zero\_heading(imu\_obj.read\_euler\_heading()\ +\ 90)}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S2\_RUN}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ share\_wait.put(0)}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ share\_chasssis\_vel.put(5\ *\ 0.036)\ \ \textcolor{comment}{\#\ Example\ conversion\ factor}}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(5):}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ chassis.update\_time()}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S2\_RUN:}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ bumper}}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ bumper.update()}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bumper.get()\ \textcolor{keywordflow}{and}\ bumper\_status\ ==\ 0:}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bumper\_status\ =\ 1}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chassis.zero\_distance()}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mode\_index\ =\ 0}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_continue.put(1)}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ turn\_gen\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Bumper\ pressed,\ switching\ mode\ schedules."{}})}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ chassis.get\_distance()}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Distance:\ \{dist\}"{}})}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Switch\ modes\ based\ on\ distance\ traveled}}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bumper\_status\ ==\ 0:}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ mode\_index\ <\ len(mode\_schedule)\ \textcolor{keywordflow}{and}\ dist\ >=\ mode\_schedule[mode\_index][0]:}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry\ =\ mode\_schedule[mode\_index]}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_mode\ =\ entry[1]}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_mode.put(new\_mode)}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Switching\ to\ mode:\ \{new\_mode\}"{}})}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(entry)\ >\ 2:}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_heading.put(entry[2])}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Setting\ heading:\ \{entry[2]\}"{}})}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mode\_index\ +=\ 1}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\_index\ <\ len(mode\_schedule2)\ }
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{and}\ dist\ >=\ mode\_schedule2[mode\_index][0]\ }
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{and}\ share\_continue.get()\ ==\ 1):}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry\ =\ mode\_schedule2[mode\_index]}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_mode\ =\ entry[1]}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_mode.put(new\_mode)}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Switching\ to\ mode:\ \{new\_mode\}"{}})}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(entry)\ >\ 2:}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_heading.put(entry[2])}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Setting\ heading:\ \{entry[2]\}"{}})}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mode\_index\ +=\ 1}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ current\_mode\ =\ share\_mode.get()}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Respond\ to\ current\ mode}}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ current\_mode\ ==\ MODE\_IR:}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ follow\_line(chassis,\ line\_follower,}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_cur\_right\_vel,}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_vel,\ share\_right\_vel,}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_max\_vel)}
+\DoxyCodeLine{00466\ }
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ current\_mode\ ==\ MODE\_HEADING:}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ heading\ =\ share\_heading.get()}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ follow\_heading(chassis,\ imu\_obj,\ PID\_Omega,}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_chasssis\_vel,}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_cur\_right\_vel,}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_vel,\ share\_right\_vel,}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_max\_vel,\ heading)}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ current\_mode\ ==\ MODE\_TURN:}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ turn\_angle\ =\ share\_heading.get()}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ turn\_gen\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ turn\_gen\ =\ follow\_turn(chassis,\ imu\_obj,\ PID\_Omega,}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_vel,\ share\_right\_vel,}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_max\_vel,\ turn\_angle,\ share\_continue)}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ next(turn\_gen)}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ StopIteration:}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Turn\ completed."{}})}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ turn\_gen\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{00486\ }
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ current\_mode\ ==\ MODE\_BACKWARD:}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ turn\_gen\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ turn\_gen\ =\ go\_backward(chassis,\ share\_left\_vel,\ share\_right\_vel,}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel.get(),\ share\_cur\_right\_vel.get(),}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chassis.get\_angle(),\ share\_heading.get(),}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ share\_continue)}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ next(turn\_gen)}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ StopIteration:}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Backward\ completed."{}})}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ turn\_gen\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{00498\ }
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ current\_mode\ ==\ MODE\_STOP:}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ KeyboardInterrupt}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S0\_INIT}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(\textcolor{stringliteral}{"{}Task4\_path\_follow\ in\ an\ invalid\ state.\ Resetting\ to\ S0."{}})}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ }
+
+\end{DoxyCode}
+\Hypertarget{main_8py_aa2d15d40756fca616210fcfd4d290b17}\index{main.py@{main.py}!task5\_bumper@{task5\_bumper}}
+\index{task5\_bumper@{task5\_bumper}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task5\_bumper()}{task5\_bumper()}}
+{\footnotesize\ttfamily \label{main_8py_aa2d15d40756fca616210fcfd4d290b17} 
+main.\+task5\+\_\+bumper (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Simple bumper task to demonstrate emergency stop or exit. 
+
+
+\begin{DoxyItemize}
+\item Monitors the bump sensors and raises Keyboard\+Interrupt when pressed.
+\end{DoxyItemize}
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Keyboard\+Interrupt} & Raises Keyboard\+Interrupt when a bumper is pressed, causing the main scheduler to stop. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00664}{664}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00664\ \textcolor{keyword}{def\ }task5\_bumper():}
+\DoxyCodeLine{00665\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00666\ \textcolor{stringliteral}{\ \ \ \ @brief\ Simple\ bumper\ task\ to\ demonstrate\ emergency\ stop\ or\ exit.}}
+\DoxyCodeLine{00667\ \textcolor{stringliteral}{\ \ \ \ @details\ }}
+\DoxyCodeLine{00668\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ Monitors\ the\ bump\ sensors\ and\ raises\ KeyboardInterrupt\ when\ pressed.}}
+\DoxyCodeLine{00669\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00670\ \textcolor{stringliteral}{\ \ \ \ @exception\ KeyboardInterrupt\ }}
+\DoxyCodeLine{00671\ \textcolor{stringliteral}{\ \ \ \ \ \ Raises\ KeyboardInterrupt\ when\ a\ bumper\ is\ pressed,\ causing\ the\ main\ scheduler\ to\ stop.}}
+\DoxyCodeLine{00672\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00673\ \ \ \ \ state\ =\ 0}
+\DoxyCodeLine{00674\ \ \ \ \ S0\_INIT\ =\ 0}
+\DoxyCodeLine{00675\ \ \ \ \ S1\_WAIT\_FOR\_PRESS\ =\ 1}
+\DoxyCodeLine{00676\ \ \ \ \ S2\_CRASH\_OUT\ =\ 2}
+\DoxyCodeLine{00677\ }
+\DoxyCodeLine{00678\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ state\ ==\ S0\_INIT:}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ bumper\ =\ \mbox{\hyperlink{class_bump}{Bump}}(bump0,\ bump1,\ bump2,\ bump3,\ bump4,\ bump5)}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S1\_WAIT\_FOR\_PRESS}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00683\ }
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S1\_WAIT\_FOR\_PRESS:}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \ \ \ \ bumper.update()}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bumper.get():}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Bumper\ pressed"{}})}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S2\_CRASH\_OUT}
+\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{yield}\ state}
+\DoxyCodeLine{00690\ }
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ state\ ==\ S2\_CRASH\_OUT:}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ KeyboardInterrupt}
+\DoxyCodeLine{00693\ }
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ S0\_INIT}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(\textcolor{stringliteral}{"{}task5\_bumper\ in\ invalid\ state.\ Reset\ to\ S0."{}})}
+\DoxyCodeLine{00697\ }
+\DoxyCodeLine{00698\ }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8py_ac444a2dc99b98409a8b2fcff38ae4b6f}\index{main.py@{main.py}!Motor\_Left@{Motor\_Left}}
+\index{Motor\_Left@{Motor\_Left}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{Motor\_Left}{Motor\_Left}}
+{\footnotesize\ttfamily \label{main_8py_ac444a2dc99b98409a8b2fcff38ae4b6f} 
+main.\+Motor\+\_\+\+Left}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{class_motor}{Motor}}(motor\_left\_enable,\ motor\_left\_dir,}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_left\_timer,\ motor\_left\_channel,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_left\_pwm)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00839}{839}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ab40f26627816d82bd72f3a65ed8d82d5}\index{main.py@{main.py}!Motor\_Right@{Motor\_Right}}
+\index{Motor\_Right@{Motor\_Right}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{Motor\_Right}{Motor\_Right}}
+{\footnotesize\ttfamily \label{main_8py_ab40f26627816d82bd72f3a65ed8d82d5} 
+main.\+Motor\+\_\+\+Right}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{class_motor}{Motor}}(motor\_right\_enable,\ motor\_right\_dir,}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_right\_timer,\ motor\_right\_channel,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motor\_right\_pwm)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00836}{836}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a6e2a6db2039ceb5e06ab4c5c4c9c7905}\index{main.py@{main.py}!q\_len@{q\_len}}
+\index{q\_len@{q\_len}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{q\_len}{q\_len}}
+{\footnotesize\ttfamily \label{main_8py_a6e2a6db2039ceb5e06ab4c5c4c9c7905} 
+int main.\+q\+\_\+len = 500}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00727}{727}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a0e7bff739a6d43426790064d7604e67d}\index{main.py@{main.py}!queue\_left\_position@{queue\_left\_position}}
+\index{queue\_left\_position@{queue\_left\_position}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{queue\_left\_position}{queue\_left\_position}}
+{\footnotesize\ttfamily \label{main_8py_a0e7bff739a6d43426790064d7604e67d} 
+main.\+queue\+\_\+left\+\_\+position}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'l'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Left\_Position"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00728}{728}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ac132acf5ce2695046aab857080b66583}\index{main.py@{main.py}!queue\_left\_velocity@{queue\_left\_velocity}}
+\index{queue\_left\_velocity@{queue\_left\_velocity}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{queue\_left\_velocity}{queue\_left\_velocity}}
+{\footnotesize\ttfamily \label{main_8py_ac132acf5ce2695046aab857080b66583} 
+main.\+queue\+\_\+left\+\_\+velocity}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'f'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Left\_Velocity"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00730}{730}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a2346a11ae4ce661ea9831ecf2448a953}\index{main.py@{main.py}!queue\_right\_position@{queue\_right\_position}}
+\index{queue\_right\_position@{queue\_right\_position}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{queue\_right\_position}{queue\_right\_position}}
+{\footnotesize\ttfamily \label{main_8py_a2346a11ae4ce661ea9831ecf2448a953} 
+main.\+queue\+\_\+right\+\_\+position}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'l'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Right\_Position"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00732}{732}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ada0b9312c38b796722d0c99246ce7ab5}\index{main.py@{main.py}!queue\_right\_velocity@{queue\_right\_velocity}}
+\index{queue\_right\_velocity@{queue\_right\_velocity}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{queue\_right\_velocity}{queue\_right\_velocity}}
+{\footnotesize\ttfamily \label{main_8py_ada0b9312c38b796722d0c99246ce7ab5} 
+main.\+queue\+\_\+right\+\_\+velocity}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_queue}{task\_share.Queue}}(\textcolor{stringliteral}{'f'},\ q\_len,\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwrite=\textcolor{keyword}{False},\ name=\textcolor{stringliteral}{"{}Queue\_Right\_Velocity"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00734}{734}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a2900c777cd73ccd2e665b2603ad46578}\index{main.py@{main.py}!share\_chassis\_vel@{share\_chassis\_vel}}
+\index{share\_chassis\_vel@{share\_chassis\_vel}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_chassis\_vel}{share\_chassis\_vel}}
+{\footnotesize\ttfamily \label{main_8py_a2900c777cd73ccd2e665b2603ad46578} 
+main.\+share\+\_\+chassis\+\_\+vel = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Chassis\+\_\+\+Vel"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00752}{752}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a7b1b6e7dc901fe09579cd581a2f71bcf}\index{main.py@{main.py}!share\_continue@{share\_continue}}
+\index{share\_continue@{share\_continue}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_continue}{share\_continue}}
+{\footnotesize\ttfamily \label{main_8py_a7b1b6e7dc901fe09579cd581a2f71bcf} 
+main.\+share\+\_\+continue = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Continue"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00773}{773}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a256212a1b054fb7db00764673da653e3}\index{main.py@{main.py}!share\_cur\_left\_vel@{share\_cur\_left\_vel}}
+\index{share\_cur\_left\_vel@{share\_cur\_left\_vel}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_cur\_left\_vel}{share\_cur\_left\_vel}}
+{\footnotesize\ttfamily \label{main_8py_a256212a1b054fb7db00764673da653e3} 
+main.\+share\+\_\+cur\+\_\+left\+\_\+vel = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Cur\+\_\+\+Left\+\_\+\+Vel"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00755}{755}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a08923618ea52835930772297cbca5586}\index{main.py@{main.py}!share\_cur\_right\_vel@{share\_cur\_right\_vel}}
+\index{share\_cur\_right\_vel@{share\_cur\_right\_vel}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_cur\_right\_vel}{share\_cur\_right\_vel}}
+{\footnotesize\ttfamily \label{main_8py_a08923618ea52835930772297cbca5586} 
+main.\+share\+\_\+cur\+\_\+right\+\_\+vel = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Cur\+\_\+\+Right\+\_\+\+Vel"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00758}{758}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a7f5ea24393ebcd9c0dc95fe5b1566474}\index{main.py@{main.py}!share\_dir@{share\_dir}}
+\index{share\_dir@{share\_dir}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_dir}{share\_dir}}
+{\footnotesize\ttfamily \label{main_8py_a7f5ea24393ebcd9c0dc95fe5b1566474} 
+main.\+share\+\_\+dir = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Dir"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00749}{749}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ab2e61c14a17da80ea8b6de8c12d06b6c}\index{main.py@{main.py}!share\_heading@{share\_heading}}
+\index{share\_heading@{share\_heading}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_heading}{share\_heading}}
+{\footnotesize\ttfamily \label{main_8py_ab2e61c14a17da80ea8b6de8c12d06b6c} 
+main.\+share\+\_\+heading = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Heading"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00770}{770}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a4b3538bf858b55ad25f6aa62bc0a59aa}\index{main.py@{main.py}!share\_left\_effort@{share\_left\_effort}}
+\index{share\_left\_effort@{share\_left\_effort}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_left\_effort}{share\_left\_effort}}
+{\footnotesize\ttfamily \label{main_8py_a4b3538bf858b55ad25f6aa62bc0a59aa} 
+main.\+share\+\_\+left\+\_\+effort = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Effort"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00715}{715}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ad083741762dd7eca5deef385687f6e2e}\index{main.py@{main.py}!share\_left\_run\_dur@{share\_left\_run\_dur}}
+\index{share\_left\_run\_dur@{share\_left\_run\_dur}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_left\_run\_dur}{share\_left\_run\_dur}}
+{\footnotesize\ttfamily \label{main_8py_ad083741762dd7eca5deef385687f6e2e} 
+main.\+share\+\_\+left\+\_\+run\+\_\+dur = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Run\+\_\+\+Dur"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00718}{718}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a2be8f3bce68f849361ad0518974ac5d4}\index{main.py@{main.py}!share\_left\_vel@{share\_left\_vel}}
+\index{share\_left\_vel@{share\_left\_vel}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_left\_vel}{share\_left\_vel}}
+{\footnotesize\ttfamily \label{main_8py_a2be8f3bce68f849361ad0518974ac5d4} 
+main.\+share\+\_\+left\+\_\+vel = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Left\+\_\+\+Vel"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00746}{746}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_af7bc4ff58722c6affeee262012fcf55c}\index{main.py@{main.py}!share\_max\_eff@{share\_max\_eff}}
+\index{share\_max\_eff@{share\_max\_eff}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_max\_eff}{share\_max\_eff}}
+{\footnotesize\ttfamily \label{main_8py_af7bc4ff58722c6affeee262012fcf55c} 
+main.\+share\+\_\+max\+\_\+eff = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Max\+\_\+\+Eff"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00740}{740}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a01cd60f30f626766e9e8b21e509ce05c}\index{main.py@{main.py}!share\_max\_vel@{share\_max\_vel}}
+\index{share\_max\_vel@{share\_max\_vel}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_max\_vel}{share\_max\_vel}}
+{\footnotesize\ttfamily \label{main_8py_a01cd60f30f626766e9e8b21e509ce05c} 
+main.\+share\+\_\+max\+\_\+vel = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Max\+\_\+\+Vel"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00737}{737}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ac1648ed9341de347f664c2c000bd537c}\index{main.py@{main.py}!share\_mode@{share\_mode}}
+\index{share\_mode@{share\_mode}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_mode}{share\_mode}}
+{\footnotesize\ttfamily \label{main_8py_ac1648ed9341de347f664c2c000bd537c} 
+main.\+share\+\_\+mode = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Mode"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00767}{767}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a0456cb15cb03d0782a60ebea1c6e6655}\index{main.py@{main.py}!share\_motor\_controller\_period@{share\_motor\_controller\_period}}
+\index{share\_motor\_controller\_period@{share\_motor\_controller\_period}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_motor\_controller\_period}{share\_motor\_controller\_period}}
+{\footnotesize\ttfamily \label{main_8py_a0456cb15cb03d0782a60ebea1c6e6655} 
+main.\+share\+\_\+motor\+\_\+controller\+\_\+period}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classtask__share_1_1_share}{task\_share.Share}}(\textcolor{stringliteral}{'i'},\ thread\_protect=\textcolor{keyword}{False},\ }
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name=\textcolor{stringliteral}{"{}Share\_Left\_Motor\_Controller\_Period"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00711}{711}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a75aff43a1280bd518cb4cfc2b3990181}\index{main.py@{main.py}!share\_right\_effort@{share\_right\_effort}}
+\index{share\_right\_effort@{share\_right\_effort}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_right\_effort}{share\_right\_effort}}
+{\footnotesize\ttfamily \label{main_8py_a75aff43a1280bd518cb4cfc2b3990181} 
+main.\+share\+\_\+right\+\_\+effort = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Effort"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00721}{721}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ab11938f316cca0a507bc9652a1421ce2}\index{main.py@{main.py}!share\_right\_run\_dur@{share\_right\_run\_dur}}
+\index{share\_right\_run\_dur@{share\_right\_run\_dur}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_right\_run\_dur}{share\_right\_run\_dur}}
+{\footnotesize\ttfamily \label{main_8py_ab11938f316cca0a507bc9652a1421ce2} 
+main.\+share\+\_\+right\+\_\+run\+\_\+dur = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Run\+\_\+\+Dur"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00724}{724}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_aaf225447dd3b4f71c7c58cae495c7abf}\index{main.py@{main.py}!share\_right\_vel@{share\_right\_vel}}
+\index{share\_right\_vel@{share\_right\_vel}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_right\_vel}{share\_right\_vel}}
+{\footnotesize\ttfamily \label{main_8py_aaf225447dd3b4f71c7c58cae495c7abf} 
+main.\+share\+\_\+right\+\_\+vel = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}f\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Right\+\_\+\+Vel"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00743}{743}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_abe9060a06cf51d73765d64230ef0c465}\index{main.py@{main.py}!share\_stop@{share\_stop}}
+\index{share\_stop@{share\_stop}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_stop}{share\_stop}}
+{\footnotesize\ttfamily \label{main_8py_abe9060a06cf51d73765d64230ef0c465} 
+main.\+share\+\_\+stop = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Stop"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00764}{764}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_aa47776161cc656417f2687bd51eaec13}\index{main.py@{main.py}!share\_wait@{share\_wait}}
+\index{share\_wait@{share\_wait}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{share\_wait}{share\_wait}}
+{\footnotesize\ttfamily \label{main_8py_aa47776161cc656417f2687bd51eaec13} 
+main.\+share\+\_\+wait = \mbox{\hyperlink{classtask__share_1_1_share}{task\+\_\+share.\+Share}}(\textquotesingle{}i\textquotesingle{}, thread\+\_\+protect=False, name="{}Share\+\_\+\+Wait"{})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00761}{761}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_af4b8f4290f8d32e70654f6deb864787f}\index{main.py@{main.py}!task1@{task1}}
+\index{task1@{task1}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task1}{task1}}
+{\footnotesize\ttfamily \label{main_8py_af4b8f4290f8d32e70654f6deb864787f} 
+main.\+task1}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task1\_main,\ name=\textcolor{stringliteral}{"{}Task\_1"{}},\ priority=1,\ period=30,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_motor\_controller\_period,\ share\_left\_effort,\ share\_right\_effort,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_run\_dur,\ share\_left\_run\_dur,\ queue\_left\_position,}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \ \ \ \ queue\_right\_position,\ queue\_left\_velocity,\ queue\_right\_velocity,}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_cur\_right\_vel}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00010\ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00777}{777}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a99d189b8f9eb3784cf7d4e5c3241b562}\index{main.py@{main.py}!task2@{task2}}
+\index{task2@{task2}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task2}{task2}}
+{\footnotesize\ttfamily \label{main_8py_a99d189b8f9eb3784cf7d4e5c3241b562} 
+main.\+task2}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task2\_left\_motor\_controller,\ name=\textcolor{stringliteral}{"{}Task\_2"{}},\ priority=2,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ period=share\_motor\_controller\_period.get(),\ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_left\_run\_dur,\ share\_left\_vel,\ share\_max\_eff,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_wait,\ share\_stop}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00008\ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00788}{788}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a120516a5d42c212c898d4616d266077a}\index{main.py@{main.py}!task3@{task3}}
+\index{task3@{task3}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task3}{task3}}
+{\footnotesize\ttfamily \label{main_8py_a120516a5d42c212c898d4616d266077a} 
+main.\+task3}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task3\_right\_motor\_controller,\ name=\textcolor{stringliteral}{"{}Task\_3"{}},\ priority=2,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ period=share\_motor\_controller\_period.get(),\ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_right\_run\_dur,\ share\_right\_vel,\ share\_cur\_right\_vel,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_wait,\ share\_stop}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00008\ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00797}{797}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_ac0ee3c5b5359f76becfe27534e82085f}\index{main.py@{main.py}!task4@{task4}}
+\index{task4@{task4}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task4}{task4}}
+{\footnotesize\ttfamily \label{main_8py_ac0ee3c5b5359f76becfe27534e82085f} 
+main.\+task4}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task4\_path\_follow,\ name=\textcolor{stringliteral}{"{}Task\_4"{}},\ priority=3,\ period=200,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ profile=\textcolor{keyword}{True},\ trace=\textcolor{keyword}{False},}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ shares=(}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ share\_chassis\_vel,\ share\_left\_vel,\ share\_right\_vel,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ share\_cur\_left\_vel,\ share\_cur\_right\_vel,\ share\_wait,}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \ \ \ \ share\_mode,\ share\_heading,\ share\_continue}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00009\ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00806}{806}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+
+\Hypertarget{main_8py_a11ec9e490c402876467b9fdadecc93e8}\index{main.py@{main.py}!task5@{task5}}
+\index{task5@{task5}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{task5}{task5}}
+{\footnotesize\ttfamily \label{main_8py_a11ec9e490c402876467b9fdadecc93e8} 
+main.\+task5}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \mbox{\hyperlink{classcotask_1_1_task}{cotask.Task}}(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ task5\_bumper,\ name=\textcolor{stringliteral}{"{}Task\_5"{}},\ priority=4,\ period=1000}
+\DoxyCodeLine{00003\ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{main_8py_source_l00816}{816}} of file \mbox{\hyperlink{main_8py_source}{main.\+py}}.
+

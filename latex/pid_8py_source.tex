@@ -1,0 +1,100 @@
+\doxysection{pid.\+py}
+\hypertarget{pid_8py_source}{}\label{pid_8py_source}\index{lib2/pid.py@{lib2/pid.py}}
+\mbox{\hyperlink{pid_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00001}00001\ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00002}00002\ \textcolor{stringliteral}{@file\ pid.py}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00003}00003\ \textcolor{stringliteral}{@brief\ PID\ controller\ class\ for\ motor\ or\ system\ control.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00004}00004\ \textcolor{stringliteral}{@details}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ Implements\ a\ simple\ PID\ algorithm\ for\ controlling\ velocity,\ position,\ or}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ other\ feedback-\/based\ systems.\ Includes\ optional\ feedforward\ terms.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00007}00007\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00009}00009\ \textcolor{keyword}{from}\ time\ \textcolor{keyword}{import}\ ticks\_us,\ ticks\_diff,\ ticks\_ms}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00010}00010\ \textcolor{keyword}{from}\ pyb\ \textcolor{keyword}{import}\ Pin,\ Timer}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00011}00011\ \textcolor{keyword}{import}\ cqueue\ \textcolor{keyword}{as}\ cqueue}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00012}00012\ \textcolor{keyword}{import}\ time}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00014}00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_i_d}{PID}}:}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00015}00015\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00016}\mbox{\hyperlink{class_p_i_d}{00016}}\ \textcolor{stringliteral}{\ \ \ \ @class\ PID}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ @brief\ A\ PID\ loop\ encapsulated\ in\ a\ Python\ class.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ Includes\ proportional,\ integral,\ and\ derivative\ terms,\ as\ well\ as\ optional}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ \ \ feedforward\ gain\ and\ offset.\ Integrator\ windup\ is\ limited\ by\ integral\_error\_max.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ Kp,\ Ki,\ Kd,\ feedforward\_gain=0,\ feedforward\_offset=0,\ integral\_error\_max=500):}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Initializes\ PID\ gains\ and\ integral\ error\ parameters.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ Kp\ Proportional\ gain.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ Ki\ Integral\ gain.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ Kd\ Derivative\ gain.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ feedforward\_gain\ Optional\ feedforward\ gain\ term\ applied\ to\ the\ desired\ setpoint.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00030}00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ feedforward\_offset\ Optional\ offset\ applied\ to\ the\ feedforward\ term\ based\ on\ direction.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ integral\_error\_max\ Maximum\ absolute\ value\ for\ the\ integrator\ to\ prevent\ windup.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ self.Kp\ =\ Kp}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ self.Ki\ =\ Ki}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ self.Kd\ =\ Kd}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ self.ff\_gain\ =\ feedforward\_gain}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ self.ff\_offset\ =\ feedforward\_offset}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ self.integral\_error\ =\ 0}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ self.prev\_error\ =\ 0}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ 0}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ self.integral\_error\_max\ =\ integral\_error\_max}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{def\ }update(self,\ desire,\ actual):}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00045}00045\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Calculates\ a\ control\ effort\ using\ a\ PID\ approach\ (plus\ feedforward).}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00046}00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00047}00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Uses\ the\ difference\ between\ desired\ and\ actual\ values\ (error)\ to\ compute\ the\ }}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ PID\ output.\ Limits\ integral\ error\ to\ prevent\ excessive\ windup.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ desire\ The\ target\ or\ desired\ value.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00050}00050\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ actual\ The\ current\ or\ measured\ value.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ control\ effort\ as\ a\ float\ (could\ be\ motor\ PWM,\ for\ example).}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ dt\ =\ ticks\_diff(ticks\_ms(),\ self.prev\_time)\ /\ 1000}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ ticks\_ms()}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ error\ =\ desire\ -\/\ actual}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ self.integral\_error\ +=\ error\ *\ dt}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bound\ integrator}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.integral\_error\ >\ self.integral\_error\_max:}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ self.integral\_error\ =\ self.integral\_error\_max}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.integral\_error\ <\ -\/self.integral\_error\_max:}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ self.integral\_error\ =\ -\/self.integral\_error\_max}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ derivative\ =\ error\ -\/\ self.prev\_error}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ self.prev\_error\ =\ error}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Determine\ direction\ for\ feedforward\ offset}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ dir\ =\ 1\ \textcolor{keywordflow}{if}\ desire\ >\ 0\ \textcolor{keywordflow}{else}\ -\/1\ \textcolor{keywordflow}{if}\ desire\ <\ 0\ \textcolor{keywordflow}{else}\ 0}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.Kp\ *\ error}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ self.integral\_error\ *\ self.Ki}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ self.Kd\ *\ derivative}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ self.ff\_gain\ *\ desire}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ (self.ff\_offset\ *\ dir))}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{def\ }update\_error(self,\ error):}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Calculates\ a\ control\ effort\ given\ a\ direct\ error\ (without\ reading\ actual).}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00079}00079\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00080}00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Similar\ to\ update(),\ but\ uses\ a\ provided\ error\ directly.\ }}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ Useful\ for\ situations\ where\ the\ user\ has\ precomputed\ the\ error\ externally.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00082}00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ error\ The\ difference\ between\ the\ desired\ value\ and\ measured\ value.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00083}00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ control\ effort\ as\ a\ float.}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ dt\ =\ ticks\_diff(ticks\_ms(),\ self.prev\_time)\ /\ 1000}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ self.prev\_time\ =\ ticks\_ms()}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ self.integral\_error\ +=\ error\ *\ dt}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ derivative\ =\ error\ -\/\ self.prev\_error}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ self.prev\_error\ =\ error}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.Kp\ *\ error}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ self.integral\_error\ *\ self.Ki}
+\DoxyCodeLine{\Hypertarget{pid_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ self.Kd\ *\ derivative)}
+
+\end{DoxyCode}

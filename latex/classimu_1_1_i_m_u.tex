@@ -1,0 +1,266 @@
+\doxysection{imu.\+IMU Class Reference}
+\hypertarget{classimu_1_1_i_m_u}{}\label{classimu_1_1_i_m_u}\index{imu.IMU@{imu.IMU}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a8305070ef5f6b4689daea782ab6d0bf5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, id=2, addr=0x28)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a45fc5069f3402deffd765ec9ee134b2d}{startup}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a1a32244012935de2b125d49fb1899585}{set\+\_\+mode}} (self, mode)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a79f6b882dc1f2ec4bdabc0b93286c5eb}{calibration\+\_\+status}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_aefcb64dc2c84e271f78787a3d0fc5377}{retrieve\+\_\+calibration\+\_\+coeff}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_ac2a4c890631bd777c73fc733f546a3b2}{write\+\_\+calibration\+\_\+coeff}} (self, filename=\textquotesingle{}calibrations.\+bin\textquotesingle{})
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a1fb37f6c5f6c3c7038b0e5779e7a6913}{read\+\_\+euler}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a4f3282096de627dcd7432575246b3295}{read\+\_\+euler\+\_\+heading}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_aafb69f6733b48dece31b55a7cdddc677}{read\+\_\+angular\+\_\+velocity}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a5f762901e3c78f238da701c95de17baf}{read\+\_\+angular\+\_\+yaw\+\_\+rate}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a1fec207489903b0994bf72b9f731fd66}{read\+\_\+mag}} (self)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a2eb6398c54be69633ea50341946cc8da}{read\+\_\+mag\+\_\+x}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_a7b5994307323f24b0e01a757406aae22}{file\+\_\+exists}} (filename)
+\item 
+\mbox{\hyperlink{classimu_1_1_i_m_u_afea307fec8213ce6841bfa233a71a51b}{read\+\_\+file}} (filename)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classimu_1_1_i_m_u_ae25e7b68ea3917d2683ee7cee2caf270}\label{classimu_1_1_i_m_u_ae25e7b68ea3917d2683ee7cee2caf270} 
+{\bfseries addr} = addr
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a6230287665f9875fdfb1dcce87f70fff}\label{classimu_1_1_i_m_u_a6230287665f9875fdfb1dcce87f70fff} 
+list {\bfseries accel\+\_\+offset} = \mbox{[}0, 0, 0\mbox{]}
+\item 
+\Hypertarget{classimu_1_1_i_m_u_ae1abfad5630c55f65adfcfc0808ddbd9}\label{classimu_1_1_i_m_u_ae1abfad5630c55f65adfcfc0808ddbd9} 
+list {\bfseries mag\+\_\+offset} = \mbox{[}0, 0, 0\mbox{]}
+\item 
+\Hypertarget{classimu_1_1_i_m_u_abd658b42bf773dd519de6165949afd3a}\label{classimu_1_1_i_m_u_abd658b42bf773dd519de6165949afd3a} 
+list {\bfseries gyr\+\_\+offset} = \mbox{[}0, 0, 0\mbox{]}
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a9706603777147f3d1f359cdd75a95bd1}\label{classimu_1_1_i_m_u_a9706603777147f3d1f359cdd75a95bd1} 
+int {\bfseries accel\+\_\+rad} = 0
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a5f1ca490eab3bf9d596d868a3f8887e3}\label{classimu_1_1_i_m_u_a5f1ca490eab3bf9d596d868a3f8887e3} 
+int {\bfseries mag\+\_\+rad} = 0
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a456d7c455aa65e1afba5845d27be36e0}\label{classimu_1_1_i_m_u_a456d7c455aa65e1afba5845d27be36e0} 
+int {\bfseries mode} = IMU.\+NDOF
+\item 
+\Hypertarget{classimu_1_1_i_m_u_aab309a01d3ca321b202c9b0182d29ba0}\label{classimu_1_1_i_m_u_aab309a01d3ca321b202c9b0182d29ba0} 
+bool {\bfseries file} = True
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a0557cb379fa1f5bf41f2a49247dc8d03}\label{classimu_1_1_i_m_u_a0557cb379fa1f5bf41f2a49247dc8d03} 
+int {\bfseries REG\+\_\+\+OPR\+\_\+\+MODE} = 0x3D
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a3f59f60d2783c29a5f17654ac4ad4332}\label{classimu_1_1_i_m_u_a3f59f60d2783c29a5f17654ac4ad4332} 
+int {\bfseries CONFIG} = 0x00
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a075aa0b42df3c9836c61bea701ddf3e8}\label{classimu_1_1_i_m_u_a075aa0b42df3c9836c61bea701ddf3e8} 
+int {\bfseries COMPASS} = 0x09
+\item 
+\Hypertarget{classimu_1_1_i_m_u_ac20864a8eafbea29218ca14ef9a451e8}\label{classimu_1_1_i_m_u_ac20864a8eafbea29218ca14ef9a451e8} 
+int {\bfseries M4G} = 0x0A
+\item 
+\Hypertarget{classimu_1_1_i_m_u_ab23afdd849fad878509dee6d3f0d4124}\label{classimu_1_1_i_m_u_ab23afdd849fad878509dee6d3f0d4124} 
+int {\bfseries NDOF\+\_\+\+FMC\+\_\+\+OFF} = 0x0B
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a3b49a61a729a7f536f6575247120de7e}\label{classimu_1_1_i_m_u_a3b49a61a729a7f536f6575247120de7e} 
+int {\bfseries NDOF} = 0x0C
+\item 
+\Hypertarget{classimu_1_1_i_m_u_ad26915d4c588c09de28a457947dbd35b}\label{classimu_1_1_i_m_u_ad26915d4c588c09de28a457947dbd35b} 
+int {\bfseries REG\+\_\+\+CALIB\+\_\+\+STAT} = 0x35
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a0b9625d3c7928d9260ed975c81198359}\label{classimu_1_1_i_m_u_a0b9625d3c7928d9260ed975c81198359} 
+int {\bfseries REG\+\_\+\+CAL\+\_\+\+DATA\+\_\+\+START} = 0x55
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a1a5c410a6ecf18b101c27bd0fcc284f0}\label{classimu_1_1_i_m_u_a1a5c410a6ecf18b101c27bd0fcc284f0} 
+int {\bfseries REG\+\_\+\+EULER} = 0x1A
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a57bb52e9e2f1c99c897fead5b7e47e05}\label{classimu_1_1_i_m_u_a57bb52e9e2f1c99c897fead5b7e47e05} 
+int {\bfseries REG\+\_\+\+GYRO} = 0x14
+\item 
+\Hypertarget{classimu_1_1_i_m_u_a885a685b67447674702e01be09af051b}\label{classimu_1_1_i_m_u_a885a685b67447674702e01be09af051b} 
+int {\bfseries REG\+\_\+\+MAG} = 0x0E
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class IMU
+@brief A class for interacting with a BNO055 IMU over I2C.
+@details 
+  Supports reading euler angles, gyro, magnetometer, and storing/retrieving 
+  calibration data in a local file named 'calibrations.bin'.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classimu_1_1_i_m_u_a8305070ef5f6b4689daea782ab6d0bf5}\index{imu.IMU@{imu.IMU}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a8305070ef5f6b4689daea782ab6d0bf5} 
+imu.\+IMU.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{id}{ = {\ttfamily 2}, }\item[{}]{addr}{ = {\ttfamily 0x28}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes the IMU object with I2C and default parameters.
+@param id I2C bus ID (on STM32, commonly 1 or 2).
+@param addr I2C address of the BNO055 (default 0x28).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classimu_1_1_i_m_u_a79f6b882dc1f2ec4bdabc0b93286c5eb}\index{imu.IMU@{imu.IMU}!calibration\_status@{calibration\_status}}
+\index{calibration\_status@{calibration\_status}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{calibration\_status()}{calibration\_status()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a79f6b882dc1f2ec4bdabc0b93286c5eb} 
+imu.\+IMU.\+calibration\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Reads the calibration status register.
+@details 
+  If it returns 0xFF, it might indicate an error. 
+  This function also prints bit-level data for debugging.
+@return 1 if calibration register is 0xFF, else 0.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a7b5994307323f24b0e01a757406aae22}\index{imu.IMU@{imu.IMU}!file\_exists@{file\_exists}}
+\index{file\_exists@{file\_exists}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{file\_exists()}{file\_exists()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a7b5994307323f24b0e01a757406aae22} 
+imu.\+IMU.\+file\+\_\+exists (\begin{DoxyParamCaption}\item[{}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}@brief Checks if the specified file exists.
+@param filename Name of the file to check.
+@return True if file exists, False otherwise.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_aafb69f6733b48dece31b55a7cdddc677}\index{imu.IMU@{imu.IMU}!read\_angular\_velocity@{read\_angular\_velocity}}
+\index{read\_angular\_velocity@{read\_angular\_velocity}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_angular\_velocity()}{read\_angular\_velocity()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_aafb69f6733b48dece31b55a7cdddc677} 
+imu.\+IMU.\+read\+\_\+angular\+\_\+velocity (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Reads gyroscope data (roll rate, pitch rate, yaw rate).
+@return (gyro_x, gyro_y, gyro_z) as signed 16-bit integers.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a5f762901e3c78f238da701c95de17baf}\index{imu.IMU@{imu.IMU}!read\_angular\_yaw\_rate@{read\_angular\_yaw\_rate}}
+\index{read\_angular\_yaw\_rate@{read\_angular\_yaw\_rate}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_angular\_yaw\_rate()}{read\_angular\_yaw\_rate()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a5f762901e3c78f238da701c95de17baf} 
+imu.\+IMU.\+read\+\_\+angular\+\_\+yaw\+\_\+rate (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Returns only the yaw rate from the gyro data.
+@return Yaw rate in IMU units (raw).
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a1fb37f6c5f6c3c7038b0e5779e7a6913}\index{imu.IMU@{imu.IMU}!read\_euler@{read\_euler}}
+\index{read\_euler@{read\_euler}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_euler()}{read\_euler()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a1fb37f6c5f6c3c7038b0e5779e7a6913} 
+imu.\+IMU.\+read\+\_\+euler (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Reads Euler angles (heading, pitch, roll) from the IMU.
+@details 
+  Each angle is scaled by 1/16. heading is eul_heading, pitch is eul_pitch, roll is eul_roll.
+@return (heading, pitch, roll) in degrees.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a4f3282096de627dcd7432575246b3295}\index{imu.IMU@{imu.IMU}!read\_euler\_heading@{read\_euler\_heading}}
+\index{read\_euler\_heading@{read\_euler\_heading}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_euler\_heading()}{read\_euler\_heading()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a4f3282096de627dcd7432575246b3295} 
+imu.\+IMU.\+read\+\_\+euler\+\_\+heading (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Convenience function to get just the heading (X Euler angle).
+@return Heading in degrees.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_afea307fec8213ce6841bfa233a71a51b}\index{imu.IMU@{imu.IMU}!read\_file@{read\_file}}
+\index{read\_file@{read\_file}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_file()}{read\_file()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_afea307fec8213ce6841bfa233a71a51b} 
+imu.\+IMU.\+read\+\_\+file (\begin{DoxyParamCaption}\item[{}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}@brief Reads binary data from a file and returns it.
+@param filename The file to read from.
+@return The file content in bytes or None if error.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a1fec207489903b0994bf72b9f731fd66}\index{imu.IMU@{imu.IMU}!read\_mag@{read\_mag}}
+\index{read\_mag@{read\_mag}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_mag()}{read\_mag()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a1fec207489903b0994bf72b9f731fd66} 
+imu.\+IMU.\+read\+\_\+mag (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Reads raw magnetometer data (X, Y, Z).
+@return (mag_x, mag_y, mag_z) as signed 16-bit integers.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a2eb6398c54be69633ea50341946cc8da}\index{imu.IMU@{imu.IMU}!read\_mag\_x@{read\_mag\_x}}
+\index{read\_mag\_x@{read\_mag\_x}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{read\_mag\_x()}{read\_mag\_x()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a2eb6398c54be69633ea50341946cc8da} 
+imu.\+IMU.\+read\+\_\+mag\+\_\+x (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Convenience function to get just the X-axis magnetometer reading.
+@return X-axis magnetometer raw value.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_aefcb64dc2c84e271f78787a3d0fc5377}\index{imu.IMU@{imu.IMU}!retrieve\_calibration\_coeff@{retrieve\_calibration\_coeff}}
+\index{retrieve\_calibration\_coeff@{retrieve\_calibration\_coeff}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{retrieve\_calibration\_coeff()}{retrieve\_calibration\_coeff()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_aefcb64dc2c84e271f78787a3d0fc5377} 
+imu.\+IMU.\+retrieve\+\_\+calibration\+\_\+coeff (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Reads calibration coefficients from the IMU and saves them to 'calibrations.bin'.
+@details 
+  The IMU must be fully calibrated prior to calling this function 
+  (checks calibration_status first). 
+  Writes data to local file and verifies by reading back.
+@return -1 if calibration incomplete, else 0 or None.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a1a32244012935de2b125d49fb1899585}\index{imu.IMU@{imu.IMU}!set\_mode@{set\_mode}}
+\index{set\_mode@{set\_mode}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{set\_mode()}{set\_mode()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a1a32244012935de2b125d49fb1899585} 
+imu.\+IMU.\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{mode}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Changes the operating mode of the BNO055.
+@param mode One of the mode constants (e.g. IMU.NDOF, IMU.CONFIG, etc.).
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_a45fc5069f3402deffd765ec9ee134b2d}\index{imu.IMU@{imu.IMU}!startup@{startup}}
+\index{startup@{startup}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{startup()}{startup()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_a45fc5069f3402deffd765ec9ee134b2d} 
+imu.\+IMU.\+startup (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Prepares the IMU with calibration data if present, else enters calibration mode.
+@details
+  - If 'calibrations.bin' exists, attempts to write calibration coefficients to IMU.
+  - If that fails, instructs user to calibrate manually.
+  - Once calibration is done, sets operating mode to NDOF.
+@return True if startup completed successfully, False otherwise.
+\end{DoxyVerb}
+ \Hypertarget{classimu_1_1_i_m_u_ac2a4c890631bd777c73fc733f546a3b2}\index{imu.IMU@{imu.IMU}!write\_calibration\_coeff@{write\_calibration\_coeff}}
+\index{write\_calibration\_coeff@{write\_calibration\_coeff}!imu.IMU@{imu.IMU}}
+\doxysubsubsection{\texorpdfstring{write\_calibration\_coeff()}{write\_calibration\_coeff()}}
+{\footnotesize\ttfamily \label{classimu_1_1_i_m_u_ac2a4c890631bd777c73fc733f546a3b2} 
+imu.\+IMU.\+write\+\_\+calibration\+\_\+coeff (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{filename}{ = {\ttfamily \textquotesingle{}calibrations.bin\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Writes calibration coefficients from a local file to the IMU.
+@details 
+  Sets IMU to CONFIG mode, reads 'calibrations.bin', and writes 
+  those bytes directly to the sensor's calibration registers. 
+  Then restores the previous mode.
+@param filename Name of the calibration file (default 'calibrations.bin').
+@return True if successful, False otherwise.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib2/imu.\+py\end{DoxyCompactItemize}
