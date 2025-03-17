@@ -12,6 +12,12 @@ This project integrates real-time task scheduling, control theory, and embedded 
 
 ---
 
+## Time Trial
+
+[Click this link to watch our Romi's time trial recorded during the in-lab demonstration](https://youtube.com/shorts/vsfdo95sP2M?feature=share)
+
+---
+
 ## Features
 - **Motor Control**: PID-based velocity control for both left and right motors.
 - **IR Sensor Navigation**: Line-following algorithm to track the course.

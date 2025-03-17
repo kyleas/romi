@@ -11,7 +11,9 @@ var searchData=
   ['tasklist_8',['TaskList',['../classcotask_1_1_task_list.html',1,'cotask']]],
   ['term_20project_9',['Romi Time-Trials: ME405 Term Project',['../index.html',1,'']]],
   ['test_5fsize_10',['TEST_SIZE',['../cqueue_8py.html#a813d58dc240ac993243e717c59137757',1,'cqueue']]],
-  ['time_20trials_3a_20me405_20term_20project_11',['Romi Time-Trials: ME405 Term Project',['../index.html',1,'']]],
-  ['trials_3a_20me405_20term_20project_12',['Romi Time-Trials: ME405 Term Project',['../index.html',1,'']]],
-  ['type_5fcode_5fstrings_13',['type_code_strings',['../task__share_8py.html#af5ee68a35f9ce19aef4c4bd4ab7c2679',1,'task_share']]]
+  ['time_20trial_11',['Time Trial',['../index.html#autotoc_md3',1,'']]],
+  ['time_20trials_3a_20me405_20term_20project_12',['Romi Time-Trials: ME405 Term Project',['../index.html',1,'']]],
+  ['trial_13',['Time Trial',['../index.html#autotoc_md3',1,'']]],
+  ['trials_3a_20me405_20term_20project_14',['Romi Time-Trials: ME405 Term Project',['../index.html',1,'']]],
+  ['type_5fcode_5fstrings_15',['type_code_strings',['../task__share_8py.html#af5ee68a35f9ce19aef4c4bd4ab7c2679',1,'task_share']]]
 ];
