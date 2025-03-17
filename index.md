@@ -12,6 +12,14 @@ This project integrates real-time task scheduling, control theory, and embedded 
 
 ---
 
+## Github
+
+[Click this link to go to our GitHub repository](https://github.com/kyleas/romi.git)
+
+---
+
+---
+
 ## Time Trial
 
 [Click this link to watch our Romi's time trial recorded during the in-lab demonstration](https://youtube.com/shorts/vsfdo95sP2M?feature=share)
