@@ -30,10 +30,24 @@ This project integrates real-\/time task scheduling, control theory, and embedde
 The system is built on a task-\/based multitasking model, where each component operates as a separate task\+:
 
 
+
+
 \begin{DoxyEnumerate}
 \item {\bfseries{Task 1}}\+: Handles user inputs and data logging.
 \item {\bfseries{Task 2 \& Task 3}}\+: Control left and right motors using \doxylink{class_p_i_d}{PID} velocity control.
+\end{DoxyEnumerate}
+
+
+
+
+\begin{DoxyEnumerate}
 \item {\bfseries{Task 4}}\+: Implements path following using \doxylink{class_i_r}{IR} sensor and \doxylink{class_i_m_u}{IMU} data.
+\end{DoxyEnumerate}
+
+
+
+
+\begin{DoxyEnumerate}
 \item {\bfseries{Task 5}} (Optional)\+: Provides an emergency stop using bumper sensors.
 \end{DoxyEnumerate}
 

@@ -70,16 +70,16 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00062}{62}} of file \mbox
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ size\ :\ int):}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Create\ a\ fast\ queue\ for\ floats.}}
-\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ When\ the\ queue\ is\ created,\ memory\ is\ allocated\ for\ the}}
-\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ given\ number\ of\ items.\ Putting\ items\ into\ the\ queue\ won't}}
-\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cause\ new\ memory\ to\ be\ allocated,\ so\ the\ queue\ can\ be\ used}}
-\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\ interrupt\ callbacks\ and\ will\ run\ quickly.}}
-\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @param\ \ \ size\ The\ maximum\ number\ of\ floats\ that\ the\ queue\ can\ hold}}
-\DoxyCodeLine{00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ size\ :\ int): }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Create\ a\ fast\ queue\ for\ floats. }}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ When\ the\ queue\ is\ created,\ memory\ is\ allocated\ for\ the }}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ given\ number\ of\ items.\ Putting\ items\ into\ the\ queue\ won't }}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cause\ new\ memory\ to\ be\ allocated,\ so\ the\ queue\ can\ be\ used }}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\ interrupt\ callbacks\ and\ will\ run\ quickly. }}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @param\ \ \ size\ The\ maximum\ number\ of\ floats\ that\ the\ queue\ can\ hold }}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00071\  }
 
 \end{DoxyCode}
 
@@ -104,13 +104,13 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00072}{72}} of file \mbox
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }any()\ -\/>\ bool:}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Checks\ if\ there\ are\ any\ items\ available\ in\ the\ queue.}}
-\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ @c\ True\ if\ there\ is\ at\ least\ one\ item\ in\ the\ queue,}}
-\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @c\ False\ if\ not}}
-\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }any()\ -\/>\ bool: }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Checks\ if\ there\ are\ any\ items\ available\ in\ the\ queue. }}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ @c\ True\ if\ there\ is\ at\ least\ one\ item\ in\ the\ queue, }}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @c\ False\ if\ not }}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00078\  }
 
 \end{DoxyCode}
 \Hypertarget{classcqueue_1_1_float_queue_a383a068695d5d997fe117d9d2bf179bf}\index{cqueue.FloatQueue@{cqueue.FloatQueue}!available@{available}}
@@ -132,13 +132,13 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00079}{79}} of file \mbox
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }available()\ -\/>\ int:}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Checks\ how\ many\ items\ are\ available\ to\ be\ read\ from\ the}}
-\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue.}}
-\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ An\ integer\ containing\ the\ number\ of\ items\ in\ the\ queue}}
-\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }available()\ -\/>\ int: }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Checks\ how\ many\ items\ are\ available\ to\ be\ read\ from\ the }}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue. }}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ An\ integer\ containing\ the\ number\ of\ items\ in\ the\ queue }}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00085\  }
 
 \end{DoxyCode}
 \Hypertarget{classcqueue_1_1_float_queue_aebb56412adef179f0718029ce839127e}\index{cqueue.FloatQueue@{cqueue.FloatQueue}!clear@{clear}}
@@ -157,14 +157,14 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00104}{104}} of file \mbo
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }clear():}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Empty\ the\ queue.}}
-\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ The\ pointers\ used\ to\ access\ data\ in\ the\ queue\ are\ reset\ to}}
-\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ their\ empty\ positions.\ The\ contents\ of\ the\ memory\ are\ not}}
-\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ changed\ and\ no\ new\ memory\ is\ allocated.}}
-\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }clear(): }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Empty\ the\ queue. }}
+\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ The\ pointers\ used\ to\ access\ data\ in\ the\ queue\ are\ reset\ to }}
+\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ their\ empty\ positions.\ The\ contents\ of\ the\ memory\ are\ not }}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ changed\ and\ no\ new\ memory\ is\ allocated. }}
+\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00111\  }
 
 \end{DoxyCode}
 \Hypertarget{classcqueue_1_1_float_queue_a31ec2169865388babb2730db7e99ee42}\index{cqueue.FloatQueue@{cqueue.FloatQueue}!full@{full}}
@@ -186,14 +186,14 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00112}{112}} of file \mbo
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }full()\ -\/>\ bool:}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00114\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Check\ whether\ the\ queue\ is\ currently\ full.}}
-\DoxyCodeLine{00115\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ If\ the\ queue\ is\ full,\ writing\ new\ data\ will\ cause\ the}}
-\DoxyCodeLine{00116\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ oldest\ data\ to\ be\ overwritten\ and\ lost.\ }}
-\DoxyCodeLine{00117\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ @c\ True\ if\ the\ queue\ is\ currently\ full\ or\ @c\ False\ if\ not}}
-\DoxyCodeLine{00118\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }full()\ -\/>\ bool: }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00114\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Check\ whether\ the\ queue\ is\ currently\ full. }}
+\DoxyCodeLine{00115\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ If\ the\ queue\ is\ full,\ writing\ new\ data\ will\ cause\ the }}
+\DoxyCodeLine{00116\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ oldest\ data\ to\ be\ overwritten\ and\ lost.\  }}
+\DoxyCodeLine{00117\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ @c\ True\ if\ the\ queue\ is\ currently\ full\ or\ @c\ False\ if\ not }}
+\DoxyCodeLine{00118\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00119\  }
 
 \end{DoxyCode}
 \Hypertarget{classcqueue_1_1_float_queue_a3beae5b8e594f3b505359fc3c04e1747}\index{cqueue.FloatQueue@{cqueue.FloatQueue}!get@{get}}
@@ -215,14 +215,14 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00096}{96}} of file \mbox
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get()\ -\/>\ float:}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Get\ an\ item\ from\ the\ queue\ if\ one\ is\ available.}}
-\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ If\ the\ queue\ is\ empty,\ @c\ None\ will\ be\ returned.}}
-\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ The\ oldest\ float\ in\ the\ queue,\ or\ @c\ None\ if\ the\ queue}}
-\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is\ currently\ empty.}}
-\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get()\ -\/>\ float: }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Get\ an\ item\ from\ the\ queue\ if\ one\ is\ available. }}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ If\ the\ queue\ is\ empty,\ @c\ None\ will\ be\ returned. }}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @returns\ The\ oldest\ float\ in\ the\ queue,\ or\ @c\ None\ if\ the\ queue }}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is\ currently\ empty. }}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00103\  }
 
 \end{DoxyCode}
 \Hypertarget{classcqueue_1_1_float_queue_a0f83f8d6b5b3c69d59a50479029bc047}\index{cqueue.FloatQueue@{cqueue.FloatQueue}!max\_full@{max\_full}}
@@ -244,18 +244,18 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00120}{120}} of file \mbo
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }max\_full()\ -\/>\ int:}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00122\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Get\ the\ maximum\ number\ of\ unread\ items\ that\ have\ been\ in}}
-\DoxyCodeLine{00123\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the\ queue.}}
-\DoxyCodeLine{00124\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ This\ method\ returns\ the\ maximum\ number\ of\ items\ that\ have}}
-\DoxyCodeLine{00125\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ been\ in\ the\ queue\ at\ any\ point\ since\ the\ queue\ was\ created}}
-\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ or\ cleared.}}
-\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @return\ \ The\ maximum\ number\ of\ items\ that\ have\ been\ in\ the\ queue}}
-\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{class\ }IntQueue:}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }max\_full()\ -\/>\ int: }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00122\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Get\ the\ maximum\ number\ of\ unread\ items\ that\ have\ been\ in }}
+\DoxyCodeLine{00123\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the\ queue. }}
+\DoxyCodeLine{00124\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ This\ method\ returns\ the\ maximum\ number\ of\ items\ that\ have }}
+\DoxyCodeLine{00125\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ been\ in\ the\ queue\ at\ any\ point\ since\ the\ queue\ was\ created }}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ or\ cleared. }}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @return\ \ The\ maximum\ number\ of\ items\ that\ have\ been\ in\ the\ queue }}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00129\  }
+\DoxyCodeLine{00130\  }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{class\ }IntQueue: }
 
 \end{DoxyCode}
 \Hypertarget{classcqueue_1_1_float_queue_a3d2421faddd1511caf5ba46a9971d97f}\index{cqueue.FloatQueue@{cqueue.FloatQueue}!put@{put}}
@@ -279,16 +279,16 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00086}{86}} of file \mbox
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }put(data\ :\ float):}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Put\ a\ floating\ point\ number\ into\ the\ queue.}}
-\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ If\ the\ queue\ is\ already\ full,\ the\ oldest\ data\ will\ be}}
-\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwritten.\ If\ this\ could\ cause\ problems,\ one\ can\ call}}
-\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @c\ full()\ to\ check\ if\ the\ queue\ is\ already\ full\ before}}
-\DoxyCodeLine{00092\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ writing\ the\ data.}}
-\DoxyCodeLine{00093\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @param\ \ \ data\ An\ integer\ to\ be\ put\ into\ the\ back\ of\ the\ queue}}
-\DoxyCodeLine{00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }put(data\ :\ float): }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @brief\ \ \ Put\ a\ floating\ point\ number\ into\ the\ queue. }}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @details\ If\ the\ queue\ is\ already\ full,\ the\ oldest\ data\ will\ be }}
+\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overwritten.\ If\ this\ could\ cause\ problems,\ one\ can\ call }}
+\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @c\ full()\ to\ check\ if\ the\ queue\ is\ already\ full\ before }}
+\DoxyCodeLine{00092\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ writing\ the\ data. }}
+\DoxyCodeLine{00093\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ @param\ \ \ data\ An\ integer\ to\ be\ put\ into\ the\ back\ of\ the\ queue }}
+\DoxyCodeLine{00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00095\  }
 
 \end{DoxyCode}
 

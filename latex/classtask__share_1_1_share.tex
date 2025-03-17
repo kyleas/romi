@@ -83,18 +83,18 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00220}{220}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ type\_code,\ thread\_protect=True,\ name=None):}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00222\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Creates\ a\ shared\ data\ item\ of\ a\ specific\ type.}}
-\DoxyCodeLine{00223\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ type\_code\ Data\ type\ code\ (e.g.\ 'f',\ 'h',\ etc.).}}
-\DoxyCodeLine{00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ thread\_protect\ Protect\ data\ by\ disabling\ interrupts\ if\ True.}}
-\DoxyCodeLine{00225\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ name\ Optional\ name\ for\ diagnostic\ identification.}}
-\DoxyCodeLine{00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ super().\_\_init\_\_(type\_code,\ thread\_protect,\ name)}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ self.\_buffer\ =\ array.array(type\_code,\ [0])}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ self.\_name\ =\ str(name)\ \textcolor{keywordflow}{if}\ name\ \textcolor{keywordflow}{else}\ (\textcolor{stringliteral}{'Share'}\ +\ str(Share.ser\_num))}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ Share.ser\_num\ +=\ 1}
-\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ type\_code,\ thread\_protect=True,\ name=None): }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00222\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Creates\ a\ shared\ data\ item\ of\ a\ specific\ type. }}
+\DoxyCodeLine{00223\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ type\_code\ Data\ type\ code\ (e.g.\ 'f',\ 'h',\ etc.). }}
+\DoxyCodeLine{00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ thread\_protect\ Protect\ data\ by\ disabling\ interrupts\ if\ True. }}
+\DoxyCodeLine{00225\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ name\ Optional\ name\ for\ diagnostic\ identification. }}
+\DoxyCodeLine{00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ super().\_\_init\_\_(type\_code,\ thread\_protect,\ name) }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ self.\_buffer\ =\ array.array(type\_code,\ [0]) }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ self.\_name\ =\ str(name)\ \textcolor{keywordflow}{if}\ name\ \textcolor{keywordflow}{else}\ (\textcolor{stringliteral}{'Share'}\ +\ str(Share.ser\_num)) }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ Share.ser\_num\ +=\ 1 }
+\DoxyCodeLine{00231\  }
 
 \end{DoxyCode}
 
@@ -116,12 +116,12 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00259}{259}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{def\ }\_\_repr\_\_(self):}
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00261\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ a\ string\ with\ diagnostic\ information\ about\ this\ share.}}
-\DoxyCodeLine{00262\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{stringliteral}{"{}\{:<12s\}\ Share<\{:s\}>"{}}.format(self.\_name,}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type\_code\_strings[self.\_type\_code]))}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{def\ }\_\_repr\_\_(self): }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00261\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ a\ string\ with\ diagnostic\ information\ about\ this\ share. }}
+\DoxyCodeLine{00262\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{stringliteral}{"{}\{:<12s\}\ Share<\{:s\}>"{}}.format(self.\_name, }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type\_code\_strings[self.\_type\_code])) }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_share_ae5e4a0e21b274c9a76b80b8bb5eb62d3}\index{task\_share.Share@{task\_share.Share}!get@{get}}
@@ -148,19 +148,19 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00246}{246}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{def\ }get(self,\ in\_ISR=False):}
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00248\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Reads\ the\ data\ from\ the\ share.}}
-\DoxyCodeLine{00249\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ so\ we\ do\ not\ block.}}
-\DoxyCodeLine{00250\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ data\ in\ the\ share.}}
-\DoxyCodeLine{00251\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq()}
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ to\_return\ =\ self.\_buffer[0]}
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state)}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ to\_return}
-\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{def\ }get(self,\ in\_ISR=False): }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00248\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Reads\ the\ data\ from\ the\ share. }}
+\DoxyCodeLine{00249\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ so\ we\ do\ not\ block. }}
+\DoxyCodeLine{00250\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ data\ in\ the\ share. }}
+\DoxyCodeLine{00251\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq() }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ to\_return\ =\ self.\_buffer[0] }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state) }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ to\_return }
+\DoxyCodeLine{00258\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_share_a6bca473510fc2d28f5b7a32f242e4e18}\index{task\_share.Share@{task\_share.Share}!put@{put}}
@@ -186,18 +186,18 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00233}{233}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{def\ }put(self,\ data,\ in\_ISR=False):}
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00235\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Writes\ data\ into\ the\ share\ (overwrites\ old\ data).}}
-\DoxyCodeLine{00236\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ data\ The\ new\ data\ value\ to\ store.}}
-\DoxyCodeLine{00237\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ so\ we\ do\ not\ block.}}
-\DoxyCodeLine{00238\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq()}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ self.\_buffer[0]\ =\ data}
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state)}
-\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{def\ }put(self,\ data,\ in\_ISR=False): }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00235\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Writes\ data\ into\ the\ share\ (overwrites\ old\ data). }}
+\DoxyCodeLine{00236\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ data\ The\ new\ data\ value\ to\ store. }}
+\DoxyCodeLine{00237\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ so\ we\ do\ not\ block. }}
+\DoxyCodeLine{00238\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq() }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ self.\_buffer[0]\ =\ data }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state) }
+\DoxyCodeLine{00244\  }
 
 \end{DoxyCode}
 

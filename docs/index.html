@@ -130,10 +130,17 @@ Features</h1>
 <h1><a class="anchor" id="autotoc_md5"></a>
 System Architecture</h1>
 <p>The system is built on a task-based multitasking model, where each component operates as a separate task:</p>
+<p><img src="Images/ME405_Term_Project_Task_Diagram.jpg" alt="Task Diagram" class="inline"/></p>
 <ol type="1">
 <li><b>Task 1</b>: Handles user inputs and data logging.</li>
 <li><b>Task 2 &amp; Task 3</b>: Control left and right motors using <a class="el" href="class_p_i_d.html" title="A PID loop encapsulated in a Python class.">PID</a> velocity control.</li>
+</ol>
+<p><img src="Images/ME405_Term_Project_Motor_Controller.jpg" alt="Motor Controller State Transition Diagram" class="inline"/></p>
+<ol type="1">
 <li><b>Task 4</b>: Implements path following using <a class="el" href="class_i_r.html" title="IR sensor interface class for line following on the ROMI chassis.">IR</a> sensor and <a class="el" href="class_i_m_u.html" title="A class for interacting with a BNO055 IMU over I2C.">IMU</a> data.</li>
+</ol>
+<p><img src="Images/ME405_Term_Project_Path_Follow.jpg" alt="Path Follow State Transition Diagram" class="inline"/></p>
+<ol type="1">
 <li><b>Task 5</b> (Optional): Provides an emergency stop using bumper sensors.</li>
 </ol>
 <p><em>Diagram Placeholder</em>: <br  />

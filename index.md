@@ -24,9 +24,17 @@ This project integrates real-time task scheduling, control theory, and embedded 
 ## System Architecture
 The system is built on a task-based multitasking model, where each component operates as a separate task:
 
+![Task Diagram](Images/ME405_Term_Project_Task_Diagram.jpg)
+
 1. **Task 1**: Handles user inputs and data logging.
 2. **Task 2 & Task 3**: Control left and right motors using PID velocity control.
+
+![Motor Controller State Transition Diagram](Images/ME405_Term_Project_Motor_Controller.jpg)
+
 3. **Task 4**: Implements path following using IR sensor and IMU data.
+
+![Path Follow State Transition Diagram](Images/ME405_Term_Project_Path_Follow.jpg)
+
 4. **Task 5** (Optional): Provides an emergency stop using bumper sensors.
 
 *Diagram Placeholder*:  

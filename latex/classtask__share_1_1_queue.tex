@@ -109,33 +109,33 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00077}{77}} of file 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ type\_code,\ size,\ thread\_protect=False,\ overwrite=False,\ name=None):}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Initializes\ the\ queue\ with\ the\ given\ size\ and\ type.}}
-\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ type\_code\ Data\ type\ (one-\/letter\ code,\ e.g.\ 'h',\ 'f',\ etc.).}}
-\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ size\ Maximum\ number\ of\ items\ the\ queue\ can\ hold.}}
-\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ thread\_protect\ If\ True,\ disable\ interrupts\ during\ put/get\ operations.}}
-\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ overwrite\ If\ True,\ new\ data\ overwrites\ old\ when\ full\ instead\ of\ blocking.}}
-\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ name\ Optional\ name\ for\ this\ queue.}}
-\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ super().\_\_init\_\_(type\_code,\ thread\_protect,\ name)}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ self.\_size\ =\ size}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ self.\_overwrite\ =\ overwrite}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ self.\_name\ =\ str(name)\ \textcolor{keywordflow}{if}\ name\ \textcolor{keywordflow}{else}\ (\textcolor{stringliteral}{'Queue'}\ +\ str(Queue.ser\_num))}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ Queue.ser\_num\ +=\ 1}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_buffer\ =\ array.array(type\_code,\ range(size))}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ MemoryError:}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_buffer\ =\ \textcolor{keywordtype}{None}}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ ValueError:}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_buffer\ =\ \textcolor{keywordtype}{None}}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}}
-\DoxyCodeLine{00100\ }
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ self.clear()}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ gc.collect()}
-\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ type\_code,\ size,\ thread\_protect=False,\ overwrite=False,\ name=None): }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Initializes\ the\ queue\ with\ the\ given\ size\ and\ type. }}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ type\_code\ Data\ type\ (one-\/letter\ code,\ e.g.\ 'h',\ 'f',\ etc.). }}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ size\ Maximum\ number\ of\ items\ the\ queue\ can\ hold. }}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ thread\_protect\ If\ True,\ disable\ interrupts\ during\ put/get\ operations. }}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ overwrite\ If\ True,\ new\ data\ overwrites\ old\ when\ full\ instead\ of\ blocking. }}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ name\ Optional\ name\ for\ this\ queue. }}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ super().\_\_init\_\_(type\_code,\ thread\_protect,\ name) }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ self.\_size\ =\ size }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ self.\_overwrite\ =\ overwrite }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ self.\_name\ =\ str(name)\ \textcolor{keywordflow}{if}\ name\ \textcolor{keywordflow}{else}\ (\textcolor{stringliteral}{'Queue'}\ +\ str(Queue.ser\_num)) }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ Queue.ser\_num\ +=\ 1 }
+\DoxyCodeLine{00091\  }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_buffer\ =\ array.array(type\_code,\ range(size)) }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ MemoryError: }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_buffer\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise} }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ ValueError: }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_buffer\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise} }
+\DoxyCodeLine{00100\  }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ self.clear() }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ gc.collect() }
+\DoxyCodeLine{00103\  }
 
 \end{DoxyCode}
 
@@ -157,15 +157,15 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00202}{202}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{def\ }\_\_repr\_\_(self):}
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00204\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ a\ string\ with\ diagnostic\ information\ about\ this\ queue.}}
-\DoxyCodeLine{00205\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{stringliteral}{'\{:<12s\}\ Queue<\{:s\}>\ Max\ Full\ \{:d\}/\{:d\}'}.format(}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\_name,\ type\_code\_strings[self.\_type\_code],}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\_max\_full,\ self.\_size))}
-\DoxyCodeLine{00209\ }
-\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{def\ }\_\_repr\_\_(self): }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00204\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ a\ string\ with\ diagnostic\ information\ about\ this\ queue. }}
+\DoxyCodeLine{00205\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{stringliteral}{'\{:<12s\}\ Queue<\{:s\}>\ Max\ Full\ \{:d\}/\{:d\}'}.format( }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\_name,\ type\_code\_strings[self.\_type\_code], }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\_max\_full,\ self.\_size)) }
+\DoxyCodeLine{00209\  }
+\DoxyCodeLine{00210\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_ac9552672266377c23011552e9df15a63}\index{task\_share.Queue@{task\_share.Queue}!any@{any}}
@@ -187,13 +187,13 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00162}{162}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{def\ }any(self):}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00164\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Checks\ if\ the\ queue\ has\ at\ least\ one\ item.}}
-\DoxyCodeLine{00165\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ there\ is\ data,\ False\ if\ empty.}}
-\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items\ >\ 0)}
-\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{def\ }any(self): }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00164\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Checks\ if\ the\ queue\ has\ at\ least\ one\ item. }}
+\DoxyCodeLine{00165\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ there\ is\ data,\ False\ if\ empty. }}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items\ >\ 0) }
+\DoxyCodeLine{00168\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_a0d4b70d239eb7244ff3b7e54d4a4981e}\index{task\_share.Queue@{task\_share.Queue}!clear@{clear}}
@@ -212,15 +212,15 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00193}{193}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{def\ }clear(self):}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Empties\ the\ queue\ of\ all\ data.}}
-\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ self.\_rd\_idx\ =\ 0}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ self.\_wr\_idx\ =\ 0}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ self.\_num\_items\ =\ 0}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ self.\_max\_full\ =\ 0}
-\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{def\ }clear(self): }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Empties\ the\ queue\ of\ all\ data. }}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ self.\_rd\_idx\ =\ 0 }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ self.\_wr\_idx\ =\ 0 }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ self.\_num\_items\ =\ 0 }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ self.\_max\_full\ =\ 0 }
+\DoxyCodeLine{00201\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_afee296230d2346df88ffb4b2b22208f3}\index{task\_share.Queue@{task\_share.Queue}!empty@{empty}}
@@ -242,13 +242,13 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00170}{170}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{def\ }empty(self):}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00172\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Checks\ if\ the\ queue\ is\ empty.}}
-\DoxyCodeLine{00173\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ no\ items\ in\ the\ queue,\ False\ otherwise.}}
-\DoxyCodeLine{00174\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items\ <=\ 0)}
-\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{def\ }empty(self): }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00172\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Checks\ if\ the\ queue\ is\ empty. }}
+\DoxyCodeLine{00173\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ no\ items\ in\ the\ queue,\ False\ otherwise. }}
+\DoxyCodeLine{00174\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items\ <=\ 0) }
+\DoxyCodeLine{00176\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_a72be18f8267b2977117eedf15ad896c8}\index{task\_share.Queue@{task\_share.Queue}!full@{full}}
@@ -270,13 +270,13 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00178}{178}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{def\ }full(self):}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Checks\ if\ the\ queue\ is\ full.}}
-\DoxyCodeLine{00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ the\ queue\ has\ reached\ its\ capacity,\ False\ otherwise.}}
-\DoxyCodeLine{00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items\ >=\ self.\_size)}
-\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{def\ }full(self): }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Checks\ if\ the\ queue\ is\ full. }}
+\DoxyCodeLine{00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ True\ if\ the\ queue\ has\ reached\ its\ capacity,\ False\ otherwise. }}
+\DoxyCodeLine{00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items\ >=\ self.\_size) }
+\DoxyCodeLine{00184\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_a6fec4a9775651c30a4c6de357eb701fc}\index{task\_share.Queue@{task\_share.Queue}!get@{get}}
@@ -303,32 +303,32 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00135}{135}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{def\ }get(self,\ in\_ISR=False):}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00137\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Retrieves\ an\ item\ from\ the\ queue.\ Blocks\ if\ empty\ (unless\ in\_ISR=True).}}
-\DoxyCodeLine{00138\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ in\ which\ case\ it\ cannot\ block.}}
-\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ data\ item\ read\ from\ the\ queue.}}
-\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ self.empty():}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ in\_ISR:}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq()}
-\DoxyCodeLine{00147\ }
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ to\_return\ =\ self.\_buffer[self.\_rd\_idx]}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ self.\_rd\_idx\ +=\ 1}
-\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_rd\_idx\ >=\ self.\_size:}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_rd\_idx\ =\ 0}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ self.\_num\_items\ -\/=\ 1}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_num\_items\ <\ 0:}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_num\_items\ =\ 0}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state)}
-\DoxyCodeLine{00158\ }
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ to\_return}
-\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{def\ }get(self,\ in\_ISR=False): }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00137\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Retrieves\ an\ item\ from\ the\ queue.\ Blocks\ if\ empty\ (unless\ in\_ISR=True). }}
+\DoxyCodeLine{00138\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ in\ which\ case\ it\ cannot\ block. }}
+\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ data\ item\ read\ from\ the\ queue. }}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ self.empty(): }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ in\_ISR: }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00144\  }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ irq\_state\ =\ pyb.disable\_irq() }
+\DoxyCodeLine{00147\  }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ to\_return\ =\ self.\_buffer[self.\_rd\_idx] }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ self.\_rd\_idx\ +=\ 1 }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_rd\_idx\ >=\ self.\_size: }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_rd\_idx\ =\ 0 }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ self.\_num\_items\ -\/=\ 1 }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_num\_items\ <\ 0: }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_num\_items\ =\ 0 }
+\DoxyCodeLine{00155\  }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(irq\_state) }
+\DoxyCodeLine{00158\  }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ to\_return }
+\DoxyCodeLine{00160\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_aef595fc4133d297e2b63014c47ac5f27}\index{task\_share.Queue@{task\_share.Queue}!num\_in@{num\_in}}
@@ -350,13 +350,13 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00186}{186}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{def\ }num\_in(self):}
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00188\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ the\ current\ number\ of\ items\ in\ the\ queue.}}
-\DoxyCodeLine{00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ count\ of\ items\ in\ the\ buffer.}}
-\DoxyCodeLine{00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items)}
-\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{def\ }num\_in(self): }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00188\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Returns\ the\ current\ number\ of\ items\ in\ the\ queue. }}
+\DoxyCodeLine{00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ The\ count\ of\ items\ in\ the\ buffer. }}
+\DoxyCodeLine{00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\_num\_items) }
+\DoxyCodeLine{00192\  }
 
 \end{DoxyCode}
 \Hypertarget{classtask__share_1_1_queue_a0611b4838abb13731d1d487a8178b883}\index{task\_share.Queue@{task\_share.Queue}!put@{put}}
@@ -382,35 +382,35 @@ Definition at line \mbox{\hyperlink{task__share_8py_source_l00105}{105}} of file
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{def\ }put(self,\ item,\ in\_ISR=False):}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Puts\ an\ item\ into\ the\ queue.\ Blocks\ if\ full\ (unless\ overwrite=True).}}
-\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ item\ The\ data\ item\ to\ store.}}
-\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ in\ which\ case\ it\ cannot\ block.}}
-\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.full():}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ in\_ISR:}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\_overwrite:}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ self.full():}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \_irq\_state\ =\ pyb.disable\_irq()}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ self.\_buffer[self.\_wr\_idx]\ =\ item}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ self.\_wr\_idx\ +=\ 1}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_wr\_idx\ >=\ self.\_size:}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_wr\_idx\ =\ 0}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ self.\_num\_items\ +=\ 1}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_num\_items\ >=\ self.\_size:}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_num\_items\ =\ self.\_size}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_num\_items\ >\ self.\_max\_full:}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_max\_full\ =\ self.\_num\_items}
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR:}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(\_irq\_state)}
-\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{def\ }put(self,\ item,\ in\_ISR=False): }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Puts\ an\ item\ into\ the\ queue.\ Blocks\ if\ full\ (unless\ overwrite=True). }}
+\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ item\ The\ data\ item\ to\ store. }}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ in\_ISR\ True\ if\ called\ from\ an\ ISR,\ in\ which\ case\ it\ cannot\ block. }}
+\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.full(): }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ in\_ISR: }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\_overwrite: }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ self.full(): }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass} }
+\DoxyCodeLine{00117\  }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \_irq\_state\ =\ pyb.disable\_irq() }
+\DoxyCodeLine{00120\  }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ self.\_buffer[self.\_wr\_idx]\ =\ item }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ self.\_wr\_idx\ +=\ 1 }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_wr\_idx\ >=\ self.\_size: }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_wr\_idx\ =\ 0 }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ self.\_num\_items\ +=\ 1 }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_num\_items\ >=\ self.\_size: }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_num\_items\ =\ self.\_size }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_num\_items\ >\ self.\_max\_full: }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ self.\_max\_full\ =\ self.\_num\_items }
+\DoxyCodeLine{00130\  }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\_thread\_protect\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ in\_ISR: }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ pyb.enable\_irq(\_irq\_state) }
+\DoxyCodeLine{00133\  }
 
 \end{DoxyCode}
 

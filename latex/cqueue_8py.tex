@@ -79,87 +79,87 @@ Definition at line \mbox{\hyperlink{cqueue_8py_source_l00359}{359}} of file \mbo
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00359\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemain}{main}}():}
-\DoxyCodeLine{00360\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
-\DoxyCodeLine{00361\ \textcolor{stringliteral}{\ \ \ \ Run\ a\ test\ by\ creating\ queues,\ putting\ numbers\ into\ the\ queues,\ getting\ the}}
-\DoxyCodeLine{00362\ \textcolor{stringliteral}{\ \ \ \ numbers\ back\ out,\ and\ checking\ for\ consistency.\ While\ we're\ at\ it,\ keep}}
-\DoxyCodeLine{00363\ \textcolor{stringliteral}{\ \ \ \ track\ of\ the\ time\ it\ took\ to\ put\ things\ into\ the\ queues,\ as\ this\ can\ be}}
-\DoxyCodeLine{00364\ \textcolor{stringliteral}{\ \ \ \ important\ if\ putting\ data\ into\ a\ queue\ within\ an\ interrupt\ callback.}}
-\DoxyCodeLine{00365\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{00366\ \ \ \ \ int\_queue\ =\ \mbox{\hyperlink{classcqueue_1_1_int_queue}{cqueue.IntQueue}}(NUM\_QUEUE\_SIZE)}
-\DoxyCodeLine{00367\ \ \ \ \ float\_queue\ =\ \mbox{\hyperlink{classcqueue_1_1_float_queue}{cqueue.FloatQueue}}(NUM\_QUEUE\_SIZE)}
-\DoxyCodeLine{00368\ \ \ \ \ byte\_queue\ =\ \mbox{\hyperlink{classcqueue_1_1_byte_queue}{cqueue.ByteQueue}}(BYTE\_QUEUE\_SIZE)}
-\DoxyCodeLine{00369\ }
-\DoxyCodeLine{00370\ \ \ \ \ intdursum\ =\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sums\ of\ durations\ of\ put()\ calls}}
-\DoxyCodeLine{00371\ \ \ \ \ floatdursum\ =\ 0}
-\DoxyCodeLine{00372\ \ \ \ \ bytedursum\ =\ 0}
-\DoxyCodeLine{00373\ \ \ \ \ intdurmax\ =\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Maximum\ durations\ of\ the\ put()\ calls}}
-\DoxyCodeLine{00374\ \ \ \ \ floatdurmax\ =\ 0}
-\DoxyCodeLine{00375\ \ \ \ \ bytedurmax\ =\ 0}
-\DoxyCodeLine{00376\ }
-\DoxyCodeLine{00377\ \ \ \ \ \textcolor{comment}{\#\ Write\ things\ into\ queues,\ overwriting\ some\ data\ to\ make\ sure\ that's\ OK}}
-\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keywordflow}{for}\ count\ \textcolor{keywordflow}{in}\ range(TEST\_SIZE):}
-\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ count\ +=\ 1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Prevent\ division\ by\ zero\ in\ test}}
-\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ begin\_time\ =\ utime.ticks\_us()}
-\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ int\_queue.put(count)}
-\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ dur\ =\ utime.ticks\_diff(utime.ticks\_us(),\ begin\_time)}
-\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ intdursum\ +=\ dur}
-\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ intdurmax\ =\ dur\ \textcolor{keywordflow}{if}\ dur\ >\ intdurmax\ \textcolor{keywordflow}{else}\ intdurmax}
-\DoxyCodeLine{00385\ }
-\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keywordflow}{for}\ count\ \textcolor{keywordflow}{in}\ range(TEST\_SIZE):}
-\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ count\ +=\ 1}
-\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ begin\_time\ =\ utime.ticks\_us()}
-\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ float\_queue.put(count)}
-\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ dur\ =\ utime.ticks\_diff(utime.ticks\_us(),\ begin\_time)}
-\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ floatdursum\ +=\ dur}
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ floatdurmax\ =\ dur\ \textcolor{keywordflow}{if}\ dur\ >\ floatdurmax\ \textcolor{keywordflow}{else}\ floatdurmax}
-\DoxyCodeLine{00393\ }
-\DoxyCodeLine{00394\ \ \ \ \ \textcolor{comment}{\#\ Put\ characters\ into\ the\ byte\ queue,\ either\ one\ character\ at\ a\ time\ or\ by}}
-\DoxyCodeLine{00395\ \ \ \ \ \textcolor{comment}{\#\ making\ a\ string\ and\ dumping\ that\ into\ the\ queue.\ It\ seems\ putting\ known}}
-\DoxyCodeLine{00396\ \ \ \ \ \textcolor{comment}{\#\ characters\ in\ the\ queue\ is\ very\ fast;\ construting\ f-\/strings,\ not\ so\ much}}
-\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{for}\ count\ \textcolor{keywordflow}{in}\ range\ (BYTE\_T\_SIZE):}
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ a\_chr\ =\ chr(ord(\textcolor{stringliteral}{'!'})\ +\ count)}
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ count\ +=\ 1}
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ begin\_time\ =\ utime.ticks\_us()}
-\DoxyCodeLine{00401\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ byte\_queue.put\ (a\_chr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ A\ single\ character\ at\ a\ time}}
-\DoxyCodeLine{00402\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ byte\_queue.put\ ('Floofala')\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Several\ characters\ at\ once}}
-\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ byte\_queue.put\ (f\textcolor{stringliteral}{"{}\{a\_chr\}"{}})\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ An\ f-\/string\ of\ characters}}
-\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ dur\ =\ utime.ticks\_diff(utime.ticks\_us(),\ begin\_time)}
-\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ bytedursum\ +=\ dur}
-\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ bytedurmax\ =\ dur\ \textcolor{keywordflow}{if}\ dur\ >\ bytedurmax\ \textcolor{keywordflow}{else}\ bytedurmax}
-\DoxyCodeLine{00407\ }
-\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordflow}{while}\ int\_queue.any()\ \textcolor{keywordflow}{and}\ float\_queue.any():}
-\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ got\_this\ =\ int\_queue.get()}
-\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ got\_that\ =\ float\_queue.get()}
-\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (float(got\_this)\ -\/\ got\_that)\ /\ got\_that\ >\ 0.0001:}
-\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{print}\ (f\textcolor{stringliteral}{"{}Error:\ got\_this\ !=\ got\_that"{}})}
-\DoxyCodeLine{00413\ }
-\DoxyCodeLine{00414\ \ \ \ \ print(f\textcolor{stringliteral}{"{}for\ \{TEST\_SIZE\}\ calls\ to\ put()\ in\ \{NUM\_QUEUE\_SIZE\}\ size\ queues:"{}})}
-\DoxyCodeLine{00415\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Ints:\ \ \ \ Avg\ \{intdursum\ /\ TEST\_SIZE:.1f\},\ Max\ \{intdurmax\}\ us"{}})}
-\DoxyCodeLine{00416\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Floats:\ \ Avg\ \{floatdursum\ /\ TEST\_SIZE:.1f\},\ Max\ \{floatdurmax\}\ us"{}})}
-\DoxyCodeLine{00417\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Strings:\ Avg\ \{bytedursum\ /\ BYTE\_T\_SIZE:.1f\},\ Max\ \{bytedurmax\}\ us"{}})}
-\DoxyCodeLine{00418\ }
-\DoxyCodeLine{00419\ \ \ \ \ \textcolor{comment}{\#\ Print\ just\ the\ last\ 50\ characters,\ or\ however\ many\ are\ available,\ from}}
-\DoxyCodeLine{00420\ \ \ \ \ \textcolor{comment}{\#\ the\ byte\ queue.\ This\ has\ been\ used\ to\ verify\ that\ the\ contents\ are\ OK}}
-\DoxyCodeLine{00421\ \ \ \ \ count\ =\ 0}
-\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{while}\ byte\_queue.any():}
-\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ got\_char\ =\ byte\_queue.get()}
-\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ count\ <\ 50:}
-\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ print(got\_char.decode(),\ end=\textcolor{stringliteral}{''})}
-\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ count\ +=\ 1}
-\DoxyCodeLine{00427\ \ \ \ \ print(\textcolor{stringliteral}{''})}
-\DoxyCodeLine{00428\ }
-\DoxyCodeLine{00429\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Int\ Sum"{}}]\ +=\ intdursum}
-\DoxyCodeLine{00430\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Int\ Max"{}}]\ =\ max(overall[\textcolor{stringliteral}{"{}Int\ Max"{}}],\ intdurmax)}
-\DoxyCodeLine{00431\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Float\ Sum"{}}]\ +=\ floatdursum}
-\DoxyCodeLine{00432\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Float\ Max"{}}]\ =\ max(overall[\textcolor{stringliteral}{"{}Float\ Max"{}}],\ floatdurmax)}
-\DoxyCodeLine{00433\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Byte\ Sum"{}}]\ +=\ bytedursum}
-\DoxyCodeLine{00434\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Byte\ Max"{}}]\ =\ max(overall[\textcolor{stringliteral}{"{}Byte\ Max"{}}],\ bytedurmax)}
-\DoxyCodeLine{00435\ }
-\DoxyCodeLine{00436\ }
-\DoxyCodeLine{00437\ \textcolor{comment}{\#\ Run\ the\ test\ suite\ the\ given\ numer\ of\ times\ for\ a\ crude\ reliability\ test.\ A}}
-\DoxyCodeLine{00438\ \textcolor{comment}{\#\ memory\ allocation\ bug\ has\ been\ found\ in\ the\ past\ by\ creating\ and\ using\ queues}}
-\DoxyCodeLine{00439\ \textcolor{comment}{\#\ many\ times}}
+\DoxyCodeLine{00359\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemain}{main}}(): }
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}! }}
+\DoxyCodeLine{00361\ \textcolor{stringliteral}{\ \ \ \ Run\ a\ test\ by\ creating\ queues,\ putting\ numbers\ into\ the\ queues,\ getting\ the }}
+\DoxyCodeLine{00362\ \textcolor{stringliteral}{\ \ \ \ numbers\ back\ out,\ and\ checking\ for\ consistency.\ While\ we're\ at\ it,\ keep }}
+\DoxyCodeLine{00363\ \textcolor{stringliteral}{\ \ \ \ track\ of\ the\ time\ it\ took\ to\ put\ things\ into\ the\ queues,\ as\ this\ can\ be }}
+\DoxyCodeLine{00364\ \textcolor{stringliteral}{\ \ \ \ important\ if\ putting\ data\ into\ a\ queue\ within\ an\ interrupt\ callback. }}
+\DoxyCodeLine{00365\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00366\ \ \ \ \ int\_queue\ =\ \mbox{\hyperlink{classcqueue_1_1_int_queue}{cqueue.IntQueue}}(NUM\_QUEUE\_SIZE) }
+\DoxyCodeLine{00367\ \ \ \ \ float\_queue\ =\ \mbox{\hyperlink{classcqueue_1_1_float_queue}{cqueue.FloatQueue}}(NUM\_QUEUE\_SIZE) }
+\DoxyCodeLine{00368\ \ \ \ \ byte\_queue\ =\ \mbox{\hyperlink{classcqueue_1_1_byte_queue}{cqueue.ByteQueue}}(BYTE\_QUEUE\_SIZE) }
+\DoxyCodeLine{00369\  }
+\DoxyCodeLine{00370\ \ \ \ \ intdursum\ =\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sums\ of\ durations\ of\ put()\ calls }}
+\DoxyCodeLine{00371\ \ \ \ \ floatdursum\ =\ 0 }
+\DoxyCodeLine{00372\ \ \ \ \ bytedursum\ =\ 0 }
+\DoxyCodeLine{00373\ \ \ \ \ intdurmax\ =\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Maximum\ durations\ of\ the\ put()\ calls }}
+\DoxyCodeLine{00374\ \ \ \ \ floatdurmax\ =\ 0 }
+\DoxyCodeLine{00375\ \ \ \ \ bytedurmax\ =\ 0 }
+\DoxyCodeLine{00376\  }
+\DoxyCodeLine{00377\ \ \ \ \ \textcolor{comment}{\#\ Write\ things\ into\ queues,\ overwriting\ some\ data\ to\ make\ sure\ that's\ OK }}
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keywordflow}{for}\ count\ \textcolor{keywordflow}{in}\ range(TEST\_SIZE): }
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ count\ +=\ 1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Prevent\ division\ by\ zero\ in\ test }}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ begin\_time\ =\ utime.ticks\_us() }
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ int\_queue.put(count) }
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ dur\ =\ utime.ticks\_diff(utime.ticks\_us(),\ begin\_time) }
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ intdursum\ +=\ dur }
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ intdurmax\ =\ dur\ \textcolor{keywordflow}{if}\ dur\ >\ intdurmax\ \textcolor{keywordflow}{else}\ intdurmax }
+\DoxyCodeLine{00385\  }
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keywordflow}{for}\ count\ \textcolor{keywordflow}{in}\ range(TEST\_SIZE): }
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ count\ +=\ 1 }
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ begin\_time\ =\ utime.ticks\_us() }
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ float\_queue.put(count) }
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ dur\ =\ utime.ticks\_diff(utime.ticks\_us(),\ begin\_time) }
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ floatdursum\ +=\ dur }
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ floatdurmax\ =\ dur\ \textcolor{keywordflow}{if}\ dur\ >\ floatdurmax\ \textcolor{keywordflow}{else}\ floatdurmax }
+\DoxyCodeLine{00393\  }
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{comment}{\#\ Put\ characters\ into\ the\ byte\ queue,\ either\ one\ character\ at\ a\ time\ or\ by }}
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{comment}{\#\ making\ a\ string\ and\ dumping\ that\ into\ the\ queue.\ It\ seems\ putting\ known }}
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{comment}{\#\ characters\ in\ the\ queue\ is\ very\ fast;\ construting\ f-\/strings,\ not\ so\ much }}
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{for}\ count\ \textcolor{keywordflow}{in}\ range\ (BYTE\_T\_SIZE): }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ a\_chr\ =\ chr(ord(\textcolor{stringliteral}{'!'})\ +\ count) }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ count\ +=\ 1 }
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ begin\_time\ =\ utime.ticks\_us() }
+\DoxyCodeLine{00401\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ byte\_queue.put\ (a\_chr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ A\ single\ character\ at\ a\ time }}
+\DoxyCodeLine{00402\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ byte\_queue.put\ ('Floofala')\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Several\ characters\ at\ once }}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ byte\_queue.put\ (f\textcolor{stringliteral}{"{}\{a\_chr\}"{}})\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ An\ f-\/string\ of\ characters }}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ dur\ =\ utime.ticks\_diff(utime.ticks\_us(),\ begin\_time) }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ bytedursum\ +=\ dur }
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ bytedurmax\ =\ dur\ \textcolor{keywordflow}{if}\ dur\ >\ bytedurmax\ \textcolor{keywordflow}{else}\ bytedurmax }
+\DoxyCodeLine{00407\  }
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordflow}{while}\ int\_queue.any()\ \textcolor{keywordflow}{and}\ float\_queue.any(): }
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ got\_this\ =\ int\_queue.get() }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ got\_that\ =\ float\_queue.get() }
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (float(got\_this)\ -\/\ got\_that)\ /\ got\_that\ >\ 0.0001: }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{print}\ (f\textcolor{stringliteral}{"{}Error:\ got\_this\ !=\ got\_that"{}}) }
+\DoxyCodeLine{00413\  }
+\DoxyCodeLine{00414\ \ \ \ \ print(f\textcolor{stringliteral}{"{}for\ \{TEST\_SIZE\}\ calls\ to\ put()\ in\ \{NUM\_QUEUE\_SIZE\}\ size\ queues:"{}}) }
+\DoxyCodeLine{00415\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Ints:\ \ \ \ Avg\ \{intdursum\ /\ TEST\_SIZE:.1f\},\ Max\ \{intdurmax\}\ us"{}}) }
+\DoxyCodeLine{00416\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Floats:\ \ Avg\ \{floatdursum\ /\ TEST\_SIZE:.1f\},\ Max\ \{floatdurmax\}\ us"{}}) }
+\DoxyCodeLine{00417\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Strings:\ Avg\ \{bytedursum\ /\ BYTE\_T\_SIZE:.1f\},\ Max\ \{bytedurmax\}\ us"{}}) }
+\DoxyCodeLine{00418\  }
+\DoxyCodeLine{00419\ \ \ \ \ \textcolor{comment}{\#\ Print\ just\ the\ last\ 50\ characters,\ or\ however\ many\ are\ available,\ from }}
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{comment}{\#\ the\ byte\ queue.\ This\ has\ been\ used\ to\ verify\ that\ the\ contents\ are\ OK }}
+\DoxyCodeLine{00421\ \ \ \ \ count\ =\ 0 }
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{while}\ byte\_queue.any(): }
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ got\_char\ =\ byte\_queue.get() }
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ count\ <\ 50: }
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ print(got\_char.decode(),\ end=\textcolor{stringliteral}{''}) }
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ count\ +=\ 1 }
+\DoxyCodeLine{00427\ \ \ \ \ print(\textcolor{stringliteral}{''}) }
+\DoxyCodeLine{00428\  }
+\DoxyCodeLine{00429\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Int\ Sum"{}}]\ +=\ intdursum }
+\DoxyCodeLine{00430\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Int\ Max"{}}]\ =\ max(overall[\textcolor{stringliteral}{"{}Int\ Max"{}}],\ intdurmax) }
+\DoxyCodeLine{00431\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Float\ Sum"{}}]\ +=\ floatdursum }
+\DoxyCodeLine{00432\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Float\ Max"{}}]\ =\ max(overall[\textcolor{stringliteral}{"{}Float\ Max"{}}],\ floatdurmax) }
+\DoxyCodeLine{00433\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Byte\ Sum"{}}]\ +=\ bytedursum }
+\DoxyCodeLine{00434\ \ \ \ \ overall[\textcolor{stringliteral}{"{}Byte\ Max"{}}]\ =\ max(overall[\textcolor{stringliteral}{"{}Byte\ Max"{}}],\ bytedurmax) }
+\DoxyCodeLine{00435\  }
+\DoxyCodeLine{00436\  }
+\DoxyCodeLine{00437\ \textcolor{comment}{\#\ Run\ the\ test\ suite\ the\ given\ numer\ of\ times\ for\ a\ crude\ reliability\ test.\ A }}
+\DoxyCodeLine{00438\ \textcolor{comment}{\#\ memory\ allocation\ bug\ has\ been\ found\ in\ the\ past\ by\ creating\ and\ using\ queues }}
+\DoxyCodeLine{00439\ \textcolor{comment}{\#\ many\ times }}
 
 \end{DoxyCode}
 
