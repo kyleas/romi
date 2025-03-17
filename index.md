@@ -43,9 +43,6 @@ The system is built on a task-based multitasking model, where each component ope
 
 4. **Task 5** (Optional): Provides an emergency stop using bumper sensors.
 
-*Diagram Placeholder*:  
-_You can insert a system architecture diagram here to visually represent the tasks and their interactions._
-
 ---
 
 ## Code Structure
